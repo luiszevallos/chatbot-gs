@@ -18,6 +18,11 @@ class Server {
     }
     middlewares() {
         this.app.use((0, cors_1.default)());
+        this.app.use((req, res, next) => {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
         this.app.use(express_1.default.urlencoded({ extended: false }));
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.static("public"));
