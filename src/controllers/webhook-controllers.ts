@@ -38,6 +38,11 @@ export const postWebhook = async (req: Request, res: Response) => {
           text: {
             body: `Hola! Es un gusto para nosotros poder atenderle. \nPara agilizar su requerimiento le invitamos a seleccionar una de la siguientes \nOpciones:`,
           },
+        });
+        await axios.post(endpoints.messages, {
+          messaging_product: "whatsapp",
+          to: message.from,
+          type: "interactive",
           interactive: {
             type: "button",
             body: {
@@ -48,15 +53,15 @@ export const postWebhook = async (req: Request, res: Response) => {
                 {
                   type: "reply",
                   reply: {
-                    id: "UNIQUE_BUTTON_ID_1",
-                    title: "BUTTON_TITLE_1",
+                    id: "1",
+                    title: "Pregunta frecuente",
                   },
                 },
                 {
                   type: "reply",
                   reply: {
-                    id: "UNIQUE_BUTTON_ID_2",
-                    title: "BUTTON_TITLE_2",
+                    id: "2",
+                    title: "Reportar incidencia",
                   },
                 },
               ],
