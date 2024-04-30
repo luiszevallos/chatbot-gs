@@ -3,21 +3,26 @@ import axios, { endpoints } from "../utils/axios";
 import { VERIFY_TOKEN } from "../../config-global";
 
 export const getWebhook = async (req: Request, res: Response) => {
-  let mode = req.query["hub.mode"];
-  console.log("🚀 ~ getWebhook ~ mode:", mode);
+  try {
+    console.log("init get");
+    let mode = req.query["hub.mode"];
+    console.log("🚀 ~ getWebhook ~ mode:", mode);
 
-  let challenge = req.query["hub.challenge"];
-  console.log("🚀 ~ getWebhook ~ challenge:", challenge);
+    let challenge = req.query["hub.challenge"];
+    console.log("🚀 ~ getWebhook ~ challenge:", challenge);
 
-  let token = req.query["hub.verify_token"];
-  console.log("🚀 ~ getWebhook ~ token:", token);
+    let token = req.query["hub.verify_token"];
+    console.log("🚀 ~ getWebhook ~ token:", token);
 
-  if (token === VERIFY_TOKEN) {
-    res.status(200).send(challenge);
-  } else {
-    res.status(403).json({
-      message: "Error en conectar bot",
-    });
+    if (token === VERIFY_TOKEN) {
+      res.status(200).send(challenge);
+    } else {
+      res.status(403).json({
+        message: "Error en conectar bot",
+      });
+    }
+  } catch (error) {
+    console.log("🚀 ~ getWebhook ~ error:", error);
   }
 };
 

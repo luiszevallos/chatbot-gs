@@ -36,19 +36,25 @@ exports.postWebhook = exports.getWebhook = void 0;
 const axios_1 = __importStar(require("../utils/axios"));
 const config_global_1 = require("../../config-global");
 const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let mode = req.query["hub.mode"];
-    console.log("🚀 ~ getWebhook ~ mode:", mode);
-    let challenge = req.query["hub.challenge"];
-    console.log("🚀 ~ getWebhook ~ challenge:", challenge);
-    let token = req.query["hub.verify_token"];
-    console.log("🚀 ~ getWebhook ~ token:", token);
-    if (token === config_global_1.VERIFY_TOKEN) {
-        res.status(200).send(challenge);
+    try {
+        console.log("init get");
+        let mode = req.query["hub.mode"];
+        console.log("🚀 ~ getWebhook ~ mode:", mode);
+        let challenge = req.query["hub.challenge"];
+        console.log("🚀 ~ getWebhook ~ challenge:", challenge);
+        let token = req.query["hub.verify_token"];
+        console.log("🚀 ~ getWebhook ~ token:", token);
+        if (token === config_global_1.VERIFY_TOKEN) {
+            res.status(200).send(challenge);
+        }
+        else {
+            res.status(403).json({
+                message: "Error en conectar bot",
+            });
+        }
     }
-    else {
-        res.status(403).json({
-            message: "Error en conectar bot",
-        });
+    catch (error) {
+        console.log("🚀 ~ getWebhook ~ error:", error);
     }
 });
 exports.getWebhook = getWebhook;
