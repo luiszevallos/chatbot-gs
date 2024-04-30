@@ -1,1 +1,1 @@
-export { default as ChatbotRouter } from "./chatbot-routes";
+export { default as WebhookRouter } from "./webhook-routes";
