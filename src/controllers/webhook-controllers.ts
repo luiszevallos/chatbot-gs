@@ -27,7 +27,8 @@ export const postWebhook = async (req: Request, res: Response) => {
     const change: IChange = entry[0].changes[0];
 
     if (change) {
-      const message = change.value.messages[0];
+      const message =
+        change.value.messages.length > 0 ? change.value.messages[0] : null;
 
       if (message) {
         await axios.post(endpoints.messages, {
@@ -35,9 +36,34 @@ export const postWebhook = async (req: Request, res: Response) => {
           type: "text",
           messaging_product: "whatsapp",
           text: {
-            body: "Hello desde webhook",
+            body: `Hola! Es un gusto para nosotros poder atenderle. \nPara agilizar su requerimiento le invitamos a seleccionar una de la siguientes \nOpciones:`,
+          },
+          interactive: {
+            type: "button",
+            body: {
+              text: "BUTTON_TEXT",
+            },
+            action: {
+              buttons: [
+                {
+                  type: "reply",
+                  reply: {
+                    id: "UNIQUE_BUTTON_ID_1",
+                    title: "BUTTON_TITLE_1",
+                  },
+                },
+                {
+                  type: "reply",
+                  reply: {
+                    id: "UNIQUE_BUTTON_ID_2",
+                    title: "BUTTON_TITLE_2",
+                  },
+                },
+              ],
+            },
           },
         });
+
         return res.sendStatus(200);
       }
     }
