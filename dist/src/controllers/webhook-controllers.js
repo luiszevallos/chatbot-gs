@@ -51,19 +51,25 @@ const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.getWebhook = getWebhook;
 const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
     const { object, entry } = req.body;
     if (object && (entry === null || entry === void 0 ? void 0 : entry.length) > 0) {
         const change = entry[0].changes[0];
         if (change) {
-            const message = change.value.messages.length > 0 ? change.value.messages[0] : null;
-            if (message) {
+            if (((_b = (_a = change === null || change === void 0 ? void 0 : change.value) === null || _a === void 0 ? void 0 : _a.messages) === null || _b === void 0 ? void 0 : _b.length) > 0) {
+                const message = change.value.messages[0];
+                // await axios.post(endpoints.messages, {
+                //   to: message.from,
+                //   type: "text",
+                //   messaging_product: "whatsapp",
+                //   text: {
+                //     body: `Hola! Es un gusto para nosotros poder atenderle. \nPara agilizar su requerimiento le invitamos a seleccionar una de la siguientes \nOpciones:`,
+                //   },
+                // });
                 yield axios_1.default.post(axios_1.endpoints.messages, {
-                    to: message.from,
-                    type: "text",
                     messaging_product: "whatsapp",
-                    text: {
-                        body: `Hola! Es un gusto para nosotros poder atenderle. \nPara agilizar su requerimiento le invitamos a seleccionar una de la siguientes \nOpciones:`,
-                    },
+                    to: message.from,
+                    type: "interactive",
                     interactive: {
                         type: "button",
                         body: {
@@ -74,15 +80,15 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                                 {
                                     type: "reply",
                                     reply: {
-                                        id: "UNIQUE_BUTTON_ID_1",
-                                        title: "BUTTON_TITLE_1",
+                                        id: "1",
+                                        title: "Pregunta frecuente",
                                     },
                                 },
                                 {
                                     type: "reply",
                                     reply: {
-                                        id: "UNIQUE_BUTTON_ID_2",
-                                        title: "BUTTON_TITLE_2",
+                                        id: "2",
+                                        title: "Reportar incidencia",
                                     },
                                 },
                             ],
@@ -91,9 +97,11 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 });
                 return res.sendStatus(200);
             }
+            else {
+                return res.sendStatus(404);
+            }
         }
     }
-    res.sendStatus(404);
 });
 exports.postWebhook = postWebhook;
 //# sourceMappingURL=webhook-controllers.js.map

@@ -27,18 +27,17 @@ export const postWebhook = async (req: Request, res: Response) => {
     const change: IChange = entry[0].changes[0];
 
     if (change) {
-      const message =
-        change.value.messages.length > 0 ? change.value.messages[0] : null;
+      if (change?.value?.messages?.length > 0) {
+        const message = change.value.messages[0];
 
-      if (message) {
-        await axios.post(endpoints.messages, {
-          to: message.from,
-          type: "text",
-          messaging_product: "whatsapp",
-          text: {
-            body: `Hola! Es un gusto para nosotros poder atenderle. \nPara agilizar su requerimiento le invitamos a seleccionar una de la siguientes \nOpciones:`,
-          },
-        });
+        // await axios.post(endpoints.messages, {
+        //   to: message.from,
+        //   type: "text",
+        //   messaging_product: "whatsapp",
+        //   text: {
+        //     body: `Hola! Es un gusto para nosotros poder atenderle. \nPara agilizar su requerimiento le invitamos a seleccionar una de la siguientes \nOpciones:`,
+        //   },
+        // });
         await axios.post(endpoints.messages, {
           messaging_product: "whatsapp",
           to: message.from,
@@ -70,8 +69,9 @@ export const postWebhook = async (req: Request, res: Response) => {
         });
 
         return res.sendStatus(200);
+      } else {
+        return res.sendStatus(404);
       }
     }
   }
-  res.sendStatus(404);
 };
