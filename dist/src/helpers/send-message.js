@@ -71,13 +71,7 @@ const sendMessageInteractiveList = (to, message, sections, title) => __awaiter(v
             type: "list",
             header: {
                 type: "text",
-                text: "your-header-content",
-            },
-            body: {
-                text: "your-text-message-content",
-            },
-            footer: {
-                text: "your-footer-content",
+                text: message,
             },
             action: {
                 button: title || message,

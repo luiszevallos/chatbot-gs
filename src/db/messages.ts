@@ -29,17 +29,17 @@ export const dbMessages = {
         rows: [
           {
             id: "11",
-            title: "Valido un pago",
+            title: "",
             description: "¿Cómo valido un pago?",
           },
           {
             id: "12",
-            title: "Pago validado",
+            title: "",
             description: "¿Cómo sé si un pago fue validado?",
           },
           {
             id: "13",
-            title: "Estado de reserva",
+            title: "",
             description: "¿Cómo veo el estado de una reserva?",
           },
           // {
