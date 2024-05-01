@@ -34,32 +34,17 @@ exports.dbMessages = {
                     {
                         id: "11",
                         title: "Validar pago",
-                        description: "",
+                        description: "¿Cómo valido un pago?",
                     },
                     {
                         id: "12",
-                        title: "Pago no validado",
-                        description: "",
+                        title: "Estado de pago",
+                        description: "¿Cómo sé si un pago fue validado?",
                     },
                     {
                         id: "13",
                         title: "Estado de reserva",
-                        description: "",
-                    },
-                ],
-            },
-            {
-                title: "Buscar pago",
-                rows: [
-                    {
-                        id: "16",
-                        title: "Pago móvil",
-                        description: "",
-                    },
-                    {
-                        id: "17",
-                        title: "Pago Zelle",
-                        description: "",
+                        description: "¿Cómo veo el estado de una reserva?",
                     },
                 ],
             },

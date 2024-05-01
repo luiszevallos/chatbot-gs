@@ -31,32 +31,37 @@ exports.getWebhook = getWebhook;
 const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const { object, entry } = req.body;
-    if (object && (entry === null || entry === void 0 ? void 0 : entry.length) > 0) {
-        const change = entry[0].changes[0];
-        if (change) {
-            if (((_b = (_a = change === null || change === void 0 ? void 0 : change.value) === null || _a === void 0 ? void 0 : _a.messages) === null || _b === void 0 ? void 0 : _b.length) > 0) {
-                const messageReceived = change.value.messages[0];
-                const { from, type, interactive } = messageReceived;
-                switch (type) {
-                    case "text":
-                        const { message, buttons } = messages_1.dbMessages.welcome;
-                        yield (0, send_message_1.sendMessageInteractiveButton)(from, message, buttons);
-                        return res.sendStatus(200);
-                    case "interactive":
-                        if ((interactive === null || interactive === void 0 ? void 0 : interactive.type) === "button_reply") {
-                            const { sections, header, title } = messages_1.dbMessages.frequent_questions;
-                            yield (0, send_message_1.sendMessageInteractiveList)(from, header.message, sections, title);
+    try {
+        if (object && (entry === null || entry === void 0 ? void 0 : entry.length) > 0) {
+            const change = entry[0].changes[0];
+            if (change) {
+                if (((_b = (_a = change === null || change === void 0 ? void 0 : change.value) === null || _a === void 0 ? void 0 : _a.messages) === null || _b === void 0 ? void 0 : _b.length) > 0) {
+                    const messageReceived = change.value.messages[0];
+                    const { from, type, interactive } = messageReceived;
+                    switch (type) {
+                        case "text":
+                            const { message, buttons } = messages_1.dbMessages.welcome;
+                            yield (0, send_message_1.sendMessageInteractiveButton)(from, message, buttons);
                             return res.sendStatus(200);
-                        }
-                        break;
-                    default:
-                        break;
+                        case "interactive":
+                            if ((interactive === null || interactive === void 0 ? void 0 : interactive.type) === "button_reply") {
+                                const { sections, header, title } = messages_1.dbMessages.frequent_questions;
+                                yield (0, send_message_1.sendMessageInteractiveList)(from, header.message, sections, title);
+                                return res.sendStatus(200);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else {
+                    return res.sendStatus(404);
                 }
             }
-            else {
-                return res.sendStatus(404);
-            }
         }
+    }
+    catch (error) {
+        console.log("🚀 ~ postWebhook ~ error:", error);
     }
 });
 exports.postWebhook = postWebhook;

@@ -26,41 +26,45 @@ export const getWebhook = async (req: Request, res: Response) => {
 
 export const postWebhook = async (req: Request, res: Response) => {
   const { object, entry } = req.body;
+  try {
+    if (object && entry?.length > 0) {
+      const change: IChange = entry[0].changes[0];
 
-  if (object && entry?.length > 0) {
-    const change: IChange = entry[0].changes[0];
+      if (change) {
+        if (change?.value?.messages?.length > 0) {
+          const messageReceived = change.value.messages[0];
 
-    if (change) {
-      if (change?.value?.messages?.length > 0) {
-        const messageReceived = change.value.messages[0];
+          const { from, type, interactive } = messageReceived;
 
-        const { from, type, interactive } = messageReceived;
-
-        switch (type) {
-          case "text":
-            const { message, buttons } = dbMessages.welcome;
-            await sendMessageInteractiveButton(from, message, buttons);
-            return res.sendStatus(200);
-
-          case "interactive":
-            if (interactive?.type === "button_reply") {
-              const { sections, header, title } = dbMessages.frequent_questions;
-              await sendMessageInteractiveList(
-                from,
-                header.message,
-                sections,
-                title
-              );
+          switch (type) {
+            case "text":
+              const { message, buttons } = dbMessages.welcome;
+              await sendMessageInteractiveButton(from, message, buttons);
               return res.sendStatus(200);
-            }
-            break;
 
-          default:
-            break;
+            case "interactive":
+              if (interactive?.type === "button_reply") {
+                const { sections, header, title } =
+                  dbMessages.frequent_questions;
+                await sendMessageInteractiveList(
+                  from,
+                  header.message,
+                  sections,
+                  title
+                );
+                return res.sendStatus(200);
+              }
+              break;
+
+            default:
+              break;
+          }
+        } else {
+          return res.sendStatus(404);
         }
-      } else {
-        return res.sendStatus(404);
       }
     }
+  } catch (error) {
+    console.log("🚀 ~ postWebhook ~ error:", error);
   }
 };
