@@ -36,13 +36,19 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (change) {
             if (((_b = (_a = change === null || change === void 0 ? void 0 : change.value) === null || _a === void 0 ? void 0 : _a.messages) === null || _b === void 0 ? void 0 : _b.length) > 0) {
                 const messageReceived = change.value.messages[0];
-                console.log("🚀 ~ postWebhook ~ messageReceived:", messageReceived);
-                const { from, type } = messageReceived;
-                if (type === "text") {
-                    // ? Mensaje de bienvenida
-                    const { message, buttons } = messages_1.dbMessages.welcome;
-                    yield (0, send_message_1.sendMessageInteractiveButton)(from, message, buttons);
-                    return res.sendStatus(200);
+                const { from, type, interactive } = messageReceived;
+                switch (type) {
+                    case "text":
+                        const { message, buttons } = messages_1.dbMessages.welcome;
+                        yield (0, send_message_1.sendMessageInteractiveButton)(from, message, buttons);
+                        return res.sendStatus(200);
+                    case "interactive":
+                        yield (0, send_message_1.sendMessageInteractiveList)(from, "hola mundo");
+                        return res.sendStatus(200);
+                    // if (interactive?.type === "button_reply") {
+                    // }
+                    default:
+                        break;
                 }
             }
             else {

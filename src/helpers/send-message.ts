@@ -39,3 +39,41 @@ export const sendMessageInteractiveButton = async (
     },
   });
 };
+
+export const sendMessageInteractiveList = async (
+  to: string,
+  message: string
+) => {
+  return await axios.post(endpoints.messages, {
+    messaging_product: "whatsapp",
+    type: "interactive",
+    to,
+    interactive: {
+      type: "list",
+      header: {
+        type: "text",
+        text: message,
+      },
+      action: {
+        button: "BUTTON_TEXT",
+        sections: [
+          {
+            title: "SECTION_1_TITLE",
+            rows: [
+              {
+                id: "SECTION_1_ROW_1_ID",
+                title: "SECTION_1_ROW_1_TITLE",
+                description: "SECTION_1_ROW_1_DESCRIPTION",
+              },
+              {
+                id: "SECTION_1_ROW_2_ID",
+                title: "SECTION_1_ROW_2_TITLE",
+                description: "SECTION_1_ROW_2_DESCRIPTION",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  });
+};

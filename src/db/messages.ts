@@ -6,7 +6,7 @@ export const dbMessages = {
         type: "reply",
         reply: {
           id: "1",
-          title: "Pregunta frecuente",
+          title: "Preguntas frecuentes",
         },
       },
       {
@@ -17,5 +17,12 @@ export const dbMessages = {
         },
       },
     ],
+  },
+  //?
+  frequent_questions: {
+    header: {
+      message: "Preguntas frecuentes",
+    },
+    list: [],
   },
 };

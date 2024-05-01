@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendMessageInteractiveButton = exports.sendMessageText = void 0;
+exports.sendMessageInteractiveList = exports.sendMessageInteractiveButton = exports.sendMessageText = void 0;
 const axios_1 = __importStar(require("../utils/axios"));
 const sendMessageText = (to, message) => __awaiter(void 0, void 0, void 0, function* () {
     return yield axios_1.default.post(axios_1.endpoints.messages, {
@@ -62,4 +62,39 @@ const sendMessageInteractiveButton = (to, message, buttons) => __awaiter(void 0,
     });
 });
 exports.sendMessageInteractiveButton = sendMessageInteractiveButton;
+const sendMessageInteractiveList = (to, message) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield axios_1.default.post(axios_1.endpoints.messages, {
+        messaging_product: "whatsapp",
+        type: "interactive",
+        to,
+        interactive: {
+            type: "list",
+            header: {
+                type: "text",
+                text: message,
+            },
+            action: {
+                button: "BUTTON_TEXT",
+                sections: [
+                    {
+                        title: "SECTION_1_TITLE",
+                        rows: [
+                            {
+                                id: "SECTION_1_ROW_1_ID",
+                                title: "SECTION_1_ROW_1_TITLE",
+                                description: "SECTION_1_ROW_1_DESCRIPTION",
+                            },
+                            {
+                                id: "SECTION_1_ROW_2_ID",
+                                title: "SECTION_1_ROW_2_TITLE",
+                                description: "SECTION_1_ROW_2_DESCRIPTION",
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+    });
+});
+exports.sendMessageInteractiveList = sendMessageInteractiveList;
 //# sourceMappingURL=send-message.js.map

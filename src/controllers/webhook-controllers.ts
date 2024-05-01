@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 //
 import { VERIFY_TOKEN } from "../../config-global";
 import { IChange } from "../types/webhook";
-import { sendMessageInteractiveButton } from "../helpers/send-message";
+import {
+  sendMessageInteractiveButton,
+  sendMessageInteractiveList,
+} from "../helpers/send-message";
 import { dbMessages } from "../db/messages";
 
 export const getWebhook = async (req: Request, res: Response) => {
@@ -30,17 +33,24 @@ export const postWebhook = async (req: Request, res: Response) => {
     if (change) {
       if (change?.value?.messages?.length > 0) {
         const messageReceived = change.value.messages[0];
-        console.log("🚀 ~ postWebhook ~ messageReceived:", messageReceived);
 
-        const { from, type } = messageReceived;
+        const { from, type, interactive } = messageReceived;
 
-        if (type === "text") {
-          // ? Mensaje de bienvenida
-          const { message, buttons } = dbMessages.welcome;
+        switch (type) {
+          case "text":
+            const { message, buttons } = dbMessages.welcome;
+            await sendMessageInteractiveButton(from, message, buttons);
+            return res.sendStatus(200);
 
-          await sendMessageInteractiveButton(from, message, buttons);
+          case "interactive":
+            await sendMessageInteractiveList(from, "hola mundo");
+            return res.sendStatus(200);
+          // if (interactive?.type === "button_reply") {
 
-          return res.sendStatus(200);
+          // }
+
+          default:
+            break;
         }
       } else {
         return res.sendStatus(404);

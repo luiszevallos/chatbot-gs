@@ -13,6 +13,13 @@ export type IMessage = {
     body: string;
   };
   type: string;
+  interactive?: {
+    type: string;
+    button_reply: {
+      id: string;
+      title: string;
+    };
+  };
 };
 
 export type IChange = {
