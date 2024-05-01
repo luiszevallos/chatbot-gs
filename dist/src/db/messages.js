@@ -29,7 +29,6 @@ exports.dbMessages = {
         },
         sections: [
             {
-                title: "Validador",
                 rows: [
                     {
                         id: "11",
