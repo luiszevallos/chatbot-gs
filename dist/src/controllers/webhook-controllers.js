@@ -45,7 +45,7 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                     case "interactive":
                         if ((interactive === null || interactive === void 0 ? void 0 : interactive.type) === "button_reply") {
                             const { sections, header } = messages_1.dbMessages.frequent_questions;
-                            yield (0, send_message_1.sendMessageInteractiveList)(from, header.message, sections);
+                            yield (0, send_message_1.sendMessageInteractiveList)(from, header.message, sections, "Lista");
                             return res.sendStatus(200);
                         }
                         break;
