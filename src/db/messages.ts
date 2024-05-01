@@ -20,27 +20,20 @@ export const dbMessages = {
   },
   //?
   frequent_questions: {
-    title: "Lista",
     header: {
       message: "Preguntas frecuentes",
     },
     sections: [
       {
+        title: "",
         rows: [
           {
             id: "11",
-            title: "Validar pago",
-            description: "¿Cómo valido un pago?",
+            title: "Pago no validado",
           },
           {
             id: "12",
-            title: "Estado de pago",
-            description: "¿Cómo sé si un pago fue validado?",
-          },
-          {
-            id: "13",
             title: "Estado de reserva",
-            description: "¿Cómo veo el estado de una reserva?",
           },
         ],
       },
