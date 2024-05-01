@@ -26,36 +26,35 @@ exports.dbMessages = {
         header: {
             message: "Preguntas frecuentes",
         },
-        list: [
+        sections: [
             {
-                title: "",
+                title: "Validador",
                 rows: [
                     {
                         id: "11",
-                        title: "",
-                        description: "¿Cómo valido un pago?",
+                        title: "Validar pago",
                     },
                     {
                         id: "12",
-                        title: "",
-                        description: "¿Cómo sé si un pago fue validado?",
+                        title: "Pago no validado",
                     },
                     {
                         id: "13",
-                        title: "",
-                        description: "¿Cómo veo el estado de una reserva?",
+                        title: "Estado de reserva",
                     },
-                    // {
-                    //   id: "14",
-                    //   title:
-                    //     "¿Qué hacer si el cliente no colocó el localizador en el concepto?",
-                    //   description: "",
-                    // },
-                    // {
-                    //   id: "15",
-                    //   title: "¿Dónde veo los pagos realizados por un cliente?",
-                    //   description: "",
-                    // },
+                ],
+            },
+            {
+                title: "Buscar pago",
+                rows: [
+                    {
+                        id: "16",
+                        title: "Pago móvil",
+                    },
+                    {
+                        id: "17",
+                        title: "Pago Zelle",
+                    },
                 ],
             },
         ],
