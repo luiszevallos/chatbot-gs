@@ -74,7 +74,7 @@ const sendMessageInteractiveList = (to, message, sections, title) => __awaiter(v
                 text: message,
             },
             action: {
-                button: title || message,
+                button: title,
                 sections,
             },
         },

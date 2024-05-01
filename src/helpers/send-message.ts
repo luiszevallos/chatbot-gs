@@ -68,7 +68,7 @@ export const sendMessageInteractiveList = async (
         text: message,
       },
       action: {
-        button: title || message,
+        button: title,
         sections,
       },
     },

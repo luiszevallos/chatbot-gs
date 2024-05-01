@@ -44,12 +44,12 @@ export const postWebhook = async (req: Request, res: Response) => {
 
           case "interactive":
             if (interactive?.type === "button_reply") {
-              const { sections, header } = dbMessages.frequent_questions;
+              const { sections, header, title } = dbMessages.frequent_questions;
               await sendMessageInteractiveList(
                 from,
                 header.message,
                 sections,
-                "Lista"
+                title
               );
               return res.sendStatus(200);
             }
