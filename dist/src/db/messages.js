@@ -45,16 +45,17 @@ exports.dbMessages = {
                         title: "¿Cómo veo el estado de una reserva?",
                         description: "",
                     },
-                    {
-                        id: "14",
-                        title: "¿Qué hacer si el cliente no colocó el localizador en el concepto?",
-                        description: "",
-                    },
-                    {
-                        id: "15",
-                        title: "¿Dónde veo los pagos realizados por un cliente?",
-                        description: "",
-                    },
+                    // {
+                    //   id: "14",
+                    //   title:
+                    //     "¿Qué hacer si el cliente no colocó el localizador en el concepto?",
+                    //   description: "",
+                    // },
+                    // {
+                    //   id: "15",
+                    //   title: "¿Dónde veo los pagos realizados por un cliente?",
+                    //   description: "",
+                    // },
                 ],
             },
         ],
