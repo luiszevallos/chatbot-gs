@@ -57,7 +57,7 @@ export const sendMessageInteractiveList = async (
   sections: ISection[],
   title?: string
 ) => {
-  return await axios.post(endpoints.messages, {
+  const data = {
     messaging_product: "whatsapp",
     type: "interactive",
     to,
@@ -72,5 +72,7 @@ export const sendMessageInteractiveList = async (
         sections,
       },
     },
-  });
+  };
+  console.log("🚀 ~ data:", data);
+  return await axios.post(endpoints.messages, data);
 };

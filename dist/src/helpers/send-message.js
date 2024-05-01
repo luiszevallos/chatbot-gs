@@ -63,7 +63,7 @@ const sendMessageInteractiveButton = (to, message, buttons) => __awaiter(void 0,
 });
 exports.sendMessageInteractiveButton = sendMessageInteractiveButton;
 const sendMessageInteractiveList = (to, message, sections, title) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield axios_1.default.post(axios_1.endpoints.messages, {
+    const data = {
         messaging_product: "whatsapp",
         type: "interactive",
         to,
@@ -78,7 +78,9 @@ const sendMessageInteractiveList = (to, message, sections, title) => __awaiter(v
                 sections,
             },
         },
-    });
+    };
+    console.log("🚀 ~ data:", data);
+    return yield axios_1.default.post(axios_1.endpoints.messages, data);
 });
 exports.sendMessageInteractiveList = sendMessageInteractiveList;
 //# sourceMappingURL=send-message.js.map
