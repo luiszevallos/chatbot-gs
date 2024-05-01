@@ -32,18 +32,18 @@ exports.dbMessages = {
                 rows: [
                     {
                         id: "11",
-                        title: "¿Cómo valido un pago?",
-                        description: "",
+                        title: "Valido un pago",
+                        description: "¿Cómo valido un pago?",
                     },
                     {
                         id: "12",
-                        title: "¿Cómo sé si un pago fue validado?",
-                        description: "",
+                        title: "Pago validado",
+                        description: "¿Cómo sé si un pago fue validado?",
                     },
                     {
                         id: "13",
-                        title: "¿Cómo veo el estado de una reserva?",
-                        description: "",
+                        title: "Estado de reserva",
+                        description: "¿Cómo veo el estado de una reserva?",
                     },
                     // {
                     //   id: "14",
