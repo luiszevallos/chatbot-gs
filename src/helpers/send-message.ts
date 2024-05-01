@@ -55,7 +55,7 @@ export const sendMessageInteractiveList = async (
   to: string,
   message: string,
   sections: ISection[],
-  title?: string
+  title: string
 ) => {
   const data = {
     messaging_product: "whatsapp",
