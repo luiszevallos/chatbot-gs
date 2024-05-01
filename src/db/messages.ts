@@ -25,6 +25,7 @@ export const dbMessages = {
     },
     list: [
       {
+        title: "",
         rows: [
           {
             id: "11",

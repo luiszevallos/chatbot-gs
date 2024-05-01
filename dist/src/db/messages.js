@@ -28,6 +28,7 @@ exports.dbMessages = {
         },
         list: [
             {
+                title: "",
                 rows: [
                     {
                         id: "11",

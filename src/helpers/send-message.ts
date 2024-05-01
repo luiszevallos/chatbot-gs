@@ -65,13 +65,13 @@ export const sendMessageInteractiveList = async (
       type: "list",
       header: {
         type: "text",
-        text: message,
+        text: "your-header-content",
       },
       body: {
-        text: "",
+        text: "your-text-message-content",
       },
       footer: {
-        text: "",
+        text: "your-footer-content",
       },
       action: {
         button: title || message,
