@@ -43,6 +43,7 @@ export const postWebhook = async (req: Request, res: Response) => {
               return res.sendStatus(200);
 
             case "interactive":
+              console.log("🚀 ~ postWebhook ~ interactive:", interactive);
               if (interactive?.type === "button_reply") {
                 const { sections, header, title } =
                   dbMessages.frequent_questions;
@@ -52,7 +53,7 @@ export const postWebhook = async (req: Request, res: Response) => {
                   sections,
                   title
                 );
-                return res.sendStatus(200);
+                res.sendStatus(200);
               }
               break;
 
