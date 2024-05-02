@@ -60,6 +60,7 @@ const resMessageInteractive = async ({ from, interactive }: IMessage) => {
         break;
     }
   } catch (error: any) {
+    console.log(error);
     const message = error?.response?.data || error.message || error;
     console.error("🚀 ~ postWebhook ~ error:", message);
   }

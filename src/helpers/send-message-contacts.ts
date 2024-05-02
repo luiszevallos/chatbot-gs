@@ -11,37 +11,6 @@ const sendMessageContacts = async (
     type: "contacts",
     contacts: [
       {
-        addresses: [
-          {
-            street: "STREET",
-            city: "CITY",
-            state: "STATE",
-            zip: "ZIP",
-            country: "COUNTRY",
-            country_code: "COUNTRY_CODE",
-            type: "HOME",
-          },
-          {
-            street: "STREET",
-            city: "CITY",
-            state: "STATE",
-            zip: "ZIP",
-            country: "COUNTRY",
-            country_code: "COUNTRY_CODE",
-            type: "WORK",
-          },
-        ],
-        birthday: "YEAR_MONTH_DAY",
-        emails: [
-          {
-            email: "EMAIL",
-            type: "WORK",
-          },
-          {
-            email: "EMAIL",
-            type: "HOME",
-          },
-        ],
         name: {
           formatted_name: "NAME",
           first_name: "FIRST_NAME",
@@ -50,32 +19,6 @@ const sendMessageContacts = async (
           suffix: "SUFFIX",
           prefix: "PREFIX",
         },
-        org: {
-          company: "COMPANY",
-          department: "DEPARTMENT",
-          title: "TITLE",
-        },
-        phones: [
-          {
-            phone: "PHONE_NUMBER",
-            type: "HOME",
-          },
-          {
-            phone: "PHONE_NUMBER",
-            type: "WORK",
-            wa_id: "PHONE_OR_WA_ID",
-          },
-        ],
-        urls: [
-          {
-            url: "URL",
-            type: "WORK",
-          },
-          {
-            url: "URL",
-            type: "HOME",
-          },
-        ],
       },
     ],
   });
