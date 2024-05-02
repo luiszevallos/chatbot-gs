@@ -30,15 +30,14 @@ export const postWebhook = async (req: Request, res: Response) => {
 
         try {
           const { from, type, interactive } = messageReceived;
-          console.log("🚀 ~ postWebhook ~ messageReceived:", messageReceived);
+          console.log("🚀 ~ postWebhook ~ from:", from);
 
           if (type === "interactive") {
             console.log("🚀 ~ postWebhook ~ type:", type);
           } else {
             // TODO: envía el mensaje de bienvenida primer contacto
             const { welcome } = dbMessages.list;
-            const res = await sendMessageInteractive(from, welcome);
-            console.log("🚀 ~ postWebhook ~ res:", res);
+            await sendMessageInteractive(from, welcome);
           }
         } catch (error) {
           console.log("🚀 ~ postWebhook ~ error:", error);

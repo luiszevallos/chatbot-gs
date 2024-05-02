@@ -38,15 +38,14 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 const messageReceived = change.value.messages[0];
                 try {
                     const { from, type, interactive } = messageReceived;
-                    console.log("🚀 ~ postWebhook ~ messageReceived:", messageReceived);
+                    console.log("🚀 ~ postWebhook ~ from:", from);
                     if (type === "interactive") {
                         console.log("🚀 ~ postWebhook ~ type:", type);
                     }
                     else {
                         // TODO: envía el mensaje de bienvenida primer contacto
                         const { welcome } = messages_1.dbMessages.list;
-                        const res = yield (0, helpers_1.sendMessageInteractive)(from, welcome);
-                        console.log("🚀 ~ postWebhook ~ res:", res);
+                        yield (0, helpers_1.sendMessageInteractive)(from, welcome);
                     }
                 }
                 catch (error) {
