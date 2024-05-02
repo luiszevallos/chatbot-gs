@@ -42,7 +42,7 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                         case "text":
                             const { message, buttons } = messages_1.dbMessages.welcome;
                             yield (0, send_message_1.sendMessageInteractiveButton)(from, message, buttons);
-                            return res.sendStatus(200);
+                            break;
                         case "interactive":
                             console.log("🚀 ~ postWebhook ~ interactive:", interactive);
                             if ((interactive === null || interactive === void 0 ? void 0 : interactive.type) === "button_reply") {
@@ -64,15 +64,20 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                         default:
                             break;
                     }
+                    res.sendStatus(200);
                 }
                 else {
-                    return res.sendStatus(404);
+                    res.sendStatus(404);
                 }
+            }
+            else {
+                res.sendStatus(404);
             }
         }
     }
     catch (error) {
         console.log("🚀 ~ postWebhook ~ error:", error);
+        res.sendStatus(500);
     }
 });
 exports.postWebhook = postWebhook;
