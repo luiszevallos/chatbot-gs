@@ -22,7 +22,6 @@ export const postWebhook = async (req: Request, res: Response) => {
   const { message, body } = req;
 
   if (!message) {
-    console.log("🚀 ~ postWebhook ~ entry:", JSON.stringify(body.entry));
     return res.sendStatus(404);
   }
 
