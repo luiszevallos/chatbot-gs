@@ -30,9 +30,8 @@ const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.getWebhook = getWebhook;
 const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    const { message, body } = req;
+    const { message } = req;
     if (!message) {
-        console.log("🚀 ~ postWebhook ~ entry:", JSON.stringify(body.entry));
         return res.sendStatus(404);
     }
     try {
@@ -40,7 +39,7 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (type === "interactive") {
             yield (0, helpers_1.responseMessageInteractive)(message);
         }
-        else {
+        else if (type === "text") {
             yield (0, helpers_1.sendMessageInteractive)(from, messages_1.dbMessages.welcome);
         }
     }

@@ -19,7 +19,7 @@ export const getWebhook = async (req: Request, res: Response) => {
 };
 
 export const postWebhook = async (req: Request, res: Response) => {
-  const { message, body } = req;
+  const { message } = req;
 
   if (!message) {
     return res.sendStatus(404);
@@ -30,7 +30,7 @@ export const postWebhook = async (req: Request, res: Response) => {
 
     if (type === "interactive") {
       await responseMessageInteractive(message);
-    } else {
+    } else if (type === "text") {
       await sendMessageInteractive(from, dbMessages.welcome);
     }
   } catch (error: any) {

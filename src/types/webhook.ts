@@ -46,6 +46,16 @@ export type IEntry = {
 
 // TODO: type message
 
+type IFunctionConfirmItem = {
+  vars: string[];
+  smps: string[];
+  data: string[];
+};
+
+type IFunctionConfirm = {
+  [name: string]: IFunctionConfirmItem;
+};
+
 export type IRow = {
   id: string;
   title: string;
@@ -129,4 +139,9 @@ export type IDB = {
   };
   continueConversation: IInteractiveButton;
   goodBye: IText;
+  form: {
+    locator: IText;
+    reference: IText;
+    amount: IText;
+  };
 };

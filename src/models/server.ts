@@ -1,6 +1,7 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { WebhookRouter } from "../routes";
+import sequelize from "../db/connection";
 
 class Server {
   private app: Application;
@@ -16,9 +17,19 @@ class Server {
       webhook: "/api/webhook",
     };
 
+    this.connectDB();
+
     this.middlewares();
 
     this.routes();
+  }
+
+  async connectDB() {
+    try {
+      await sequelize.sync();
+    } catch (error) {
+      throw new Error("Error al sincronizar la base de datos");
+    }
   }
 
   middlewares() {

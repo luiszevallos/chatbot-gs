@@ -65,6 +65,20 @@ export const dbMessages: IDB = {
     type: "text",
     message: "Gracias por contactarnos. Ha sido un placer atenderle.",
   },
+  form: {
+    locator: {
+      type: "text",
+      message: `Por favor ingresa el localizado \n\n(Ej: 123456)`,
+    },
+    reference: {
+      type: "text",
+      message: `Por favor ingresa el número de referencia \n\n(EJ: 123456)`,
+    },
+    amount: {
+      type: "text",
+      message: `Por favor ingresa el monto \n\n(EJ: 1234.00)`,
+    },
+  },
 
   // ? next 2
   response: {
