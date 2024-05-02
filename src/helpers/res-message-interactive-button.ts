@@ -5,7 +5,7 @@ import sendMessageText from "./send-message-text";
 
 const resMessageInteractiveButton = async ({ from, interactive }: IMessage) => {
   try {
-    switch (interactive?.list_reply?.id) {
+    switch (interactive?.button_reply?.id) {
       case "42":
         await sendMessageText(from, dbMessages.response["42"]?.message);
         break;

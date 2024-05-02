@@ -26,10 +26,10 @@ export const getWebhook = async (req: Request, res: Response) => {
 
 export const postWebhook = async (req: Request, res: Response) => {
   const { object, entry } = req.body;
+  console.log("🚀 ~ postWebhook ~ entry:", entry);
   try {
     if (object && entry?.length > 0) {
       const change: IChange = entry[0].changes[0];
-      console.log("🚀 ~ postWebhook ~ change:", change);
 
       if (change && change?.value?.messages?.length > 0) {
         const messageReceived = change.value.messages[0];
