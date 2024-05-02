@@ -28,7 +28,7 @@ exports.dbMessages = {
                             },
                             {
                                 id: "3",
-                                title: "No se actualizan los Pagos",
+                                title: "Pagos no actualizados",
                             },
                             {
                                 id: "4",
