@@ -63,9 +63,7 @@ const resMessageInteractive = async ({ from, interactive }: IMessage) => {
         break;
     }
   } catch (error: any) {
-    console.log(JSON.stringify(error));
-    const message = error?.response?.data || error.message || error;
-    console.error("🚀 ~ resMessageInteractive ~ error:", message);
+    throw new Error(JSON.stringify(error));
   }
 };
 
