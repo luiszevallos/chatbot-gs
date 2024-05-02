@@ -8,18 +8,71 @@ const sendMessageContacts = async (
   return await axios.post(endpoints.messages, {
     messaging_product: "whatsapp",
     to,
-    contacts: [
-      {
-        input: "16505555555",
-        wa_id: "16505555555",
+    type: "template",
+    template: {
+      name: "TEMPLATE_NAME",
+      language: {
+        code: "LANGUAGE_AND_LOCALE_CODE",
       },
-    ],
-    messages: [
-      {
-        id: "wamid.HBgLMTY1MDUwNzY1MjAVAgARGBI5QTNDQTVCM0Q0Q0Q2RTY3RTcA",
-        message_status: "accepted",
-      },
-    ],
+      components: [
+        {
+          type: "header",
+          parameters: [
+            {
+              type: "image",
+              image: {
+                link: "http(s)://URL",
+              },
+            },
+          ],
+        },
+        {
+          type: "body",
+          parameters: [
+            {
+              type: "text",
+              text: "TEXT_STRING",
+            },
+            {
+              type: "currency",
+              currency: {
+                fallback_value: "VALUE",
+                code: "USD",
+                amount_1000: 100,
+              },
+            },
+            {
+              type: "date_time",
+              date_time: {
+                fallback_value: "MONTH DAY, YEAR",
+              },
+            },
+          ],
+        },
+        {
+          type: "button",
+          sub_type: "quick_reply",
+          index: "0",
+          parameters: [
+            {
+              type: "payload",
+              payload: "PAYLOAD",
+            },
+          ],
+        },
+        {
+          type: "button",
+          sub_type: "quick_reply",
+          index: "1",
+          parameters: [
+            {
+              type: "payload",
+              payload: "PAYLOAD",
+            },
+          ],
+        },
+      ],
+    },
   });
 };
 
