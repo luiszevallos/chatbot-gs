@@ -57,6 +57,31 @@ export type ISection = {
   rows: IRow[];
 };
 
+export type IButton = {
+  type: string;
+  reply: {
+    id: string;
+    title: string;
+  };
+};
+
+export type IInteractiveButton = {
+  type: string;
+  header?: {
+    type: string;
+    text: string;
+  };
+  body: {
+    text: string;
+  };
+  footer?: {
+    text: string;
+  };
+  action: {
+    buttons: IButton[];
+  };
+};
+
 export type IInteractiveList = {
   type: string;
   header?: {
@@ -80,6 +105,7 @@ export type IInteractiveList = {
 export type IDB = {
   welcome: IInteractiveList;
   response: {
+    "1": IInteractiveButton;
     "2": IInteractiveList;
     "3": IInteractiveList;
   };

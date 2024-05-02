@@ -19,11 +19,11 @@ exports.dbMessages = {
                     rows: [
                         {
                             id: "1",
-                            title: "No Puedo Ingresar",
+                            title: "No puedo ingresar",
                         },
                         {
                             id: "2",
-                            title: "No visualizo el Pago",
+                            title: "No visualizo el pago",
                         },
                         {
                             id: "3",
@@ -31,7 +31,7 @@ exports.dbMessages = {
                         },
                         {
                             id: "4",
-                            title: "Terminar la Conversación",
+                            title: "Terminar la conversación",
                         },
                     ],
                 },
@@ -39,32 +39,58 @@ exports.dbMessages = {
         },
     },
     response: {
+        "1": {
+            type: "button",
+            body: {
+                text: `¿Hay algo más en lo que podamos ayudarle?`,
+            },
+            action: {
+                buttons: [
+                    {
+                        type: "reply",
+                        reply: {
+                            id: "11",
+                            title: "Si",
+                        },
+                    },
+                    {
+                        type: "reply",
+                        reply: {
+                            id: "12",
+                            title: "No",
+                        },
+                    },
+                ],
+            },
+        },
         "2": {
             type: "list",
             body: {
-                text: `No visualizo el Pago`,
+                text: `No visualizo el pago`,
             },
             action: {
                 button: "Menu",
                 sections: [
                     {
-                        title: "No visualizo el Pago",
+                        title: "No visualizo el pago",
                         rows: [
                             {
-                                id: "11",
-                                title: "Zelle Respuesta",
+                                id: "21",
+                                title: "Zelle",
+                                description: "No visualizo pago en Zelle",
                             },
                             {
-                                id: "12",
-                                title: "Pago móvil Respuesta",
+                                id: "22",
+                                title: "Pago móvil",
+                                description: "Np visualizo pago móvil",
                             },
                             {
-                                id: "13",
+                                id: "23",
                                 title: "Sin localizador",
-                                description: "Cliente no coloco el Localizador",
+                                description: "Cliente no coloco el localizador",
                             },
                             {
-                                id: "14",
+                                id: "24",
                                 title: "Como valido un pago",
                             },
                         ],
@@ -84,12 +110,12 @@ exports.dbMessages = {
                         title: "Pagos no actualizados",
                         rows: [
                             {
-                                id: "21",
+                                id: "31",
                                 title: "Visualizar pagos",
                                 description: "Donde veo los pagos de un cliente",
                             },
                             {
-                                id: "22",
+                                id: "32",
                                 title: "Tiempo de espera",
                                 description: "Cuanto tiempo debo esperar para visualizar un pago.",
                             },

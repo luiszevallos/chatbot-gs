@@ -43,6 +43,9 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                         // TODO: aquí va el switch para responde dependiendo la interacción
                         if ((interactive === null || interactive === void 0 ? void 0 : interactive.type) === "list_reply") {
                             switch ((_c = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _c === void 0 ? void 0 : _c.id) {
+                                case "1":
+                                    yield (0, helpers_1.sendMessageInteractive)(from, messages_1.dbMessages.response["1"]);
+                                    break;
                                 case "2":
                                     yield (0, helpers_1.sendMessageInteractive)(from, messages_1.dbMessages.response["2"]);
                                     break;
