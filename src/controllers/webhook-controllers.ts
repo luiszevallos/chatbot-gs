@@ -6,6 +6,7 @@ import { IChange } from "../types/webhook";
 import {
   resMessageInteractiveButtons,
   sendMessageInteractiveButton,
+  sendMessageInteractiveList,
 } from "../helpers";
 
 export const getWebhook = async (req: Request, res: Response) => {
@@ -35,18 +36,9 @@ export const postWebhook = async (req: Request, res: Response) => {
 
         if (type === "interactive") {
           console.log("🚀 ~ postWebhook ~ type:", type);
-
-          switch (interactive?.type) {
-            case "button_reply":
-              await resMessageInteractiveButtons(messageReceived);
-              break;
-
-            default:
-              break;
-          }
         } else {
-          const { message, buttons } = dbMessages.welcome;
-          await sendMessageInteractiveButton(from, message, buttons);
+          const { welcome } = dbMessages.list;
+          await sendMessageInteractiveList(from, welcome);
         }
 
         return res.sendStatus(200);

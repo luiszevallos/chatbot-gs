@@ -33,22 +33,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importStar(require("../utils/axios"));
-const sendMessageInteractiveList = (to, message, sections) => __awaiter(void 0, void 0, void 0, function* () {
+const sendMessageInteractiveList = (to, // ? usuario que recibe mensaje
+interactive // ? mensaje interactivo que se envía a usuario
+) => __awaiter(void 0, void 0, void 0, function* () {
     return yield axios_1.default.post(axios_1.endpoints.messages, {
         messaging_product: "whatsapp",
         type: "interactive",
         to,
-        interactive: {
-            type: "list",
-            header: {
-                type: "text",
-                text: message,
-            },
-            action: {
-                button: "Lista",
-                sections,
-            },
-        },
+        interactive,
     });
 });
 exports.default = sendMessageInteractiveList;

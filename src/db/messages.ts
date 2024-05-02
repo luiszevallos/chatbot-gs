@@ -1,39 +1,38 @@
-export const dbMessages = {
-  welcome: {
-    message: `Hola! \nEs un gusto para nosotros poder atenderle. \nPara agilizar su requerimiento le invitamos a seleccionar una de la siguientes \nOpciones:`,
-    buttons: [
-      {
-        type: "reply",
-        reply: {
-          id: "1",
-          title: "Preguntas frecuentes",
-        },
+import { IDB } from "../types/webhook";
+
+export const dbMessages: IDB = {
+  list: {
+    welcome: {
+      type: "list",
+      header: {
+        type: "text",
+        text: "¡Hola! Te doy la bienvenida al soporte del Validador",
       },
-      {
-        type: "reply",
-        reply: {
-          id: "2",
-          title: "Reportar incidencia",
-        },
+      body: {
+        text: `¿En qué puedo ayudarte hoy? \nEstoy aquí para guiarte y resolver cualquier duda que tengas sobre la aplicación. Puedes preguntarme sobre:`,
       },
-    ],
-  },
-  //?
-  frequent_questions: {
-    sections: [
-      {
-        title: "",
-        rows: [
+      action: {
+        sections: [
           {
-            id: "11",
-            title: "Pago no validado",
+            title: "Pago móvil",
+            rows: [
+              {
+                id: "11",
+                title: "No se visualiza el pago",
+              },
+            ],
           },
           {
-            id: "12",
-            title: "Estado de reserva",
+            title: "Zelle",
+            rows: [
+              {
+                id: "21",
+                title: "No se visualiza el pago",
+              },
+            ],
           },
         ],
       },
-    ],
+    },
   },
 };

@@ -39,3 +39,42 @@ export type IEntry = {
   id: string;
   changes: IChange[];
 };
+
+// TODO: type message
+
+export type IRow = {
+  id: string;
+  title: string;
+  description?: string;
+};
+
+export type ISection = {
+  title?: string;
+  rows: IRow[];
+};
+
+export type IInteractive = {
+  type: string;
+  header: {
+    type: string;
+    text: string;
+  };
+  body?: {
+    text: string;
+  };
+  footer?: {
+    text: string;
+  };
+  action: {
+    sections: ISection[];
+    button?: string;
+  };
+};
+
+// TODO: db message
+
+export type IDB = {
+  list: {
+    welcome: IInteractive;
+  };
+};

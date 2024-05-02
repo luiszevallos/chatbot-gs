@@ -39,17 +39,10 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 const { from, type, interactive } = messageReceived;
                 if (type === "interactive") {
                     console.log("🚀 ~ postWebhook ~ type:", type);
-                    switch (interactive === null || interactive === void 0 ? void 0 : interactive.type) {
-                        case "button_reply":
-                            yield (0, helpers_1.resMessageInteractiveButtons)(messageReceived);
-                            break;
-                        default:
-                            break;
-                    }
                 }
                 else {
-                    const { message, buttons } = messages_1.dbMessages.welcome;
-                    yield (0, helpers_1.sendMessageInteractiveButton)(from, message, buttons);
+                    const { welcome } = messages_1.dbMessages.list;
+                    yield (0, helpers_1.sendMessageInteractiveList)(from, welcome);
                 }
                 return res.sendStatus(200);
             }

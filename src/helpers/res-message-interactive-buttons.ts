@@ -10,12 +10,12 @@ const resMessageInteractiveButtons = async ({
     switch (interactive?.button_reply?.id) {
       // ? Pregunta frecuente
       case "1":
-        const { sections } = dbMessages.frequent_questions;
-        return await sendMessageInteractiveList(
-          from,
-          "Preguntas frecuente",
-          sections
-        );
+      // const { sections } = dbMessages.frequent_questions;
+      // return await sendMessageInteractiveList(
+      //   from,
+      //   "Preguntas frecuente",
+      //   sections
+      // );
 
       default:
         return;
