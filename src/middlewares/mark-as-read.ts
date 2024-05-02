@@ -11,7 +11,7 @@ const markAsRead = async (req: Request, res: Response, next: NextFunction) => {
       const messages = entry[0]?.changes[0]?.value?.messages || [];
       const message = messages?.length > 0 ? messages[0] : null;
       if (message) {
-        await axios.post(`${endpoints.messages}/message`, {
+        await axios.post(`${endpoints.messages}`, {
           messaging_product: "whatsapp",
           status: "read",
           message_id: message.id,
