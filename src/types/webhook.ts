@@ -55,11 +55,11 @@ export type ISection = {
 
 export type IInteractive = {
   type: string;
-  header: {
+  header?: {
     type: string;
     text: string;
   };
-  body?: {
+  body: {
     text: string;
   };
   footer?: {

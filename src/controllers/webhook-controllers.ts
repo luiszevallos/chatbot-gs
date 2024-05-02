@@ -39,8 +39,9 @@ export const postWebhook = async (req: Request, res: Response) => {
             const { welcome } = dbMessages.list;
             await sendMessageInteractive(from, welcome);
           }
-        } catch (error) {
-          console.log("🚀 ~ postWebhook ~ error:", error);
+        } catch (error: any) {
+          const message = error?.response?.data || error.message || error;
+          console.log("🚀 ~ postWebhook ~ error:", message);
         }
 
         return res.sendStatus(200);
