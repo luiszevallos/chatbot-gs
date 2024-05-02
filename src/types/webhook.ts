@@ -105,8 +105,8 @@ export type IInteractiveList = {
 export type IDB = {
   welcome: IInteractiveList;
   response: {
-    "1": IInteractiveButton;
     "2": IInteractiveList;
     "3": IInteractiveList;
+    "4": IInteractiveButton;
   };
 };

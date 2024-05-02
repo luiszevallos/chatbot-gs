@@ -39,30 +39,6 @@ exports.dbMessages = {
         },
     },
     response: {
-        "1": {
-            type: "button",
-            body: {
-                text: `¿Hay algo más en lo que podamos ayudarle?`,
-            },
-            action: {
-                buttons: [
-                    {
-                        type: "reply",
-                        reply: {
-                            id: "11",
-                            title: "Si",
-                        },
-                    },
-                    {
-                        type: "reply",
-                        reply: {
-                            id: "12",
-                            title: "No",
-                        },
-                    },
-                ],
-            },
-        },
         "2": {
             type: "list",
             body: {
@@ -82,7 +58,7 @@ exports.dbMessages = {
                             {
                                 id: "22",
                                 title: "Pago móvil",
-                                description: "Np visualizo pago móvil",
+                                description: "No visualizo pago móvil",
                             },
                             {
                                 id: "23",
@@ -120,6 +96,30 @@ exports.dbMessages = {
                                 description: "Cuanto tiempo debo esperar para visualizar un pago.",
                             },
                         ],
+                    },
+                ],
+            },
+        },
+        "4": {
+            type: "button",
+            body: {
+                text: `¿Hay algo más en lo que podamos ayudarle?`,
+            },
+            action: {
+                buttons: [
+                    {
+                        type: "reply",
+                        reply: {
+                            id: "11",
+                            title: "Si",
+                        },
+                    },
+                    {
+                        type: "reply",
+                        reply: {
+                            id: "12",
+                            title: "No",
+                        },
                     },
                 ],
             },
