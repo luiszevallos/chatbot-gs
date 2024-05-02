@@ -53,7 +53,7 @@ export type ISection = {
   rows: IRow[];
 };
 
-export type IInteractive = {
+export type IInteractiveList = {
   type: string;
   header?: {
     type: string;
@@ -74,7 +74,8 @@ export type IInteractive = {
 // TODO: db message
 
 export type IDB = {
-  list: {
-    welcome: IInteractive;
+  welcome: IInteractiveList;
+  response: {
+    res_2: IInteractiveList;
   };
 };
