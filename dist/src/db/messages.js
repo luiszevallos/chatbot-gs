@@ -39,6 +39,7 @@ exports.dbMessages = {
         },
     },
     response: {
+        // ? response 2
         "2": {
             type: "list",
             body: {
@@ -74,6 +75,7 @@ exports.dbMessages = {
                 ],
             },
         },
+        // ? response 3
         "3": {
             type: "list",
             body: {
@@ -100,6 +102,7 @@ exports.dbMessages = {
                 ],
             },
         },
+        // ? response 4
         "4": {
             type: "button",
             body: {
@@ -110,19 +113,22 @@ exports.dbMessages = {
                     {
                         type: "reply",
                         reply: {
-                            id: "11",
+                            id: "41",
                             title: "Si",
                         },
                     },
                     {
                         type: "reply",
                         reply: {
-                            id: "12",
+                            id: "42",
                             title: "No",
                         },
                     },
                 ],
             },
+        },
+        "42": {
+            message: "Gracias por contactarnos. Ha sido un placer atenderle.",
         },
     },
 };

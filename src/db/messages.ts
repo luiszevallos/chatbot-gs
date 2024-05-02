@@ -38,6 +38,7 @@ export const dbMessages: IDB = {
     },
   },
   response: {
+    // ? response 2
     "2": {
       type: "list",
       body: {
@@ -73,6 +74,7 @@ export const dbMessages: IDB = {
         ],
       },
     },
+    // ? response 3
     "3": {
       type: "list",
 
@@ -101,6 +103,7 @@ export const dbMessages: IDB = {
         ],
       },
     },
+    // ? response 4
     "4": {
       type: "button",
       body: {
@@ -111,19 +114,22 @@ export const dbMessages: IDB = {
           {
             type: "reply",
             reply: {
-              id: "11",
+              id: "41",
               title: "Si",
             },
           },
           {
             type: "reply",
             reply: {
-              id: "12",
+              id: "42",
               title: "No",
             },
           },
         ],
       },
+    },
+    "42": {
+      message: "Gracias por contactarnos. Ha sido un placer atenderle.",
     },
   },
 };

@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { VERIFY_TOKEN } from "../../config-global";
 import { dbMessages } from "../db/messages";
 import { IChange } from "../types/webhook";
-import { sendMessageInteractive } from "../helpers";
+import { sendMessageInteractive, sendMessageText } from "../helpers";
 
 export const getWebhook = async (req: Request, res: Response) => {
   let challenge = req.query["hub.challenge"];
@@ -30,6 +30,7 @@ export const postWebhook = async (req: Request, res: Response) => {
 
         try {
           const { from, type, interactive } = messageReceived;
+          console.log("🚀 ~ postWebhook ~ messageReceived:", messageReceived);
           console.log("🚀 ~ postWebhook ~ from:", from);
 
           if (type === "interactive") {
@@ -48,12 +49,18 @@ export const postWebhook = async (req: Request, res: Response) => {
                   await sendMessageInteractive(from, dbMessages.response["4"]);
                   break;
 
+                case "42":
+                  await sendMessageText(
+                    from,
+                    dbMessages.response["42"]?.message
+                  );
+                  break;
+
                 default:
                   await sendMessageInteractive(from, dbMessages.welcome);
                   break;
               }
             }
-            console.log(messageReceived);
           } else {
             // * envía el mensaje de bienvenida primer contacto
             await sendMessageInteractive(from, dbMessages.welcome);

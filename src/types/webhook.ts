@@ -65,6 +65,10 @@ export type IButton = {
   };
 };
 
+export type IText = {
+  message: string;
+};
+
 export type IInteractiveButton = {
   type: string;
   header?: {
@@ -108,5 +112,6 @@ export type IDB = {
     "2": IInteractiveList;
     "3": IInteractiveList;
     "4": IInteractiveButton;
+    "42": IText;
   };
 };
