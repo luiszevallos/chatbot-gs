@@ -11,27 +11,6 @@ const sendMessageContacts = async (
     type: "contacts",
     contacts: [
       {
-        addresses: [
-          {
-            street: "STREET",
-            city: "CITY",
-            state: "STATE",
-            zip: "ZIP",
-            country: "COUNTRY",
-            country_code: "COUNTRY_CODE",
-            type: "HOME",
-          },
-          {
-            street: "STREET",
-            city: "CITY",
-            state: "STATE",
-            zip: "ZIP",
-            country: "COUNTRY",
-            country_code: "COUNTRY_CODE",
-            type: "WORK",
-          },
-        ],
-        birthday: "YEAR_MONTH_DAY",
         emails: [
           {
             email: "EMAIL",
