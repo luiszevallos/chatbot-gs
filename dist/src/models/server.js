@@ -30,7 +30,10 @@ class Server {
     connectDB() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield connection_1.default.sync();
+                yield connection_1.default.authenticate();
+                console.log("Conectado auth");
+                yield connection_1.default.sync({ force: true });
+                console.log("Conectado Sync");
             }
             catch (error) {
                 throw new Error("Error al sincronizar la base de datos");

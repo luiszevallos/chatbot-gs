@@ -28,7 +28,7 @@ const FormSupport = connection_1.default.define("form", {
         type: sequelize_1.DataTypes.NUMBER,
     },
 }, {
-    tableName: "form_support",
+    tableName: "forms",
 });
 exports.default = FormSupport;
 //# sourceMappingURL=form-support-models.js.map

@@ -28,7 +28,7 @@ class Server {
     try {
       await sequelize.authenticate();
       console.log("Conectado auth");
-      await sequelize.sync({ force: true });
+      await sequelize.sync();
       console.log("Conectado Sync");
     } catch (error) {
       throw new Error("Error al sincronizar la base de datos");
