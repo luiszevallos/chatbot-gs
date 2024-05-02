@@ -111,21 +111,21 @@ export type IDB = {
   welcome: IInteractiveList;
   response: {
     // ? Response 1 --> 11 --> 111
-    "1": IInteractiveButton;
-    "11": IInteractiveButton;
-    "12": IText;
-    "111": IText;
-    "112": IText;
+    res1: IInteractiveButton;
+    res11: IInteractiveButton;
+    res12: IText;
+    res111: IText;
+    res112: IText;
     //
     // ? Response 2 --> 22 --> 222
-    "2": IInteractiveList;
-    "21": IText;
-    "22": IText;
-    "23": IText;
-    "24": IText;
+    res2: IInteractiveList;
+    res21: IText;
+    res22: IText;
+    res23: IText;
+    res24: IText;
 
     // ? Response 3 --> 33 --> 333
-    "3": IInteractiveList;
+    res3: IInteractiveList;
   };
   continueConversation: IInteractiveButton;
   goodBye: IText;

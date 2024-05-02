@@ -69,7 +69,7 @@ export const dbMessages: IDB = {
   // ? next 2
   response: {
     // ? Response 1 --> 11 --> 111
-    "1": {
+    res1: {
       type: "button",
       body: {
         text: `¿Está registrado en la plataforma?`,
@@ -93,7 +93,7 @@ export const dbMessages: IDB = {
         ],
       },
     },
-    "11": {
+    res11: {
       type: "button",
       body: {
         text: `¿Ha ingresado anteriormente a la plataforma?`,
@@ -117,21 +117,21 @@ export const dbMessages: IDB = {
         ],
       },
     },
-    "12": {
+    res12: {
       type: "text",
       message: "Solicite agregar un nuevo operador a una oficina",
     },
-    "111": {
+    res111: {
       type: "text",
       message: "Pronto lo estaremos contactando.",
     },
-    "112": {
+    res112: {
       type: "text",
       message: "Pronto lo estaremos contactando.",
     },
 
     // ? response 2
-    "2": {
+    res2: {
       type: "list",
       body: {
         text: `No visualizo el pago`,
@@ -166,25 +166,25 @@ export const dbMessages: IDB = {
         ],
       },
     },
-    "21": {
+    res21: {
       type: "text",
       message: `*Si buscas un pago Zelle:* \n\n- Dirígete a la pestaña "Todos". \n- En el área de búsqueda, ingresa: \n   - Moneda: "USD". \n   - Método de pago: "Zelle". \n   - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago`,
     },
-    "22": {
+    res22: {
       type: "text",
       message: `*Si buscas un Pago Móvil:* \n\n- Dirígete a la pestaña "Todos". \nEn el área de búsqueda, ingresa: \n   - Moneda: "Ves".  \n   - Método de pago: "Pago móvil".  \n   - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago. `,
     },
-    "23": {
+    res23: {
       type: "text",
       message: `*CLIENTE NO COLOCO EL LOCALIZADOR:* \nSi el cliente no colocó el localizador en el concepto, lo ingresó de forma errónea o incluyó texto adicional, el pago no se validará automáticamente. En este caso, aparecerá en la pestaña "Por Validar" y deberá validarse manualmente. `,
     },
-    "24": {
+    res24: {
       type: "text",
       message: `*¿CÓMO VALIDO UN PAGO?* \nLos pagos suelen validarse automáticamente si el cliente ingresó solo el número de localizador de seis dígitos en el concepto. De lo contrario, el pago pasará a "Pagos por validar" y deberás seguir estos pasos:  \nBusca el pago usando los filtros de búsqueda.  \nUna vez localizado, haz clic en los tres puntos verticales y luego en "Validar".  \nIngresa el localizador de seis dígitos asociado al pago.  \nHaz clic en el botón "Validar".  \nTu pago pasará a la lista de pagos validados manualmente.`,
     },
 
     // ? response 3
-    "3": {
+    res3: {
       type: "list",
 
       body: {

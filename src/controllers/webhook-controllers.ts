@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 //
 import { VERIFY_TOKEN } from "../../config-global";
 import { dbMessages } from "../db/messages";
-import { resMessageInteractive, sendMessageInteractive } from "../helpers";
+import { responseMessageInteractive, sendMessageInteractive } from "../helpers";
 
 export const getWebhook = async (req: Request, res: Response) => {
   let challenge = req.query["hub.challenge"];
@@ -31,14 +31,11 @@ export const postWebhook = async (req: Request, res: Response) => {
       type,
       text: { body },
     } = message;
-    console.log(`Usuario: ${from} a respondido: ${body}`);
+    console.log("🚀 ~ postWebhook ~ message:", message);
 
     if (type === "interactive") {
-      // * responde los mensajes interactivo
-      const res = await resMessageInteractive(message);
-      console.log("🚀 ~ postWebhook ~ res:", res);
+      await responseMessageInteractive(message);
     } else {
-      // * envía el mensaje de bienvenida primer contacto
       await sendMessageInteractive(from, dbMessages.welcome);
     }
   } catch (error: any) {
