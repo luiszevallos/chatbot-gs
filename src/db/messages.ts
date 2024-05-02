@@ -96,7 +96,7 @@ export const dbMessages: IDB = {
     "11": {
       type: "button",
       body: {
-        text: `¿ha ingresado anteriormente a la página?`,
+        text: `¿Ha ingresado anteriormente a la plataforma?`,
       },
       action: {
         buttons: [
@@ -122,6 +122,10 @@ export const dbMessages: IDB = {
       message: "Solicite agregar un nuevo operador a una oficina",
     },
     "111": {
+      type: "text",
+      message: "Pronto lo estaremos contactando.",
+    },
+    "112": {
       type: "text",
       message: "Pronto lo estaremos contactando.",
     },

@@ -115,6 +115,7 @@ export type IDB = {
     "11": IInteractiveButton;
     "12": IText;
     "111": IText;
+    "112": IText;
     //
     // ? Response 2 --> 22 --> 222
     "2": IInteractiveList;

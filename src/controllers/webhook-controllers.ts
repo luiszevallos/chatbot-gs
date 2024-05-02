@@ -26,7 +26,12 @@ export const postWebhook = async (req: Request, res: Response) => {
   }
 
   try {
-    const { from, type } = message;
+    const {
+      from,
+      type,
+      text: { body },
+    } = message;
+    console.log(`Usuario: ${from} a respondido: ${body}`);
 
     if (type === "interactive") {
       // * responde los mensajes interactivo
