@@ -46,7 +46,6 @@ const markAsRead = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
             });
         }
         catch (error) {
-            console.log(JSON.stringify(error));
             const message = ((_b = error === null || error === void 0 ? void 0 : error.response) === null || _b === void 0 ? void 0 : _b.data) || error.message || error;
             console.error("🚀 ~ markAsRead ~ error:", message);
         }

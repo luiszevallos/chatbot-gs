@@ -12,17 +12,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const validMessage = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     const { object, entry } = req.body;
-    console.log("🚀 ~ entry:", JSON.stringify(entry));
     try {
         if (object && (entry === null || entry === void 0 ? void 0 : entry.length) > 0 && ((_a = entry[0].changes) === null || _a === void 0 ? void 0 : _a.length) > 0) {
             const change = entry[0].changes[0];
-            console.log("🚀 ~ change:", change);
             if (change && ((_c = (_b = change === null || change === void 0 ? void 0 : change.value) === null || _b === void 0 ? void 0 : _b.messages) === null || _c === void 0 ? void 0 : _c.length) > 0) {
                 const message = change.value.messages[0];
-                console.log("🚀 ~ message:", message);
-                req.message = message;
-                next();
+                if (message) {
+                    req.message = message;
+                }
             }
+            next();
         }
         else
             return res.sendStatus(404);

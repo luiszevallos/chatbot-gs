@@ -13,7 +13,6 @@ const markAsRead = async (req: Request, res: Response, next: NextFunction) => {
         message_id: messageId,
       });
     } catch (error: any) {
-      console.log(JSON.stringify(error));
       const message = error?.response?.data || error.message || error;
       console.error("🚀 ~ markAsRead ~ error:", message);
     }

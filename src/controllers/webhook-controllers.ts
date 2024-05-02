@@ -22,7 +22,7 @@ export const postWebhook = async (req: Request, res: Response) => {
   const { message, body } = req;
 
   if (!message) {
-    console.log(JSON.stringify(body.entry));
+    console.log("🚀 ~ postWebhook ~ entry:", JSON.stringify(body.entry));
     return res.sendStatus(404);
   }
 
@@ -35,7 +35,6 @@ export const postWebhook = async (req: Request, res: Response) => {
       await sendMessageInteractive(from, dbMessages.welcome);
     }
   } catch (error: any) {
-    console.log(JSON.stringify(error));
     const message = error?.response?.data || error.message || error;
     console.error("🚀 ~ postWebhook ~ error:", message);
   }

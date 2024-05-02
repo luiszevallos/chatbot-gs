@@ -30,9 +30,9 @@ const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.getWebhook = getWebhook;
 const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    const { message } = req;
-    console.log("🚀 ~ postWebhook ~ message:", message);
+    const { message, body } = req;
     if (!message) {
+        console.log("🚀 ~ postWebhook ~ entry:", JSON.stringify(body.entry));
         return res.sendStatus(404);
     }
     try {
@@ -45,7 +45,6 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         }
     }
     catch (error) {
-        console.log(JSON.stringify(error));
         const message = ((_a = error === null || error === void 0 ? void 0 : error.response) === null || _a === void 0 ? void 0 : _a.data) || error.message || error;
         console.error("🚀 ~ postWebhook ~ error:", message);
     }

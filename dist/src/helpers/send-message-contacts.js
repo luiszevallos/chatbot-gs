@@ -41,32 +41,17 @@ const sendMessageContacts = (to // ? usuario que recibe mensaje
         to,
         type: "interactive",
         interactive: {
-            type: "flow",
-            header: {
-                type: "text",
-                text: "Flow message header",
-            },
+            type: "address_message",
             body: {
-                text: "Flow message body",
-            },
-            footer: {
-                text: "Flow message footer",
+                text: "Thanks for your order! Tell us what address you’d like this order delivered to.",
             },
             action: {
-                name: "flow",
+                name: "address_message",
                 parameters: {
-                    flow_message_version: "3",
-                    flow_token: "AQAAAAACS5FpgQ_cAAAAAD0QI3s.",
-                    flow_id: "1",
-                    flow_cta: "Book!",
-                    flow_action: "navigate",
-                    flow_action_payload: {
-                        screen: "<SCREEN_NAME>",
-                        data: {
-                            product_name: "name",
-                            product_description: "description",
-                            product_price: 100,
-                        },
+                    country: "IN",
+                    values: {
+                        name: "CUSTOMER_NAME",
+                        phone_number: "+91xxxxxxxxxx",
                     },
                 },
             },
