@@ -40,6 +40,10 @@ export const postWebhook = async (req: Request, res: Response) => {
                   await sendMessageInteractive(from, dbMessages.response["2"]);
                   break;
 
+                case "3":
+                  await sendMessageInteractive(from, dbMessages.response["3"]);
+                  break;
+
                 default:
                   break;
               }

@@ -15,7 +15,7 @@ exports.dbMessages = {
             button: "Preguntas frecuentes",
             sections: [
                 {
-                    title: "Preguntas",
+                    title: "Preguntas frecuente",
                     rows: [
                         {
                             id: "1",
@@ -45,10 +45,10 @@ exports.dbMessages = {
                 text: `No visualizo el Pago`,
             },
             action: {
-                button: "lista",
+                button: "Menu",
                 sections: [
                     {
-                        title: "Lista",
+                        title: "No visualizo el Pago",
                         rows: [
                             {
                                 id: "11",
@@ -66,6 +66,32 @@ exports.dbMessages = {
                             {
                                 id: "14",
                                 title: "Como valido un pago",
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+        "3": {
+            type: "list",
+            body: {
+                text: `Pagos no actualizados`,
+            },
+            action: {
+                button: "Menu",
+                sections: [
+                    {
+                        title: "Pagos no actualizados",
+                        rows: [
+                            {
+                                id: "21",
+                                title: "Visualizar pagos",
+                                description: "Donde veo los pagos de un cliente",
+                            },
+                            {
+                                id: "22",
+                                title: "Tiempo de espera",
+                                description: "Cuanto tiempo debo esperar para visualizar un pago.",
                             },
                         ],
                     },

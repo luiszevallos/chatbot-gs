@@ -81,5 +81,6 @@ export type IDB = {
   welcome: IInteractiveList;
   response: {
     "2": IInteractiveList;
+    "3": IInteractiveList;
   };
 };
