@@ -25,7 +25,7 @@ const FormSupport = connection_1.default.define("form", {
         defaultValue: true,
     },
     phoneNumber: {
-        type: sequelize_1.DataTypes.NUMBER,
+        type: sequelize_1.DataTypes.STRING,
     },
 }, {
     tableName: "forms",

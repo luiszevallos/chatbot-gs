@@ -23,7 +23,7 @@ const FormSupport = sequelize.define(
       defaultValue: true,
     },
     phoneNumber: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.STRING,
     },
   },
   {

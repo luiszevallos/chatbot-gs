@@ -32,7 +32,7 @@ class Server {
             try {
                 yield connection_1.default.authenticate();
                 console.log("Conectado auth");
-                yield connection_1.default.sync({ force: true });
+                yield connection_1.default.sync();
                 console.log("Conectado Sync");
             }
             catch (error) {
