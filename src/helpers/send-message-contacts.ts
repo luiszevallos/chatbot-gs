@@ -8,70 +8,22 @@ const sendMessageContacts = async (
   return await axios.post(endpoints.messages, {
     messaging_product: "whatsapp",
     to,
-    type: "template",
-    template: {
-      name: "TEMPLATE_NAME",
-      language: {
-        code: "LANGUAGE_AND_LOCALE_CODE",
+    type: "interactive",
+    interactive: {
+      type: "address_message",
+      body: {
+        text: "Thanks for your order! Tell us what address you’d like this order delivered to.",
       },
-      components: [
-        {
-          type: "header",
-          parameters: [
-            {
-              type: "image",
-              image: {
-                link: "http(s)://URL",
-              },
-            },
-          ],
+      action: {
+        name: "address_message",
+        parameters: {
+          country: "IN",
+          values: {
+            name: "CUSTOMER_NAME",
+            phone_number: "+91xxxxxxxxxx",
+          },
         },
-        {
-          type: "body",
-          parameters: [
-            {
-              type: "text",
-              text: "TEXT_STRING",
-            },
-            {
-              type: "currency",
-              currency: {
-                fallback_value: "VALUE",
-                code: "USD",
-                amount_1000: 100,
-              },
-            },
-            {
-              type: "date_time",
-              date_time: {
-                fallback_value: "MONTH DAY, YEAR",
-              },
-            },
-          ],
-        },
-        {
-          type: "button",
-          sub_type: "quick_reply",
-          index: "0",
-          parameters: [
-            {
-              type: "payload",
-              payload: "PAYLOAD",
-            },
-          ],
-        },
-        {
-          type: "button",
-          sub_type: "quick_reply",
-          index: "1",
-          parameters: [
-            {
-              type: "payload",
-              payload: "PAYLOAD",
-            },
-          ],
-        },
-      ],
+      },
     },
   });
 };
