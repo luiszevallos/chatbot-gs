@@ -27,7 +27,7 @@ const FormSupport = sequelize.define(
     },
   },
   {
-    tableName: "form_support",
+    tableName: "forms",
   }
 );
 
