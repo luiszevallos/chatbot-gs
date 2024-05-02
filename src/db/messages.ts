@@ -6,10 +6,13 @@ export const dbMessages: IDB = {
       type: "list",
       header: {
         type: "text",
-        text: "¡Hola! Te doy la bienvenida al soporte del Validador",
+        text: "¡Hola! \nTe doy la bienvenida al soporte del Validador",
       },
       body: {
-        text: `¿En qué puedo ayudarte hoy? \nEstoy aquí para guiarte y resolver cualquier duda que tengas sobre la aplicación. Puedes preguntarme sobre:`,
+        text: `¿En qué puedo ayudarte hoy?`,
+      },
+      footer: {
+        text: "Estoy aquí para guiarte y resolver cualquier duda que tengas sobre la aplicación. Puedes preguntarme sobre:",
       },
       action: {
         button: "Preguntas frecuentes",
