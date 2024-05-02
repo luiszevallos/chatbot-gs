@@ -34,11 +34,11 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         if (object && (entry === null || entry === void 0 ? void 0 : entry.length) > 0) {
             const change = entry[0].changes[0];
+            console.log("🚀 ~ postWebhook ~ change:", change);
             if (change && ((_b = (_a = change === null || change === void 0 ? void 0 : change.value) === null || _a === void 0 ? void 0 : _a.messages) === null || _b === void 0 ? void 0 : _b.length) > 0) {
                 const messageReceived = change.value.messages[0];
                 try {
                     const { from, type, interactive } = messageReceived;
-                    console.log("🚀 ~ postWebhook ~ messageReceived:", messageReceived);
                     console.log("🚀 ~ postWebhook ~ from:", from);
                     if (type === "interactive") {
                         // TODO: aquí va el switch para responde dependiendo la interacción

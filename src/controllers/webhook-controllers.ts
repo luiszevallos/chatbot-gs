@@ -24,13 +24,13 @@ export const postWebhook = async (req: Request, res: Response) => {
   try {
     if (object && entry?.length > 0) {
       const change: IChange = entry[0].changes[0];
+      console.log("🚀 ~ postWebhook ~ change:", change);
 
       if (change && change?.value?.messages?.length > 0) {
         const messageReceived = change.value.messages[0];
 
         try {
           const { from, type, interactive } = messageReceived;
-          console.log("🚀 ~ postWebhook ~ messageReceived:", messageReceived);
           console.log("🚀 ~ postWebhook ~ from:", from);
 
           if (type === "interactive") {
