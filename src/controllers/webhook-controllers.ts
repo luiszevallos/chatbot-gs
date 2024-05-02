@@ -3,7 +3,12 @@ import { Request, Response } from "express";
 import { VERIFY_TOKEN } from "../../config-global";
 import { dbMessages } from "../db/messages";
 import { IChange } from "../types/webhook";
-import { sendMessageInteractive, sendMessageText } from "../helpers";
+import {
+  resMessageInteractiveButton,
+  resMessageInteractiveList,
+  sendMessageInteractive,
+  sendMessageText,
+} from "../helpers";
 
 export const getWebhook = async (req: Request, res: Response) => {
   let challenge = req.query["hub.challenge"];
@@ -36,30 +41,9 @@ export const postWebhook = async (req: Request, res: Response) => {
           if (type === "interactive") {
             // TODO: aquí va el switch para responde dependiendo la interacción
             if (interactive?.type === "list_reply") {
-              switch (interactive?.list_reply?.id) {
-                case "2":
-                  await sendMessageInteractive(from, dbMessages.response["2"]);
-                  break;
-
-                case "3":
-                  await sendMessageInteractive(from, dbMessages.response["3"]);
-                  break;
-
-                case "4":
-                  await sendMessageInteractive(from, dbMessages.response["4"]);
-                  break;
-
-                case "42":
-                  await sendMessageText(
-                    from,
-                    dbMessages.response["42"]?.message
-                  );
-                  break;
-
-                default:
-                  await sendMessageInteractive(from, dbMessages.welcome);
-                  break;
-              }
+              await resMessageInteractiveList(messageReceived);
+            } else if (interactive?.type === "button_reply") {
+              await resMessageInteractiveButton(messageReceived);
             }
           } else {
             // * envía el mensaje de bienvenida primer contacto
