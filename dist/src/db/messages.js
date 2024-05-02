@@ -13,6 +13,7 @@ exports.dbMessages = {
                 text: `¿En qué puedo ayudarte hoy? \nEstoy aquí para guiarte y resolver cualquier duda que tengas sobre la aplicación. Puedes preguntarme sobre:`,
             },
             action: {
+                button: "Preguntas frecuentes",
                 sections: [
                     {
                         title: "Pago móvil",

@@ -67,7 +67,7 @@ export type IInteractive = {
   };
   action: {
     sections: ISection[];
-    button?: string;
+    button: string;
   };
 };
 
