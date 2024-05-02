@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { getWebhook, postWebhook } from "../controllers/webhook-controllers";
-import markAsRead from "../middlewares/mark-as-read";
+import { markAsRead, validMessage } from "../middlewares";
 
 const router = Router();
 
 router.get("/", getWebhook);
 
-router.post("/", [markAsRead], postWebhook);
+router.post("/", [validMessage, markAsRead], postWebhook);
 
 export default router;

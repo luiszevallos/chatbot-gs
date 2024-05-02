@@ -29,16 +29,102 @@ exports.dbMessages = {
                             id: "3",
                             title: "Pagos no actualizados",
                         },
-                        {
-                            id: "4",
-                            title: "Terminar la conversación",
-                        },
+                        // {
+                        //   id: "4",
+                        //   title: "Terminar la conversación",
+                        // },
                     ],
                 },
             ],
         },
     },
+    continueConversation: {
+        type: "button",
+        body: {
+            text: `¿Hay algo más en lo que podamos ayudarle?`,
+        },
+        action: {
+            buttons: [
+                {
+                    type: "reply",
+                    reply: {
+                        id: "41",
+                        title: "Si",
+                    },
+                },
+                {
+                    type: "reply",
+                    reply: {
+                        id: "42",
+                        title: "No",
+                    },
+                },
+            ],
+        },
+    },
+    goodBye: {
+        type: "text",
+        message: "Gracias por contactarnos. Ha sido un placer atenderle.",
+    },
+    // ? next 2
     response: {
+        // ? Response 1 --> 11 --> 111
+        "1": {
+            type: "button",
+            body: {
+                text: `¿Está registrado en la plataforma?`,
+            },
+            action: {
+                buttons: [
+                    {
+                        type: "reply",
+                        reply: {
+                            id: "11",
+                            title: "Si",
+                        },
+                    },
+                    {
+                        type: "reply",
+                        reply: {
+                            id: "12",
+                            title: "No",
+                        },
+                    },
+                ],
+            },
+        },
+        "11": {
+            type: "button",
+            body: {
+                text: `¿ha ingresado anteriormente a la página?`,
+            },
+            action: {
+                buttons: [
+                    {
+                        type: "reply",
+                        reply: {
+                            id: "111",
+                            title: "Si",
+                        },
+                    },
+                    {
+                        type: "reply",
+                        reply: {
+                            id: "111",
+                            title: "No",
+                        },
+                    },
+                ],
+            },
+        },
+        "12": {
+            type: "text",
+            message: "Solicite agregar un nuevo operador a una oficina",
+        },
+        "111": {
+            type: "text",
+            message: "Pronto lo estaremos contactando.",
+        },
         // ? response 2
         "2": {
             type: "list",
@@ -101,34 +187,6 @@ exports.dbMessages = {
                     },
                 ],
             },
-        },
-        // ? response 4
-        "4": {
-            type: "button",
-            body: {
-                text: `¿Hay algo más en lo que podamos ayudarle?`,
-            },
-            action: {
-                buttons: [
-                    {
-                        type: "reply",
-                        reply: {
-                            id: "41",
-                            title: "Si",
-                        },
-                    },
-                    {
-                        type: "reply",
-                        reply: {
-                            id: "42",
-                            title: "No",
-                        },
-                    },
-                ],
-            },
-        },
-        "42": {
-            message: "Gracias por contactarnos. Ha sido un placer atenderle.",
         },
     },
 };

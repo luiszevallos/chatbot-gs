@@ -3,9 +3,32 @@ import { IMessage } from "../types/webhook";
 import sendMessageInteractive from "./send-message-interactive";
 import sendMessageText from "./send-message-text";
 
-const resMessageInteractiveList = async ({ from, interactive }: IMessage) => {
+const resMessageInteractive = async ({ from, interactive }: IMessage) => {
   try {
-    switch (interactive?.list_reply?.id) {
+    const replyId =
+      interactive?.list_reply?.id || interactive?.button_reply?.id;
+    switch (replyId) {
+      // ? Response 1 --> 11 --> 111
+      case "1":
+        await sendMessageInteractive(from, dbMessages.response["1"]);
+        break;
+
+      case "11":
+        await sendMessageInteractive(from, dbMessages.response["11"]);
+        break;
+
+      case "12":
+        await sendMessageText(from, dbMessages.response["12"].message);
+        await sendMessageInteractive(from, dbMessages.continueConversation);
+        break;
+
+      case "111":
+        await sendMessageText(from, dbMessages.response["111"].message);
+        await sendMessageInteractive(from, dbMessages.continueConversation);
+        break;
+
+      // ? Response 2 --> 22 --> 222
+
       case "2":
         await sendMessageInteractive(from, dbMessages.response["2"]);
         break;
@@ -15,11 +38,7 @@ const resMessageInteractiveList = async ({ from, interactive }: IMessage) => {
         break;
 
       case "4":
-        await sendMessageInteractive(from, dbMessages.response["4"]);
-        break;
-
-      case "42":
-        await sendMessageText(from, dbMessages.response["42"]?.message);
+        await sendMessageInteractive(from, dbMessages.continueConversation);
         break;
 
       default:
@@ -31,4 +50,4 @@ const resMessageInteractiveList = async ({ from, interactive }: IMessage) => {
   }
 };
 
-export default resMessageInteractiveList;
+export default resMessageInteractive;

@@ -67,6 +67,7 @@ export type IButton = {
 
 export type IText = {
   message: string;
+  type: string;
 };
 
 export type IInteractiveButton = {
@@ -109,9 +110,17 @@ export type IInteractiveList = {
 export type IDB = {
   welcome: IInteractiveList;
   response: {
+    // ? Response 1 --> 11 --> 111
+    "1": IInteractiveButton;
+    "11": IInteractiveButton;
+    "12": IText;
+    "111": IText;
+    //
+    // ? Response 2 --> 22 --> 222
     "2": IInteractiveList;
+    // ? Response 3 --> 33 --> 333
     "3": IInteractiveList;
-    "4": IInteractiveButton;
-    "42": IText;
   };
+  continueConversation: IInteractiveButton;
+  goodBye: IText;
 };

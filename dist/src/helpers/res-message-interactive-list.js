@@ -15,10 +15,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const messages_1 = require("../db/messages");
 const send_message_interactive_1 = __importDefault(require("./send-message-interactive"));
 const send_message_text_1 = __importDefault(require("./send-message-text"));
-const resMessageInteractiveList = (_a) => __awaiter(void 0, [_a], void 0, function* ({ from, interactive }) {
+const resMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, function* ({ from, interactive }) {
     var _b, _c;
     try {
-        switch ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _b === void 0 ? void 0 : _b.id) {
+        const replyId = ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _b === void 0 ? void 0 : _b.id) || ((_c = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _c === void 0 ? void 0 : _c.id);
+        switch (replyId) {
+            // ? Response 1 --> 11 --> 111
+            case "1":
+                yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response["1"]);
+                break;
+            case "11":
+                yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response["11"]);
+                break;
+            case "12":
+                yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response["12"].message);
+                yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
+                break;
+            case "111":
+                yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response["111"].message);
+                yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
+                break;
+            // ? Response 2 --> 22 --> 222
             case "2":
                 yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response["2"]);
                 break;
@@ -26,10 +43,7 @@ const resMessageInteractiveList = (_a) => __awaiter(void 0, [_a], void 0, functi
                 yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response["3"]);
                 break;
             case "4":
-                yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response["4"]);
-                break;
-            case "42":
-                yield (0, send_message_text_1.default)(from, (_c = messages_1.dbMessages.response["42"]) === null || _c === void 0 ? void 0 : _c.message);
+                yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
                 break;
             default:
                 yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.welcome);
@@ -40,5 +54,5 @@ const resMessageInteractiveList = (_a) => __awaiter(void 0, [_a], void 0, functi
         throw new Error(`${error}`);
     }
 });
-exports.default = resMessageInteractiveList;
+exports.default = resMessageInteractive;
 //# sourceMappingURL=res-message-interactive-list.js.map

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev-ts": "tsc --watch",
-    "dev": "nodemon dist/app",
-    "start": "node dist/app"
+    "dev": "tsc && nodemon dist/app",
+    "start": "tsc && node dist/app"
   },
   "keywords": [],
   "author": "",

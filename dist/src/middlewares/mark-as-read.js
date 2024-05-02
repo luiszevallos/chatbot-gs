@@ -35,22 +35,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 const axios_1 = __importStar(require("../utils/axios"));
 const markAsRead = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c;
-    const { object, entry } = req.body;
-    if (object && entry) {
+    var _a, _b;
+    const messageId = (_a = req.message) === null || _a === void 0 ? void 0 : _a.id;
+    if (messageId) {
         try {
-            const messages = ((_c = (_b = (_a = entry[0]) === null || _a === void 0 ? void 0 : _a.changes[0]) === null || _b === void 0 ? void 0 : _b.value) === null || _c === void 0 ? void 0 : _c.messages) || [];
-            const message = (messages === null || messages === void 0 ? void 0 : messages.length) > 0 ? messages[0] : null;
-            if (message) {
-                yield axios_1.default.post(`${axios_1.endpoints.messages}`, {
-                    messaging_product: "whatsapp",
-                    status: "read",
-                    message_id: message.id,
-                });
-            }
+            yield axios_1.default.post(`${axios_1.endpoints.messages}`, {
+                messaging_product: "whatsapp",
+                status: "read",
+                message_id: messageId,
+            });
         }
         catch (error) {
-            console.log("🚀 ~ markAsRead ~ error:", error);
+            const message = ((_b = error === null || error === void 0 ? void 0 : error.response) === null || _b === void 0 ? void 0 : _b.data) || error.message || error;
+            console.error("🚀 ~ postWebhook ~ error:", message);
         }
     }
     next();
