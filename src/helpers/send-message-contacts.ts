@@ -8,19 +8,38 @@ const sendMessageContacts = async (
   return await axios.post(endpoints.messages, {
     messaging_product: "whatsapp",
     to,
-    type: "contacts",
-    contacts: [
-      {
-        name: {
-          formatted_name: "NAME",
-          first_name: "FIRST_NAME",
-          last_name: "LAST_NAME",
-          middle_name: "MIDDLE_NAME",
-          suffix: "SUFFIX",
-          prefix: "PREFIX",
+    type: "interactive",
+    interactive: {
+      type: "flow",
+      header: {
+        type: "text",
+        text: "Flow message header",
+      },
+      body: {
+        text: "Flow message body",
+      },
+      footer: {
+        text: "Flow message footer",
+      },
+      action: {
+        name: "flow",
+        parameters: {
+          flow_message_version: "3",
+          flow_token: "AQAAAAACS5FpgQ_cAAAAAD0QI3s.",
+          flow_id: "1",
+          flow_cta: "Book!",
+          flow_action: "navigate",
+          flow_action_payload: {
+            screen: "<SCREEN_NAME>",
+            data: {
+              product_name: "name",
+              product_description: "description",
+              product_price: 100,
+            },
+          },
         },
       },
-    ],
+    },
   });
 };
 
