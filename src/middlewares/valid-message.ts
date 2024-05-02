@@ -8,7 +8,7 @@ const validMessage = async (
   next: NextFunction
 ) => {
   const { object, entry } = req.body;
-  console.log("🚀 ~ object:", object);
+  console.log("🚀 ~ entry:", JSON.stringify(entry));
 
   try {
     if (object && entry?.length > 0 && entry[0].changes?.length > 0) {
