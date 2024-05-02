@@ -19,7 +19,10 @@ const send_message_text_1 = __importDefault(require("./send-message-text"));
 const resMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, function* ({ from, interactive }) {
     var _b, _c;
     try {
+        console.log("🚀 ~ resMessageInteractive ~ interactive:", interactive);
         const replyId = ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _b === void 0 ? void 0 : _b.id) || ((_c = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _c === void 0 ? void 0 : _c.id);
+        // !
+        console.log("🚀 ~ resMessageInteractive ~ replyId:", replyId);
         switch (replyId) {
             // ? Response 1 --> 11 --> 111
             case "1":

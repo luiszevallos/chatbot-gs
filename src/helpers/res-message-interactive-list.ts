@@ -6,8 +6,11 @@ import sendMessageText from "./send-message-text";
 
 const resMessageInteractive = async ({ from, interactive }: IMessage) => {
   try {
+    console.log("🚀 ~ resMessageInteractive ~ interactive:", interactive);
     const replyId =
       interactive?.list_reply?.id || interactive?.button_reply?.id;
+    // !
+    console.log("🚀 ~ resMessageInteractive ~ replyId:", replyId);
     switch (replyId) {
       // ? Response 1 --> 11 --> 111
       case "1":
