@@ -39,6 +39,26 @@ const resMessageInteractive = async ({ from, interactive }: IMessage) => {
         await sendMessageInteractive(from, dbMessages.response["2"]);
         break;
 
+      case "21":
+        await sendMessageText(from, dbMessages.response["21"].message);
+        await sendMessageInteractive(from, dbMessages.continueConversation);
+        break;
+
+      case "22":
+        await sendMessageText(from, dbMessages.response["22"].message);
+        await sendMessageInteractive(from, dbMessages.continueConversation);
+        break;
+
+      case "23":
+        await sendMessageText(from, dbMessages.response["23"].message);
+        await sendMessageInteractive(from, dbMessages.continueConversation);
+        break;
+
+      case "24":
+        await sendMessageText(from, dbMessages.response["24"].message);
+        await sendMessageInteractive(from, dbMessages.continueConversation);
+        break;
+
       // ? Response 3 --> 33 --> 333
 
       case "3":

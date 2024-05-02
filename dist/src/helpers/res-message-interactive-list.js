@@ -17,7 +17,7 @@ const send_message_contacts_1 = __importDefault(require("./send-message-contacts
 const send_message_interactive_1 = __importDefault(require("./send-message-interactive"));
 const send_message_text_1 = __importDefault(require("./send-message-text"));
 const resMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, function* ({ from, interactive }) {
-    var _b, _c, _d;
+    var _b, _c;
     try {
         const replyId = ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _b === void 0 ? void 0 : _b.id) || ((_c = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _c === void 0 ? void 0 : _c.id);
         switch (replyId) {
@@ -44,6 +44,22 @@ const resMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, function* 
             case "2":
                 yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response["2"]);
                 break;
+            case "21":
+                yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response["21"].message);
+                yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
+                break;
+            case "22":
+                yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response["22"].message);
+                yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
+                break;
+            case "23":
+                yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response["23"].message);
+                yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
+                break;
+            case "24":
+                yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response["24"].message);
+                yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
+                break;
             // ? Response 3 --> 33 --> 333
             case "3":
                 console.log("3");
@@ -64,9 +80,7 @@ const resMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, function* 
         }
     }
     catch (error) {
-        console.log(JSON.stringify(error));
-        const message = ((_d = error === null || error === void 0 ? void 0 : error.response) === null || _d === void 0 ? void 0 : _d.data) || error.message || error;
-        console.error("🚀 ~ resMessageInteractive ~ error:", message);
+        throw new Error(JSON.stringify(error));
     }
 });
 exports.default = resMessageInteractive;

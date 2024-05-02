@@ -119,6 +119,11 @@ export type IDB = {
     //
     // ? Response 2 --> 22 --> 222
     "2": IInteractiveList;
+    "21": IText;
+    "22": IText;
+    "23": IText;
+    "24": IText;
+
     // ? Response 3 --> 33 --> 333
     "3": IInteractiveList;
   };
