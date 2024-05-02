@@ -29,7 +29,7 @@ const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.getWebhook = getWebhook;
 const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     const { object, entry } = req.body;
     try {
         if (object && (entry === null || entry === void 0 ? void 0 : entry.length) > 0) {
@@ -41,14 +41,16 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                     console.log("🚀 ~ postWebhook ~ from:", from);
                     if (type === "interactive") {
                         // TODO: aquí va el switch para responde dependiendo la interacción
+                        if ((interactive === null || interactive === void 0 ? void 0 : interactive.type) === "list_reply") {
+                            switch ((_c = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _c === void 0 ? void 0 : _c.id) {
+                                case "2":
+                                    yield (0, helpers_1.sendMessageInteractive)(from, messages_1.dbMessages.response["2"]);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                         console.log(messageReceived);
-                        // switch (interactive?.type) {
-                        //   case "res_2":
-                        //     await sendMessageInteractive(from, dbMessages.response.res_2);
-                        //     break;
-                        //   default:
-                        //     break;
-                        // }
                     }
                     else {
                         // * envía el mensaje de bienvenida primer contacto
@@ -56,7 +58,7 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                     }
                 }
                 catch (error) {
-                    const message = ((_c = error === null || error === void 0 ? void 0 : error.response) === null || _c === void 0 ? void 0 : _c.data) || error.message || error;
+                    const message = ((_d = error === null || error === void 0 ? void 0 : error.response) === null || _d === void 0 ? void 0 : _d.data) || error.message || error;
                     console.log("🚀 ~ postWebhook ~ error:", message);
                 }
                 return res.sendStatus(200);

@@ -15,7 +15,11 @@ export type IMessage = {
   type: string;
   interactive?: {
     type: string;
-    button_reply: {
+    button_reply?: {
+      id: string;
+      title: string;
+    };
+    list_reply?: {
       id: string;
       title: string;
     };
@@ -76,6 +80,6 @@ export type IInteractiveList = {
 export type IDB = {
   welcome: IInteractiveList;
   response: {
-    res_2: IInteractiveList;
+    "2": IInteractiveList;
   };
 };

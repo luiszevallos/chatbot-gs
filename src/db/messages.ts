@@ -17,19 +17,19 @@ export const dbMessages: IDB = {
           title: "Preguntas",
           rows: [
             {
-              id: "response_1",
+              id: "1",
               title: "No Puedo Ingresar",
             },
             {
-              id: "response_2",
+              id: "2",
               title: "No visualizo el Pago",
             },
             {
-              id: "response_3",
+              id: "3",
               title: "Pagos no actualizados",
             },
             {
-              id: "response_4",
+              id: "4",
               title: "Terminar la Conversación",
             },
           ],
@@ -38,7 +38,7 @@ export const dbMessages: IDB = {
     },
   },
   response: {
-    res_2: {
+    "2": {
       type: "list",
 
       body: {
@@ -51,20 +51,20 @@ export const dbMessages: IDB = {
             title: "Lista",
             rows: [
               {
-                id: "response_11",
+                id: "11",
                 title: "Zelle Respuesta",
               },
               {
-                id: "response_12",
+                id: "12",
                 title: "Pago móvil Respuesta",
               },
               {
-                id: "response_13",
+                id: "13",
                 title: "Sin localizador",
                 description: "Cliente no coloco el Localizador",
               },
               {
-                id: "response_14",
+                id: "14",
                 title: "Como valido un pago",
               },
             ],
