@@ -9,26 +9,29 @@ export const dbMessages: IDB = {
         text: "¡Hola! \nTe doy la bienvenida al soporte del Validador",
       },
       body: {
-        text: `¿En qué puedo ayudarte hoy? \nEstoy aquí para guiarte y resolver cualquier duda que tengas sobre la aplicación. Puedes preguntarme sobre:`,
+        text: `¿En qué puedo ayudarte hoy? \nEstoy aquí para guiarte y resolver cualquier duda que tengas sobre la aplicación. \nPuedes preguntarme sobre:`,
       },
       action: {
         button: "Preguntas frecuentes",
         sections: [
           {
-            title: "Pago móvil",
+            title: "Preguntas",
             rows: [
               {
-                id: "11",
-                title: "No se visualiza el pago",
+                id: "1",
+                title: "No Puedo Ingresar",
               },
-            ],
-          },
-          {
-            title: "Zelle",
-            rows: [
               {
-                id: "21",
-                title: "No se visualiza el pago",
+                id: "2",
+                title: "No visualizo el Pago",
+              },
+              {
+                id: "3",
+                title: "No se actualizan los Pagos",
+              },
+              {
+                id: "4",
+                title: "Terminar la Conversación",
               },
             ],
           },
