@@ -33,6 +33,16 @@ const sendMessageInteractive = async (
               },
             ],
           },
+          {
+            title: "<SECTION_TITLE_TEXT>",
+            rows: [
+              {
+                id: "<ROW_ID>",
+                title: "<ROW_TITLE_TEXT>",
+                description: "<ROW_DESCRIPTION_TEXT>",
+              },
+            ],
+          },
         ],
         button: "<BUTTON_TEXT>",
       },
