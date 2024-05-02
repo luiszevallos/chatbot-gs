@@ -46,12 +46,21 @@ const resMessageInteractive = async ({ from, interactive }: IMessage) => {
         await sendMessageInteractive(from, dbMessages.continueConversation);
         break;
 
+      case "41":
+        await sendMessageInteractive(from, dbMessages.welcome);
+        break;
+
+      case "42":
+        await sendMessageText(from, dbMessages.goodBye.message);
+        break;
+
       default:
         await sendMessageInteractive(from, dbMessages.welcome);
         break;
     }
-  } catch (error) {
-    throw new Error(`${error}`);
+  } catch (error: any) {
+    const message = error?.response?.data || error.message || error;
+    console.error("🚀 ~ postWebhook ~ error:", message);
   }
 };
 

@@ -4,8 +4,9 @@
 
 - Node 16.x || 18.x
 
-## USING NPM
+## USING YARN
 
-- npm install
-- npm run dev-ts
-- npm run dev
+- yarn install
+- yarn run dev-ts
+- yarn run dev
+- yarn run start
