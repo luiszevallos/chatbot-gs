@@ -32,26 +32,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//
 const axios_1 = __importStar(require("../utils/axios"));
-const markAsRead = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
-    const messageId = (_a = req.message) === null || _a === void 0 ? void 0 : _a.id;
-    if (messageId) {
-        try {
-            yield axios_1.default.post(`${axios_1.endpoints.messages}`, {
-                messaging_product: "whatsapp",
-                status: "read",
-                message_id: messageId,
-            });
-        }
-        catch (error) {
-            console.log(JSON.stringify(error));
-            const message = ((_b = error === null || error === void 0 ? void 0 : error.response) === null || _b === void 0 ? void 0 : _b.data) || error.message || error;
-            console.error("🚀 ~ markAsRead ~ error:", message);
-        }
-    }
-    next();
+const sendMessageContacts = (to // ? usuario que recibe mensaje
+// interactive: IInteractiveList | IInteractiveButton // ? mensaje interactivo que se envía a usuario
+) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield axios_1.default.post(axios_1.endpoints.messages, {
+        messaging_product: "whatsapp",
+        to,
+        type: "interactive",
+        interactive: {
+            type: "flow",
+            header: {
+                type: "text",
+                text: "Flow message header",
+            },
+            body: {
+                text: "Flow message body",
+            },
+            footer: {
+                text: "Flow message footer",
+            },
+            action: {
+                name: "flow",
+                parameters: {
+                    flow_message_version: "3",
+                    flow_token: "AQAAAAACS5FpgQ_cAAAAAD0QI3s.",
+                    flow_id: "1",
+                    flow_cta: "Book!",
+                    flow_action: "navigate",
+                    flow_action_payload: {
+                        screen: "<SCREEN_NAME>",
+                        data: {
+                            product_name: "name",
+                            product_description: "description",
+                            product_price: 100,
+                        },
+                    },
+                },
+            },
+        },
+    });
 });
-exports.default = markAsRead;
-//# sourceMappingURL=mark-as-read.js.map
+exports.default = sendMessageContacts;
+//# sourceMappingURL=send-message-contacts.js.map

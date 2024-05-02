@@ -39,6 +39,8 @@ const resMessageInteractive = async ({ from, interactive }: IMessage) => {
         await sendMessageInteractive(from, dbMessages.response["2"]);
         break;
 
+      // ? Response 3 --> 33 --> 333
+
       case "3":
         console.log("3");
         await sendMessageContacts(from);
@@ -63,7 +65,7 @@ const resMessageInteractive = async ({ from, interactive }: IMessage) => {
   } catch (error: any) {
     console.log(JSON.stringify(error));
     const message = error?.response?.data || error.message || error;
-    console.error("🚀 ~ postWebhook ~ error:", message);
+    console.error("🚀 ~ resMessageInteractive ~ error:", message);
   }
 };
 

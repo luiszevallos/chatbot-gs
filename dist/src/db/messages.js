@@ -96,7 +96,7 @@ exports.dbMessages = {
         "11": {
             type: "button",
             body: {
-                text: `¿ha ingresado anteriormente a la página?`,
+                text: `¿Ha ingresado anteriormente a la plataforma?`,
             },
             action: {
                 buttons: [
@@ -110,7 +110,7 @@ exports.dbMessages = {
                     {
                         type: "reply",
                         reply: {
-                            id: "111",
+                            id: "112",
                             title: "No",
                         },
                     },
@@ -122,6 +122,10 @@ exports.dbMessages = {
             message: "Solicite agregar un nuevo operador a una oficina",
         },
         "111": {
+            type: "text",
+            message: "Pronto lo estaremos contactando.",
+        },
+        "112": {
             type: "text",
             message: "Pronto lo estaremos contactando.",
         },

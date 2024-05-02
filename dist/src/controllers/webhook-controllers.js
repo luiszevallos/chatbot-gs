@@ -30,12 +30,14 @@ const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.getWebhook = getWebhook;
 const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    const { message } = req;
+    const { message, body } = req;
+    console.log(JSON.stringify(body.entry));
     if (!message) {
         return res.sendStatus(404);
     }
     try {
-        const { from, type } = message;
+        const { from, type, text: { body }, } = message;
+        console.log(`Usuario: ${from} a respondido: ${body}`);
         if (type === "interactive") {
             // * responde los mensajes interactivo
             yield (0, helpers_1.resMessageInteractiveList)(message);
@@ -46,6 +48,7 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         }
     }
     catch (error) {
+        console.log(JSON.stringify(error));
         const message = ((_a = error === null || error === void 0 ? void 0 : error.response) === null || _a === void 0 ? void 0 : _a.data) || error.message || error;
         console.error("🚀 ~ postWebhook ~ error:", message);
     }
