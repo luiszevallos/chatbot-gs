@@ -8,53 +8,16 @@ const sendMessageContacts = async (
   return await axios.post(endpoints.messages, {
     messaging_product: "whatsapp",
     to,
-    type: "contacts",
     contacts: [
       {
-        emails: [
-          {
-            email: "EMAIL",
-            type: "WORK",
-          },
-          {
-            email: "EMAIL",
-            type: "HOME",
-          },
-        ],
-        name: {
-          formatted_name: "NAME",
-          first_name: "FIRST_NAME",
-          last_name: "LAST_NAME",
-          middle_name: "MIDDLE_NAME",
-          suffix: "SUFFIX",
-          prefix: "PREFIX",
-        },
-        org: {
-          company: "COMPANY",
-          department: "DEPARTMENT",
-          title: "TITLE",
-        },
-        phones: [
-          {
-            phone: "PHONE_NUMBER",
-            type: "HOME",
-          },
-          {
-            phone: "PHONE_NUMBER",
-            type: "WORK",
-            wa_id: "PHONE_OR_WA_ID",
-          },
-        ],
-        urls: [
-          {
-            url: "URL",
-            type: "WORK",
-          },
-          {
-            url: "URL",
-            type: "HOME",
-          },
-        ],
+        input: "16505555555",
+        wa_id: "16505555555",
+      },
+    ],
+    messages: [
+      {
+        id: "wamid.HBgLMTY1MDUwNzY1MjAVAgARGBI5QTNDQTVCM0Q0Q0Q2RTY3RTcA",
+        message_status: "accepted",
       },
     ],
   });

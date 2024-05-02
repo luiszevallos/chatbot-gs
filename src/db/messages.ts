@@ -159,7 +159,7 @@ export const dbMessages: IDB = {
               },
               {
                 id: "24",
-                title: "Como valido un pago",
+                title: "¿Cómo valido un pago?",
               },
             ],
           },
