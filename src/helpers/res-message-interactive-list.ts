@@ -27,6 +27,11 @@ const resMessageInteractive = async ({ from, interactive }: IMessage) => {
         await sendMessageInteractive(from, dbMessages.continueConversation);
         break;
 
+      case "112":
+        await sendMessageText(from, dbMessages.response["111"].message);
+        await sendMessageInteractive(from, dbMessages.continueConversation);
+        break;
+
       // ? Response 2 --> 22 --> 222
 
       case "2":
