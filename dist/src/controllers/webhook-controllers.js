@@ -30,20 +30,17 @@ const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.getWebhook = getWebhook;
 const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    const { message, body } = req;
-    console.log(JSON.stringify(body.entry));
+    const { message } = req;
+    console.log("🚀 ~ postWebhook ~ message:", message);
     if (!message) {
         return res.sendStatus(404);
     }
     try {
-        const { from, type, text: { body }, } = message;
-        console.log(`Usuario: ${from} a respondido: ${body}`);
+        const { from, type } = message;
         if (type === "interactive") {
-            // * responde los mensajes interactivo
-            yield (0, helpers_1.resMessageInteractiveList)(message);
+            yield (0, helpers_1.responseMessageInteractive)(message);
         }
         else {
-            // * envía el mensaje de bienvenida primer contacto
             yield (0, helpers_1.sendMessageInteractive)(from, messages_1.dbMessages.welcome);
         }
     }

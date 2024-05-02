@@ -8,13 +8,16 @@ const validMessage = async (
   next: NextFunction
 ) => {
   const { object, entry } = req.body;
+  console.log("🚀 ~ entry:", JSON.stringify(entry));
 
   try {
     if (object && entry?.length > 0 && entry[0].changes?.length > 0) {
       const change: IChange = entry[0].changes[0];
+      console.log("🚀 ~ change:", change);
 
       if (change && change?.value?.messages?.length > 0) {
         const message = change.value.messages[0];
+        console.log("🚀 ~ message:", message);
 
         req.message = message;
 

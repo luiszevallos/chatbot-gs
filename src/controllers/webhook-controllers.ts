@@ -20,18 +20,14 @@ export const getWebhook = async (req: Request, res: Response) => {
 
 export const postWebhook = async (req: Request, res: Response) => {
   const { message } = req;
+  console.log("🚀 ~ postWebhook ~ message:", message);
 
   if (!message) {
     return res.sendStatus(404);
   }
 
   try {
-    const {
-      from,
-      type,
-      text: { body },
-    } = message;
-    console.log("🚀 ~ postWebhook ~ message:", message);
+    const { from, type } = message;
 
     if (type === "interactive") {
       await responseMessageInteractive(message);
