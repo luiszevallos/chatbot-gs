@@ -23,9 +23,6 @@ exports.dbMessages = {
     },
     //?
     frequent_questions: {
-        header: {
-            message: "Preguntas frecuentes",
-        },
         sections: [
             {
                 title: "",

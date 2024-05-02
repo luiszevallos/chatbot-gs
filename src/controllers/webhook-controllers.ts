@@ -1,19 +1,17 @@
 import { Request, Response } from "express";
 //
 import { VERIFY_TOKEN } from "../../config-global";
+import { dbMessages } from "../db/messages";
 import { IChange } from "../types/webhook";
 import {
+  resMessageInteractiveButtons,
   sendMessageInteractiveButton,
-  sendMessageInteractiveList,
-} from "../helpers/send-message";
-import { dbMessages } from "../db/messages";
+} from "../helpers";
 
 export const getWebhook = async (req: Request, res: Response) => {
-  let mode = req.query["hub.mode"];
-
   let challenge = req.query["hub.challenge"];
-
   let token = req.query["hub.verify_token"];
+  let mode = req.query["hub.mode"];
 
   if (token === VERIFY_TOKEN) {
     res.status(200).send(challenge);
@@ -30,50 +28,32 @@ export const postWebhook = async (req: Request, res: Response) => {
     if (object && entry?.length > 0) {
       const change: IChange = entry[0].changes[0];
 
-      if (change) {
-        if (change?.value?.messages?.length > 0) {
-          const messageReceived = change.value.messages[0];
+      if (change && change?.value?.messages?.length > 0) {
+        const messageReceived = change.value.messages[0];
 
-          const { from, type, interactive } = messageReceived;
+        const { from, type, interactive } = messageReceived;
 
-          switch (type) {
-            case "text":
-              const { message, buttons } = dbMessages.welcome;
-              await sendMessageInteractiveButton(from, message, buttons);
-              break;
+        if (type === "interactive") {
+          console.log("🚀 ~ postWebhook ~ type:", type);
 
-            case "interactive":
-              console.log("🚀 ~ postWebhook ~ interactive:", interactive);
-              if (interactive?.type === "button_reply") {
-                // switch (interactive.button_reply.id) {
-                //   case "1":
-                //     const { sections, header } = dbMessages.frequent_questions;
-                //     await sendMessageInteractiveList(
-                //       from,
-                //       header.message,
-                //       sections
-                //     );
-                //     res.sendStatus(200);
-                //     break;
-                //   default:
-                //     break;
-                // }
-              }
+          switch (interactive?.type) {
+            case "button_reply":
+              await resMessageInteractiveButtons(messageReceived);
               break;
 
             default:
               break;
           }
-          res.sendStatus(200);
         } else {
-          res.sendStatus(404);
+          const { message, buttons } = dbMessages.welcome;
+          await sendMessageInteractiveButton(from, message, buttons);
         }
-      } else {
-        res.sendStatus(404);
+
+        return res.sendStatus(200);
       }
     }
+    return res.sendStatus(404);
   } catch (error) {
-    console.log("🚀 ~ postWebhook ~ error:", error);
     res.sendStatus(500);
   }
 };

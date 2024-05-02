@@ -12,12 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postWebhook = exports.getWebhook = void 0;
 //
 const config_global_1 = require("../../config-global");
-const send_message_1 = require("../helpers/send-message");
 const messages_1 = require("../db/messages");
+const helpers_1 = require("../helpers");
 const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let mode = req.query["hub.mode"];
     let challenge = req.query["hub.challenge"];
     let token = req.query["hub.verify_token"];
+    let mode = req.query["hub.mode"];
     if (token === config_global_1.VERIFY_TOKEN) {
         res.status(200).send(challenge);
     }
@@ -34,49 +34,29 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         if (object && (entry === null || entry === void 0 ? void 0 : entry.length) > 0) {
             const change = entry[0].changes[0];
-            if (change) {
-                if (((_b = (_a = change === null || change === void 0 ? void 0 : change.value) === null || _a === void 0 ? void 0 : _a.messages) === null || _b === void 0 ? void 0 : _b.length) > 0) {
-                    const messageReceived = change.value.messages[0];
-                    const { from, type, interactive } = messageReceived;
-                    switch (type) {
-                        case "text":
-                            const { message, buttons } = messages_1.dbMessages.welcome;
-                            yield (0, send_message_1.sendMessageInteractiveButton)(from, message, buttons);
-                            break;
-                        case "interactive":
-                            console.log("🚀 ~ postWebhook ~ interactive:", interactive);
-                            if ((interactive === null || interactive === void 0 ? void 0 : interactive.type) === "button_reply") {
-                                // switch (interactive.button_reply.id) {
-                                //   case "1":
-                                //     const { sections, header } = dbMessages.frequent_questions;
-                                //     await sendMessageInteractiveList(
-                                //       from,
-                                //       header.message,
-                                //       sections
-                                //     );
-                                //     res.sendStatus(200);
-                                //     break;
-                                //   default:
-                                //     break;
-                                // }
-                            }
+            if (change && ((_b = (_a = change === null || change === void 0 ? void 0 : change.value) === null || _a === void 0 ? void 0 : _a.messages) === null || _b === void 0 ? void 0 : _b.length) > 0) {
+                const messageReceived = change.value.messages[0];
+                const { from, type, interactive } = messageReceived;
+                if (type === "interactive") {
+                    console.log("🚀 ~ postWebhook ~ type:", type);
+                    switch (interactive === null || interactive === void 0 ? void 0 : interactive.type) {
+                        case "button_reply":
+                            yield (0, helpers_1.resMessageInteractiveButtons)(messageReceived);
                             break;
                         default:
                             break;
                     }
-                    res.sendStatus(200);
                 }
                 else {
-                    res.sendStatus(404);
+                    const { message, buttons } = messages_1.dbMessages.welcome;
+                    yield (0, helpers_1.sendMessageInteractiveButton)(from, message, buttons);
                 }
-            }
-            else {
-                res.sendStatus(404);
+                return res.sendStatus(200);
             }
         }
+        return res.sendStatus(404);
     }
     catch (error) {
-        console.log("🚀 ~ postWebhook ~ error:", error);
         res.sendStatus(500);
     }
 });
