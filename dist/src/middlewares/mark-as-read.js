@@ -38,14 +38,20 @@ const markAsRead = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     var _a, _b, _c;
     const { object, entry } = req.body;
     if (object && entry) {
-        const messages = ((_c = (_b = (_a = entry[0]) === null || _a === void 0 ? void 0 : _a.changes[0]) === null || _b === void 0 ? void 0 : _b.value) === null || _c === void 0 ? void 0 : _c.messages) || [];
-        yield Promise.all(messages.map((message) => __awaiter(void 0, void 0, void 0, function* () {
-            yield axios_1.default.post(`${axios_1.endpoints.messages}/message`, {
-                messaging_product: "whatsapp",
-                status: "read",
-                message_id: message.id,
-            });
-        })));
+        try {
+            const messages = ((_c = (_b = (_a = entry[0]) === null || _a === void 0 ? void 0 : _a.changes[0]) === null || _b === void 0 ? void 0 : _b.value) === null || _c === void 0 ? void 0 : _c.messages) || [];
+            const message = (messages === null || messages === void 0 ? void 0 : messages.length) > 0 ? messages[0] : null;
+            if (message) {
+                yield axios_1.default.post(`${axios_1.endpoints.messages}/message`, {
+                    messaging_product: "whatsapp",
+                    status: "read",
+                    message_id: message.id,
+                });
+            }
+        }
+        catch (error) {
+            console.log("🚀 ~ markAsRead ~ error:", error);
+        }
     }
     next();
 });
