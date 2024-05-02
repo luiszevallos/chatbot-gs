@@ -168,11 +168,11 @@ export const dbMessages: IDB = {
     },
     res21: {
       type: "text",
-      message: `*Si buscas un pago Zelle:* \n\n- Dirígete a la pestaña "Todos". \n- En el área de búsqueda, ingresa: \n   - Moneda: "USD". \n   - Método de pago: "Zelle". \n   - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago`,
+      message: `*Si buscas un pago Zelle:* \n\nDirígete a la pestaña "Todos". \nEn el área de búsqueda, ingresa: \n - Moneda: "USD". \n - Método de pago: "Zelle". \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago`,
     },
     res22: {
       type: "text",
-      message: `*Si buscas un Pago Móvil:* \n\n- Dirígete a la pestaña "Todos". \nEn el área de búsqueda, ingresa: \n   - Moneda: "Ves".  \n   - Método de pago: "Pago móvil".  \n   - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago. `,
+      message: `*Si buscas un Pago Móvil:* \n\nDirígete a la pestaña "Todos". \nEn el área de búsqueda, ingresa: \n - Moneda: "Ves".  \n - Método de pago: "Pago móvil".  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago. `,
     },
     res23: {
       type: "text",

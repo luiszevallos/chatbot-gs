@@ -1,5 +1,6 @@
 import { dbMessages } from "../db/messages";
 import { IMessage } from "../types/webhook";
+import sendMessageContacts from "./send-message-contacts";
 import sendMessageInteractive from "./send-message-interactive";
 import sendMessageText from "./send-message-text";
 
@@ -72,8 +73,8 @@ const responseMessageInteractive = async ({ from, interactive }: IMessage) => {
 
     // ? Response 3 --> 33 --> 333
 
-    // case "3":
-    //   return
+    case "3":
+      return await sendMessageContacts(from);
 
     case "4":
       return await sendMessageInteractive(
