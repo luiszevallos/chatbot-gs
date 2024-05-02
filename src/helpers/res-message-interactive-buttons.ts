@@ -1,6 +1,6 @@
 import { dbMessages } from "../db/messages";
 import { IMessage } from "../types/webhook";
-import sendMessageInteractiveList from "./send-message-interactive-list";
+import sendMessageInteractiveList from "./send-message-interactive";
 
 const resMessageInteractiveButtons = async ({
   from,

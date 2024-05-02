@@ -3,11 +3,7 @@ import { Request, Response } from "express";
 import { VERIFY_TOKEN } from "../../config-global";
 import { dbMessages } from "../db/messages";
 import { IChange } from "../types/webhook";
-import {
-  resMessageInteractiveButtons,
-  sendMessageInteractiveButton,
-  sendMessageInteractiveList,
-} from "../helpers";
+import { sendMessageInteractive } from "../helpers";
 
 export const getWebhook = async (req: Request, res: Response) => {
   let challenge = req.query["hub.challenge"];
@@ -32,13 +28,19 @@ export const postWebhook = async (req: Request, res: Response) => {
       if (change && change?.value?.messages?.length > 0) {
         const messageReceived = change.value.messages[0];
 
-        const { from, type, interactive } = messageReceived;
+        try {
+          const { from, type, interactive } = messageReceived;
+          console.log("🚀 ~ postWebhook ~ messageReceived:", messageReceived);
 
-        if (type === "interactive") {
-          console.log("🚀 ~ postWebhook ~ type:", type);
-        } else {
+          // if (type === "interactive") {
+          //   console.log("🚀 ~ postWebhook ~ type:", type);
+          // } else {
           const { welcome } = dbMessages.list;
-          await sendMessageInteractiveList(from, welcome);
+          const res = await sendMessageInteractive(from, welcome);
+          console.log("🚀 ~ postWebhook ~ res:", res);
+          // }
+        } catch (error) {
+          console.log("🚀 ~ postWebhook ~ error:", error);
         }
 
         return res.sendStatus(200);

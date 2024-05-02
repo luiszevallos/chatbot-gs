@@ -36,13 +36,19 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             const change = entry[0].changes[0];
             if (change && ((_b = (_a = change === null || change === void 0 ? void 0 : change.value) === null || _a === void 0 ? void 0 : _a.messages) === null || _b === void 0 ? void 0 : _b.length) > 0) {
                 const messageReceived = change.value.messages[0];
-                const { from, type, interactive } = messageReceived;
-                if (type === "interactive") {
-                    console.log("🚀 ~ postWebhook ~ type:", type);
-                }
-                else {
+                try {
+                    const { from, type, interactive } = messageReceived;
+                    console.log("🚀 ~ postWebhook ~ messageReceived:", messageReceived);
+                    // if (type === "interactive") {
+                    //   console.log("🚀 ~ postWebhook ~ type:", type);
+                    // } else {
                     const { welcome } = messages_1.dbMessages.list;
-                    yield (0, helpers_1.sendMessageInteractiveList)(from, welcome);
+                    const res = yield (0, helpers_1.sendMessageInteractive)(from, welcome);
+                    console.log("🚀 ~ postWebhook ~ res:", res);
+                    // }
+                }
+                catch (error) {
+                    console.log("🚀 ~ postWebhook ~ error:", error);
                 }
                 return res.sendStatus(200);
             }

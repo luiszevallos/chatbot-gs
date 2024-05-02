@@ -1,7 +1,7 @@
 import { IInteractive } from "../types/webhook";
 import axios, { endpoints } from "../utils/axios";
 
-const sendMessageInteractiveList = async (
+const sendMessageInteractive = async (
   to: string, // ? usuario que recibe mensaje
   interactive: IInteractive // ? mensaje interactivo que se envía a usuario
 ) => {
@@ -13,4 +13,4 @@ const sendMessageInteractiveList = async (
   });
 };
 
-export default sendMessageInteractiveList;
+export default sendMessageInteractive;
