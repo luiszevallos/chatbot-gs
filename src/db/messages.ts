@@ -68,7 +68,7 @@ export const dbMessages: IDB = {
   form: {
     locator: {
       type: "text",
-      message: `Por favor ingresa el localizado \n\n(Ej: 123456)`,
+      message: `Por favor ingresa el localizador \n\n(Ej: 123456)`,
     },
     reference: {
       type: "text",
@@ -76,7 +76,7 @@ export const dbMessages: IDB = {
     },
     amount: {
       type: "text",
-      message: `Por favor ingresa el monto \n\n(EJ: 1234.00)`,
+      message: `Por favor ingresa el monto \n\n(EJ: 1000,00)`,
     },
   },
 
