@@ -1,4 +1,5 @@
 import { dbMessages } from "../db/messages";
+import { FormSupportModels } from "../models";
 import { IMessage } from "../types/webhook";
 import sendMessageContacts from "./send-message-contacts";
 import sendMessageInteractive from "./send-message-interactive";
@@ -80,6 +81,15 @@ const responseMessageInteractive = async ({ from, interactive }: IMessage) => {
         from,
         dbMessages.continueConversation
       );
+
+    case "32":
+      await FormSupportModels.create({
+        locator: "",
+        amount: "",
+        reference: "",
+        phoneNumber: from,
+      });
+      return await sendMessageText(from, dbMessages.form.locator.message);
 
     // ? Response 4 --> 44 --> 444
 
