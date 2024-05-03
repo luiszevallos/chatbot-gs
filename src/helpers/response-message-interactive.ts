@@ -8,6 +8,16 @@ const responseMessageInteractive = async (message: IMessage) => {
   const { from, interactive } = message;
   const replyId = interactive?.list_reply?.id || interactive?.button_reply?.id;
 
+  const createdFormSupport = async () => {
+    await FormSupportModels.create({
+      locator: "",
+      amount: "",
+      reference: "",
+      phoneNumber: from,
+    });
+    return await sendMessageText(from, dbMessages.form.locator.message);
+  };
+
   const sendFormSupport = async () => {
     const formSupport = await FormSupportModels.findOne({
       where: {
@@ -116,14 +126,7 @@ const responseMessageInteractive = async (message: IMessage) => {
       );
 
     case "32":
-      // ? aqui se abre el form de soporte
-      await FormSupportModels.create({
-        locator: "",
-        amount: "",
-        reference: "",
-        phoneNumber: from,
-      });
-      return await sendMessageText(from, dbMessages.form.locator.message);
+      return await createdFormSupport();
 
     // ? Response 4 --> 44 --> 444
 

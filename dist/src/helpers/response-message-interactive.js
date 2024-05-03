@@ -20,6 +20,15 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
     var _a, _b;
     const { from, interactive } = message;
     const replyId = ((_a = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _a === void 0 ? void 0 : _a.id) || ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _b === void 0 ? void 0 : _b.id);
+    const createdFormSupport = () => __awaiter(void 0, void 0, void 0, function* () {
+        yield models_1.FormSupportModels.create({
+            locator: "",
+            amount: "",
+            reference: "",
+            phoneNumber: from,
+        });
+        return yield (0, send_message_text_1.default)(from, messages_1.dbMessages.form.locator.message);
+    });
     const sendFormSupport = () => __awaiter(void 0, void 0, void 0, function* () {
         const formSupport = yield models_1.FormSupportModels.findOne({
             where: {
@@ -88,14 +97,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         case "31":
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
         case "32":
-            // ? aqui se abre el form de soporte
-            yield models_1.FormSupportModels.create({
-                locator: "",
-                amount: "",
-                reference: "",
-                phoneNumber: from,
-            });
-            return yield (0, send_message_text_1.default)(from, messages_1.dbMessages.form.locator.message);
+            return yield createdFormSupport();
         // ? Response 4 --> 44 --> 444
         case "4":
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
