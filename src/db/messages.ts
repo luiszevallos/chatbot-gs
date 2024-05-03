@@ -80,6 +80,31 @@ export const dbMessages: IDB = {
     },
   },
 
+  resolved3: {
+    type: "button",
+    body: {
+      text: `¿Resolví tu duda?`,
+    },
+    action: {
+      buttons: [
+        {
+          type: "reply",
+          reply: {
+            id: "31",
+            title: "Si",
+          },
+        },
+        {
+          type: "reply",
+          reply: {
+            id: "32",
+            title: "No",
+          },
+        },
+      ],
+    },
+  },
+
   // ? next 2
   response: {
     // ? Response 1 --> 11 --> 111
@@ -200,7 +225,7 @@ export const dbMessages: IDB = {
     // ? response 3
     res3: {
       type: "text",
-      message: `*PAGOS NO ACTUALIZADOS:* \n\nPara verificar si un pago fue validado, dirígete a la pestaña "Validados automático" y en la sección de búsqueda ingresa:  \n - Moneda: "USD" o "Ves"  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago.  \nSi no aparece allí, deberás buscarlo en la pestaña "Por Validar" y si aun no lo visualizas, espera de 2 a 5 min en que aparezca, puede ocurrir lentitud en la red del banco para recibir los pagos.`,
+      message: `*PAGOS NO ACTUALIZADOS:* \n\nPara verificar si un pago fue validado, dirígete a la pestaña "Validados automático" y en la sección de búsqueda ingresa:  \n - Moneda: "USD" o "Ves"  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago.  \n\nSi no aparece allí, deberás buscarlo en la pestaña "Por Validar" y si aun no lo visualizas, espera de 2 a 5 min en que aparezca, puede ocurrir lentitud en la red del banco para recibir los pagos.`,
     },
   },
 };

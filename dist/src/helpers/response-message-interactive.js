@@ -50,7 +50,10 @@ const responseMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, funct
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
         // ? Response 3 --> 33 --> 333
         case "3":
-            return yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res3.message);
+            yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res3.message);
+            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.resolved3);
+        case "31":
+            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
         // ? Response 4 --> 44 --> 444
         case "4":
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);

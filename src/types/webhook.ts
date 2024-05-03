@@ -137,6 +137,7 @@ export type IDB = {
     // ? Response 3 --> 33 --> 333
     res3: IText;
   };
+  resolved3: IInteractiveButton;
   continueConversation: IInteractiveButton;
   goodBye: IText;
   form: {
