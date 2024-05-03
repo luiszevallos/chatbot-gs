@@ -72,10 +72,7 @@ const responseMessageInteractive = async ({ from, interactive }: IMessage) => {
     // ? Response 3 --> 33 --> 333
 
     case "3":
-      return await sendMessageInteractive(from, dbMessages.response.res3);
-
-    case "42":
-      return await sendMessageText(from, dbMessages.response.res33.message);
+      return await sendMessageText(from, dbMessages.response.res3.message);
 
     // ? Response 4 --> 44 --> 444
 
