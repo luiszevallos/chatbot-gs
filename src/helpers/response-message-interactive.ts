@@ -1,16 +1,49 @@
 import { dbMessages } from "../db/messages";
 import { FormSupportModels } from "../models";
 import { IMessage } from "../types/webhook";
-import sendMessageContacts from "./send-message-contacts";
 import sendMessageInteractive from "./send-message-interactive";
 import sendMessageText from "./send-message-text";
 
-const responseMessageInteractive = async ({ from, interactive }: IMessage) => {
+const responseMessageInteractive = async (message: IMessage) => {
+  const { from, interactive } = message;
   const replyId = interactive?.list_reply?.id || interactive?.button_reply?.id;
+
+  const sendFormSupport = async () => {
+    const formSupport = await FormSupportModels.findOne({
+      where: {
+        phoneNumber: message.from,
+        open: true,
+      },
+    });
+    if (formSupport) {
+      await formSupport.update({ open: false });
+    }
+    await sendMessageText(from, dbMessages.response.confirm.message);
+    return await sendMessageInteractive(from, dbMessages.continueConversation);
+  };
+
+  const resetFormSupport = async () => {
+    const formSupport = await FormSupportModels.findOne({
+      where: {
+        phoneNumber: message.from,
+        open: true,
+      },
+    });
+    if (formSupport) {
+      await formSupport.update({
+        open: true,
+        locator: "",
+        amount: "",
+        reference: "",
+      });
+    }
+    return await sendMessageText(from, dbMessages.form.locator.message);
+  };
 
   switch (replyId) {
     // ? Response 1 --> 11 --> 111
     case "1":
+      console.log("🚀 ~ responseMessageInteractive ~ message:", message);
       return await sendMessageInteractive(from, dbMessages.response.res1);
 
     case "11":
@@ -83,6 +116,7 @@ const responseMessageInteractive = async ({ from, interactive }: IMessage) => {
       );
 
     case "32":
+      // ? aqui se abre el form de soporte
       await FormSupportModels.create({
         locator: "",
         amount: "",
@@ -104,6 +138,13 @@ const responseMessageInteractive = async ({ from, interactive }: IMessage) => {
 
     case "42":
       return await sendMessageText(from, dbMessages.goodBye.message);
+
+    // ? Response de form
+    case "form_1":
+      return await sendFormSupport();
+
+    case "form_2":
+      return await resetFormSupport();
 
     default:
       return await sendMessageInteractive(from, dbMessages.welcome);

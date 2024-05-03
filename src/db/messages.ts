@@ -227,5 +227,11 @@ export const dbMessages: IDB = {
       type: "text",
       message: `*PAGOS NO ACTUALIZADOS:* \n\nPara verificar si un pago fue validado, dirígete a la pestaña "Validados automático" y en la sección de búsqueda ingresa:  \n - Moneda: "USD" o "Ves"  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago.  \n\nSi no aparece allí, deberás buscarlo en la pestaña "Por Validar" y si aun no lo visualizas, espera de 2 a 5 min en que aparezca, puede ocurrir lentitud en la red del banco para recibir los pagos.`,
     },
+
+    // ? form
+    confirm: {
+      type: "text",
+      message: "Pronto lo estaremos contactando",
+    },
   },
 };

@@ -16,12 +16,44 @@ const messages_1 = require("../db/messages");
 const models_1 = require("../models");
 const send_message_interactive_1 = __importDefault(require("./send-message-interactive"));
 const send_message_text_1 = __importDefault(require("./send-message-text"));
-const responseMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, function* ({ from, interactive }) {
-    var _b, _c;
-    const replyId = ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _b === void 0 ? void 0 : _b.id) || ((_c = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _c === void 0 ? void 0 : _c.id);
+const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
+    const { from, interactive } = message;
+    const replyId = ((_a = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _a === void 0 ? void 0 : _a.id) || ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _b === void 0 ? void 0 : _b.id);
+    const sendFormSupport = () => __awaiter(void 0, void 0, void 0, function* () {
+        const formSupport = yield models_1.FormSupportModels.findOne({
+            where: {
+                phoneNumber: message.from,
+                open: true,
+            },
+        });
+        if (formSupport) {
+            yield formSupport.update({ open: false });
+        }
+        yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.confirm.message);
+        return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
+    });
+    const resetFormSupport = () => __awaiter(void 0, void 0, void 0, function* () {
+        const formSupport = yield models_1.FormSupportModels.findOne({
+            where: {
+                phoneNumber: message.from,
+                open: true,
+            },
+        });
+        if (formSupport) {
+            yield formSupport.update({
+                open: true,
+                locator: "",
+                amount: "",
+                reference: "",
+            });
+        }
+        return yield (0, send_message_text_1.default)(from, messages_1.dbMessages.form.locator.message);
+    });
     switch (replyId) {
         // ? Response 1 --> 11 --> 111
         case "1":
+            console.log("🚀 ~ responseMessageInteractive ~ message:", message);
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response.res1);
         case "11":
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response.res11);
@@ -56,6 +88,7 @@ const responseMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, funct
         case "31":
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
         case "32":
+            // ? aqui se abre el form de soporte
             yield models_1.FormSupportModels.create({
                 locator: "",
                 amount: "",
@@ -70,6 +103,11 @@ const responseMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, funct
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.welcome);
         case "42":
             return yield (0, send_message_text_1.default)(from, messages_1.dbMessages.goodBye.message);
+        // ? Response de form
+        case "form_1":
+            return yield sendFormSupport();
+        case "form_2":
+            return yield resetFormSupport();
         default:
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.welcome);
     }
