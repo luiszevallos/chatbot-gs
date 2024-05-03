@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const validMessage = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     const { object, entry } = req.body;
-    console.log("🚀 ~ object:", object);
     try {
         if (object && (entry === null || entry === void 0 ? void 0 : entry.length) > 0 && ((_a = entry[0].changes) === null || _a === void 0 ? void 0 : _a.length) > 0) {
             const change = entry[0].changes[0];

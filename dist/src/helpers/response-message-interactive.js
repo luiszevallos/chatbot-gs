@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const messages_1 = require("../db/messages");
-const send_message_contacts_1 = __importDefault(require("./send-message-contacts"));
 const send_message_interactive_1 = __importDefault(require("./send-message-interactive"));
 const send_message_text_1 = __importDefault(require("./send-message-text"));
 const responseMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, function* ({ from, interactive }) {
@@ -51,7 +50,8 @@ const responseMessageInteractive = (_a) => __awaiter(void 0, [_a], void 0, funct
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
         // ? Response 3 --> 33 --> 333
         case "3":
-            return yield (0, send_message_contacts_1.default)(from);
+            return yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res3.message);
+        // ? Response 4 --> 44 --> 444
         case "4":
             return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
         case "41":
