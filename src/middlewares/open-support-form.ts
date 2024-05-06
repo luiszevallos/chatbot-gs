@@ -26,6 +26,7 @@ const openSupportForm = async (
 
         case "other":
           formOther(message);
+          break;
 
         default:
           break;
