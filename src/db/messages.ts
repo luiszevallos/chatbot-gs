@@ -21,29 +21,32 @@ export const dbMessages: IDB = {
     },
   },
   main: {
-    type: "list",
+    type: "button",
     body: {
       text: `¿En qué puedo ayudarte? \n\nSelecciona una opción`,
     },
     action: {
-      button: "Opción",
-      sections: [
+      buttons: [
         {
-          title: "Opción",
-          rows: [
-            {
-              id: "1",
-              title: "No puedo ingresar",
-            },
-            {
-              id: "2",
-              title: "No visualizo el pago",
-            },
-            {
-              id: "3",
-              title: "Otro",
-            },
-          ],
+          type: "reply",
+          reply: {
+            id: "1",
+            title: "No puedo ingresar",
+          },
+        },
+        {
+          type: "reply",
+          reply: {
+            id: "2",
+            title: "No visualizo el pago",
+          },
+        },
+        {
+          type: "reply",
+          reply: {
+            id: "2",
+            title: "Otro",
+          },
         },
       ],
     },

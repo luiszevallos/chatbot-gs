@@ -18,6 +18,9 @@ const FormSupport = sequelize.define(
     amount: {
       type: DataTypes.STRING,
     },
+    description: {
+      type: DataTypes.STRING,
+    },
     open: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,

@@ -20,6 +20,9 @@ const FormSupport = connection_1.default.define("form", {
     amount: {
         type: sequelize_1.DataTypes.STRING,
     },
+    description: {
+        type: sequelize_1.DataTypes.STRING,
+    },
     open: {
         type: sequelize_1.DataTypes.BOOLEAN,
         defaultValue: true,

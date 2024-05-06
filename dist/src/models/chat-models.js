@@ -23,6 +23,10 @@ const Chat = connection_1.default.define("chat", {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
+    type: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
     email: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,

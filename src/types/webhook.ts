@@ -119,7 +119,8 @@ export type IInteractiveList = {
 
 export type IDB = {
   greeting: IText;
-  main: IInteractiveList;
+  // main: IInteractiveList;
+  main: IInteractiveButton;
   form: {
     locator: IText;
     reference: IText;
