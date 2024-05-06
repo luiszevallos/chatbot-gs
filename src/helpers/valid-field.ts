@@ -15,7 +15,7 @@ export const validLocator = (text: string) => {
 };
 
 export const validNumberPhone = (text: string) => {
-  if (text.trim().length > 10 || text.includes("58")) {
+  if (text.trim().length > 10) {
     return "Debe de ser un Número de teléfono valido";
   }
   return false;
