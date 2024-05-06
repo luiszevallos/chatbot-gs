@@ -37,7 +37,7 @@ const openSupportForm = async (
           } else if (!uri) {
             const response = await axios.get(`/${image.id}`);
             // await formSupport.update({ uri: respontext.body });
-            console.log("🚀 ~ response:", response.data);
+            console.log("🚀 ~ response.data:", JSON.stringify(response.data));
           }
           break;
 
