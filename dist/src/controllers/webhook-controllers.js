@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postWebhook = exports.getWebhook = void 0;
 //
 const config_global_1 = require("../../config-global");
-// import { dbMessages } from "../db/messages";
-// import { responseMessageInteractive, sendMessageInteractive } from "../helpers";
+const messages_1 = require("../db/messages");
+const helpers_1 = require("../helpers");
 const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let challenge = req.query["hub.challenge"];
     let token = req.query["hub.verify_token"];
@@ -39,7 +39,7 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         // if (type === "interactive") {
         //   await responseMessageInteractive(message);
         // } else if (type === "text") {
-        //   await sendMessageInteractive(from, dbMessages.welcome);
+        yield (0, helpers_1.sendMessageInteractive)(from, messages_1.dbMessages.main);
         // }
     }
     catch (error) {

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 //
 import { VERIFY_TOKEN } from "../../config-global";
-// import { dbMessages } from "../db/messages";
-// import { responseMessageInteractive, sendMessageInteractive } from "../helpers";
+import { dbMessages } from "../db/messages";
+import { responseMessageInteractive, sendMessageInteractive } from "../helpers";
 
 export const getWebhook = async (req: Request, res: Response) => {
   let challenge = req.query["hub.challenge"];
@@ -31,7 +31,7 @@ export const postWebhook = async (req: Request, res: Response) => {
     // if (type === "interactive") {
     //   await responseMessageInteractive(message);
     // } else if (type === "text") {
-    //   await sendMessageInteractive(from, dbMessages.welcome);
+    await sendMessageInteractive(from, dbMessages.main);
     // }
   } catch (error: any) {
     const message = error?.response?.data || error.message || error;

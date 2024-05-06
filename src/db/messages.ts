@@ -20,42 +20,37 @@ export const dbMessages: IDB = {
       message: `Por favor ingresa el monto \n\n(EJ: 1000,00)`,
     },
   },
+  main: {
+    type: "list",
+    body: {
+      text: `¿En qué puedo ayudarte hoy? \n\nPuedes preguntarme sobre:`,
+    },
+    action: {
+      button: "Selecciona una opción",
+      sections: [
+        {
+          title: "Menú",
+          rows: [
+            {
+              id: "1",
+              title: "No puedo ingresar",
+            },
+            {
+              id: "2",
+              title: "No visualizo el pago",
+            },
+            {
+              id: "3",
+              title: "Otro",
+            },
+          ],
+        },
+      ],
+    },
+  },
 
   // welcome: {
-  //   type: "list",
-  //   header: {
-  //     type: "text",
-  //     text: "¡Hola! \nTe doy la bienvenida al soporte del Validador",
-  //   },
-  //   body: {
-  //     text: `¿En qué puedo ayudarte hoy? \nEstoy aquí para guiarte y resolver cualquier duda que tengas sobre la aplicación. \nPuedes preguntarme sobre:`,
-  //   },
-  //   action: {
-  //     button: "Preguntas frecuentes",
-  //     sections: [
-  //       {
-  //         title: "Preguntas frecuente",
-  //         rows: [
-  //           {
-  //             id: "1",
-  //             title: "No puedo ingresar",
-  //           },
-  //           {
-  //             id: "2",
-  //             title: "No visualizo el pago",
-  //           },
-  //           {
-  //             id: "3",
-  //             title: "Pagos no actualizados",
-  //           },
-  //           // {
-  //           //   id: "4",
-  //           //   title: "Terminar la conversación",
-  //           // },
-  //         ],
-  //       },
-  //     ],
-  //   },
+  //
   // },
   // continueConversation: {
   //   type: "button",

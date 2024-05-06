@@ -119,6 +119,12 @@ export type IInteractiveList = {
 
 export type IDB = {
   greeting: IText;
+  main: IInteractiveList;
+  form: {
+    locator: IText;
+    reference: IText;
+    amount: IText;
+  };
   // welcome: IInteractiveList;
   // response: {
   //   // ? Response 1 --> 11 --> 111
@@ -144,9 +150,4 @@ export type IDB = {
   // resolved3: IInteractiveButton;
   // continueConversation: IInteractiveButton;
   // goodBye: IText;
-  form: {
-    locator: IText;
-    reference: IText;
-    amount: IText;
-  };
 };
