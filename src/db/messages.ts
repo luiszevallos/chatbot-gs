@@ -71,9 +71,9 @@ export const dbMessages: IDB = {
           },
         },
         {
-          type: "7",
+          type: "reply",
           reply: {
-            id: "42",
+            id: "7",
             title: "No",
           },
         },
