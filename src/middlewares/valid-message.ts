@@ -17,9 +17,11 @@ const validMessage = async (
         const message = change.value.messages[0];
         if (message) {
           req.message = message;
+          next();
+        } else {
+          return res.sendStatus(404);
         }
       }
-      next();
     } else return res.sendStatus(404);
   } catch (error) {
     res.sendStatus(500);

@@ -11,7 +11,6 @@ const ValidChatStarted = async (
   next: NextFunction
 ) => {
   const { message } = req;
-  console.log("🚀 ~ message:", message);
 
   try {
     if (message) {
