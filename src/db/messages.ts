@@ -5,7 +5,6 @@ export const dbMessages: IDB = {
     type: "text",
     message: `*¡Hola!* \nBienvenido al Soporte del validador de pago \n\nPor favor ingrese su correo electrónico \n\(Ej: example@mail.com)`,
   },
-
   form: {
     locator: {
       type: "text",
@@ -55,7 +54,6 @@ export const dbMessages: IDB = {
       ],
     },
   },
-
   continue: {
     type: "button",
     body: {
@@ -84,7 +82,14 @@ export const dbMessages: IDB = {
     type: "text",
     message: "Gracias por contactarnos. Ha sido un placer atenderle.",
   },
-
+  other: {
+    type: "text",
+    message: "Describa su problema",
+  },
+  attachImage: {
+    type: "text",
+    message: "Por favor enviar una imagen de su caso",
+  },
   // welcome: {
   //
   // },

@@ -9,6 +9,22 @@ const FormSupport = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    open: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     locator: {
       type: DataTypes.STRING,
     },
@@ -21,16 +37,8 @@ const FormSupport = sequelize.define(
     description: {
       type: DataTypes.STRING,
     },
-    open: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-    phoneNumber: {
+    uri: {
       type: DataTypes.STRING,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
   },
   {

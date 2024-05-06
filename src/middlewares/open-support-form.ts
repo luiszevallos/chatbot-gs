@@ -19,9 +19,25 @@ const openSupportForm = async (
     });
 
     const { text, from } = message;
+    console.log("🚀 ~ message:", message);
 
-    if (formSupport && message.type === "text") {
-      const { locator, reference, amount } = formSupport.dataValues;
+    if (formSupport) {
+      const { type, description, uri, locator, reference, amount } =
+        formSupport.dataValues;
+
+      switch (type) {
+        case "other":
+          if (!description && message.type !== "text") {
+            return await sendMessageText(from, dbMessages.other.message);
+          } else if (!description) {
+            await formSupport.update({ description: text.body });
+            return await sendMessageText(from, dbMessages.support.message);
+          }
+          break;
+
+        default:
+          break;
+      }
 
       if (!locator) {
         await formSupport.update({ locator: text.body });

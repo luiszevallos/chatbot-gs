@@ -124,6 +124,8 @@ export type IDB = {
   main: IInteractiveButton;
   continue: IInteractiveButton;
   bye: IText;
+  attachImage: IText;
+  other: IText;
   form: {
     locator: IText;
     reference: IText;
