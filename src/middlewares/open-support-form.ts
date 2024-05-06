@@ -58,7 +58,8 @@ const openSupportForm = async (
 
       switch (type) {
         case "other":
-          return await formSupportOther();
+          await formSupportOther();
+          break;
 
         default:
           break;
