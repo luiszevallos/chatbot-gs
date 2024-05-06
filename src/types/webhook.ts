@@ -131,6 +131,7 @@ export type IDB = {
   bye: IText;
   attachImage: IText;
   other: IText;
+  didNotDisplayPayment: IInteractiveButton;
   form: {
     locator: IText;
     reference: IText;

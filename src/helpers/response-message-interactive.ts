@@ -69,6 +69,12 @@ const responseMessageInteractive = async (message: IMessage) => {
     case "1":
       return await sendFormSupport();
 
+    case "2":
+      return await sendMessageInteractive(
+        phoneNumber,
+        dbMessages.didNotDisplayPayment
+      );
+
     case "3":
       return await createFormAnother();
 

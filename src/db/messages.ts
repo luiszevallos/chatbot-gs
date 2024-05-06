@@ -90,6 +90,38 @@ export const dbMessages: IDB = {
     type: "text",
     message: "Por favor envié una imagen de su caso",
   },
+  didNotDisplayPayment: {
+    type: "button",
+    body: {
+      text: `No visualizo pago`,
+    },
+    action: {
+      buttons: [
+        {
+          type: "reply",
+          reply: {
+            id: "11",
+            title: "Pago móvil",
+          },
+        },
+        {
+          type: "reply",
+          reply: {
+            id: "12",
+            title: "Zelle",
+          },
+        },
+        {
+          type: "reply",
+          reply: {
+            id: "13",
+            title: "¿Cómo valido un pago?",
+          },
+        },
+      ],
+    },
+  },
+
   // welcome: {
   //
   // },
