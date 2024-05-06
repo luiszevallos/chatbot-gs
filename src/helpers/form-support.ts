@@ -80,7 +80,7 @@ class FormSupport {
           await formSupport.update({ reference: text.body });
           return await sendMessageText(
             phoneNumber,
-            paymentMobile.reference.message
+            paymentMobile.locator.message
           );
         }
       } else if (!locator) {
