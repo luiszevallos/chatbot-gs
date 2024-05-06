@@ -19,9 +19,12 @@ const validMessage = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                 const message = change.value.messages[0];
                 if (message) {
                     req.message = message;
+                    next();
+                }
+                else {
+                    return res.sendStatus(404);
                 }
             }
-            next();
         }
         else
             return res.sendStatus(404);

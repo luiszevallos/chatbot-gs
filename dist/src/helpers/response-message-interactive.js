@@ -37,6 +37,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
                 email,
                 description: `Usuario no puede ingresar a la plataforma con el correo: ${email}`,
             };
+            console.log("🚀 ~ sendFormSupport ~ data:", data);
             // TODO: Aquí se envía el formulario a soporte
             yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
@@ -56,9 +57,29 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         }
         return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.bye.message);
     });
+    const createFormAnother = () => __awaiter(void 0, void 0, void 0, function* () {
+        const chat = yield models_1.ChatModels.findOne({
+            where: {
+                phoneNumber,
+                open: true,
+            },
+        });
+        if (chat) {
+            yield models_1.FormSupportModels.create({
+                type: "other",
+                phoneNumber,
+                email: chat.dataValues.email,
+                description: "",
+                uri: "",
+            });
+        }
+        return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.other.message);
+    });
     switch (replyId) {
         case "1":
-            return sendFormSupport();
+            return yield sendFormSupport();
+        case "3":
+            return yield createFormAnother();
         case "6":
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.main);
         case "7":

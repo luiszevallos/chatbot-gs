@@ -11,6 +11,22 @@ const FormSupport = connection_1.default.define("form", {
         autoIncrement: true,
         primaryKey: true,
     },
+    type: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    open: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: true,
+    },
+    phoneNumber: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
     locator: {
         type: sequelize_1.DataTypes.STRING,
     },
@@ -23,16 +39,8 @@ const FormSupport = connection_1.default.define("form", {
     description: {
         type: sequelize_1.DataTypes.STRING,
     },
-    open: {
-        type: sequelize_1.DataTypes.BOOLEAN,
-        defaultValue: true,
-    },
-    phoneNumber: {
+    uri: {
         type: sequelize_1.DataTypes.STRING,
-    },
-    email: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
     },
 }, {
     tableName: "form_support",

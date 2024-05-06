@@ -54,19 +54,24 @@ const responseMessageInteractive = async (message: IMessage) => {
         open: true,
       },
     });
-    await FormSupportModels.create({
-      type: "other",
-      phoneNumber,
-      description: "",
-      uri: "",
-    });
+    if (chat) {
+      await FormSupportModels.create({
+        type: "other",
+        phoneNumber,
+        email: chat.dataValues.email,
+        description: "",
+        uri: "",
+      });
+    }
+    return await sendMessageText(phoneNumber, dbMessages.other.message);
   };
 
   switch (replyId) {
     case "1":
-      return sendFormSupport();
+      return await sendFormSupport();
 
     case "3":
+      return await createFormAnother();
 
     case "6":
       return await sendMessageInteractive(phoneNumber, dbMessages.main);

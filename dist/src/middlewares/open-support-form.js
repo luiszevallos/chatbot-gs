@@ -22,8 +22,22 @@ const openSupportForm = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
             },
         });
         const { text, from } = message;
-        if (formSupport && message.type === "text") {
-            const { locator, reference, amount } = formSupport.dataValues;
+        console.log("🚀 ~ message:", message);
+        if (formSupport) {
+            const { type, description, uri, locator, reference, amount } = formSupport.dataValues;
+            switch (type) {
+                case "other":
+                    if (!description && message.type !== "text") {
+                        return yield (0, helpers_1.sendMessageText)(from, messages_1.dbMessages.other.message);
+                    }
+                    else if (!description) {
+                        yield formSupport.update({ description: text.body });
+                        return yield (0, helpers_1.sendMessageText)(from, messages_1.dbMessages.support.message);
+                    }
+                    break;
+                default:
+                    break;
+            }
             if (!locator) {
                 yield formSupport.update({ locator: text.body });
                 yield (0, helpers_1.sendMessageText)(from, messages_1.dbMessages.form.reference.message);

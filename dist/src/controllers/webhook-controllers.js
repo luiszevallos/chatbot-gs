@@ -36,11 +36,12 @@ const postWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
     try {
         const { from, type } = message;
-        // if (type === "interactive") {
-        //   await responseMessageInteractive(message);
-        // } else if (type === "text") {
-        yield (0, helpers_1.sendMessageInteractive)(from, messages_1.dbMessages.main);
-        // }
+        if (type === "interactive") {
+            yield (0, helpers_1.responseMessageInteractive)(message);
+        }
+        else {
+            yield (0, helpers_1.sendMessageInteractive)(from, messages_1.dbMessages.main);
+        }
     }
     catch (error) {
         const message = ((_a = error === null || error === void 0 ? void 0 : error.response) === null || _a === void 0 ? void 0 : _a.data) || error.message || error;

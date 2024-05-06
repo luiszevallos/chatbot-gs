@@ -22,12 +22,12 @@ exports.dbMessages = {
     },
     support: {
         type: "text",
-        message: "Pronto lo estaremos contactando",
+        message: "Estamos aperturando un ticket, pronto lo estaremos contactando",
     },
     main: {
         type: "button",
         body: {
-            text: `¿En qué puedo ayudarte? \n\nSelecciona una opción`,
+            text: `¿En qué puedo ayudarte?`,
         },
         action: {
             buttons: [
@@ -48,7 +48,7 @@ exports.dbMessages = {
                 {
                     type: "reply",
                     reply: {
-                        id: "2",
+                        id: "3",
                         title: "Otro",
                     },
                 },
@@ -70,9 +70,9 @@ exports.dbMessages = {
                     },
                 },
                 {
-                    type: "7",
+                    type: "reply",
                     reply: {
-                        id: "42",
+                        id: "7",
                         title: "No",
                     },
                 },
@@ -82,6 +82,14 @@ exports.dbMessages = {
     bye: {
         type: "text",
         message: "Gracias por contactarnos. Ha sido un placer atenderle.",
+    },
+    other: {
+        type: "text",
+        message: "Describa su problema",
+    },
+    attachImage: {
+        type: "text",
+        message: "Por favor enviar una imagen de su caso",
     },
     // welcome: {
     //
