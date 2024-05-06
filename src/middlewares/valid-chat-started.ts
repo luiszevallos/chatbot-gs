@@ -22,7 +22,6 @@ const ValidChatStarted = async (
           open: true,
         },
       });
-      console.log("🚀 ~ chat:", chat);
 
       if (!chat) {
         // ? Valida si el texto enviado es un correo validado
