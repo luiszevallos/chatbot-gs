@@ -24,6 +24,11 @@ export type IMessage = {
       title: string;
     };
   };
+  image: {
+    mime_type: string;
+    sha256: string;
+    id: string;
+  };
 };
 
 export type IChange = {

@@ -4,7 +4,7 @@ import { HEADER_JWT, HOST_API, NUMBER_PHONE_ID } from "../../config-global";
 // ----------------------------------------------------------------------
 
 const axiosInstance = axios.create({
-  baseURL: `${HOST_API}/${NUMBER_PHONE_ID}`,
+  baseURL: `${HOST_API}`,
   headers: {
     Authorization: `Bearer ${HEADER_JWT}`,
   },
@@ -25,5 +25,5 @@ export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
 // ----------------------------------------------------------------------
 
 export const endpoints = {
-  messages: "/messages",
+  messages: `/${NUMBER_PHONE_ID}/messages`,
 };
