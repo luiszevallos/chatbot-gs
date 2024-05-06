@@ -1,21 +1,65 @@
 // import { dbMessages } from "../db/messages";
-// import { FormSupportModels } from "../models";
+import { dbMessages } from "../db/messages";
+import { ChatModels, FormSupportModels } from "../models";
 import { IMessage } from "../types/webhook";
+import sendMessageInteractive from "./send-message-interactive";
+import sendMessageText from "./send-message-text";
 // import sendMessageInteractive from "./send-message-interactive";
 // import sendMessageText from "./send-message-text";
 
 const responseMessageInteractive = async (message: IMessage) => {
-  // const { from, interactive } = message;
-  // const replyId = interactive?.list_reply?.id || interactive?.button_reply?.id;
-  // const createdFormSupport = async () => {
-  //   await FormSupportModels.create({
-  //     locator: "",
-  //     amount: "",
-  //     reference: "",
-  //     phoneNumber: from,
-  //   });
-  //   return await sendMessageText(from, dbMessages.form.locator.message);
-  // };
+  const { from: phoneNumber, interactive } = message;
+  const replyId = interactive?.list_reply?.id || interactive?.button_reply?.id;
+
+  const sendFormSupport = async () => {
+    const chat = await ChatModels.findOne({
+      where: {
+        phoneNumber,
+        open: true,
+      },
+    });
+    if (chat) {
+      const email = chat.dataValues.email;
+      const data = {
+        phoneNumber,
+        email,
+        description: `Usuario no puede ingresar a la plataforma con el correo: ${email}`,
+      };
+      // TODO: Aquí se envía el formulario a soporte
+      await sendMessageText(phoneNumber, dbMessages.support.message);
+      return await sendMessageInteractive(phoneNumber, dbMessages.continue);
+    }
+  };
+
+  const closeConversation = async () => {
+    const chat = await ChatModels.findOne({
+      where: {
+        phoneNumber,
+        open: true,
+      },
+    });
+    if (chat) {
+      await chat.update({
+        open: false,
+      });
+    }
+    return await sendMessageText(phoneNumber, dbMessages.bye.message);
+  };
+
+  switch (replyId) {
+    case "1":
+      return sendFormSupport();
+
+    case "6":
+      return await sendMessageInteractive(phoneNumber, dbMessages.main);
+
+    case "7":
+      return await closeConversation();
+
+    default:
+      break;
+  }
+
   // const sendFormSupport = async () => {
   //   const formSupport = await FormSupportModels.findOne({
   //     where: {

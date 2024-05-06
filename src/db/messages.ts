@@ -20,6 +20,10 @@ export const dbMessages: IDB = {
       message: `Por favor ingresa el monto \n\n(EJ: 1000,00)`,
     },
   },
+  support: {
+    type: "text",
+    message: "Pronto lo estaremos contactando",
+  },
   main: {
     type: "button",
     body: {
@@ -52,38 +56,38 @@ export const dbMessages: IDB = {
     },
   },
 
+  continue: {
+    type: "button",
+    body: {
+      text: `¿Hay algo más en lo que podamos ayudarle?`,
+    },
+    action: {
+      buttons: [
+        {
+          type: "reply",
+          reply: {
+            id: "6",
+            title: "Si",
+          },
+        },
+        {
+          type: "7",
+          reply: {
+            id: "42",
+            title: "No",
+          },
+        },
+      ],
+    },
+  },
+  bye: {
+    type: "text",
+    message: "Gracias por contactarnos. Ha sido un placer atenderle.",
+  },
+
   // welcome: {
   //
   // },
-  // continueConversation: {
-  //   type: "button",
-  //   body: {
-  //     text: `¿Hay algo más en lo que podamos ayudarle?`,
-  //   },
-  //   action: {
-  //     buttons: [
-  //       {
-  //         type: "reply",
-  //         reply: {
-  //           id: "41",
-  //           title: "Si",
-  //         },
-  //       },
-  //       {
-  //         type: "reply",
-  //         reply: {
-  //           id: "42",
-  //           title: "No",
-  //         },
-  //       },
-  //     ],
-  //   },
-  // },
-  // goodBye: {
-  //   type: "text",
-  //   message: "Gracias por contactarnos. Ha sido un placer atenderle.",
-  // },
-
   // resolved3: {
   //   type: "button",
   //   body: {
