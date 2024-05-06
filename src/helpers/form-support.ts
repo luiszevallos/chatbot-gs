@@ -99,7 +99,7 @@ class FormSupport {
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
         } else {
-          await formSupport.update({ phoneNumber: text.body });
+          await formSupport.update({ issuerNumber: text.body });
           return await sendMessageText(
             phoneNumber,
             paymentMobile.amount.message

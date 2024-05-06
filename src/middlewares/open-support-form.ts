@@ -12,7 +12,6 @@ const openSupportForm = async (
 
   if (message) {
     const existFormSupport = await formSupport.consultSupportForm(message);
-    console.log("🚀 ~ existFormSupport:", JSON.stringify(existFormSupport));
 
     if (existFormSupport) {
       return res.sendStatus(200);
