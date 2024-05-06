@@ -160,7 +160,7 @@ class FormSupport {
             },
           });
         }
-      } else {
+      } else if (type === "button") {
         const replyId =
           interactive?.list_reply?.id || interactive?.button_reply?.id;
 
@@ -188,6 +188,31 @@ class FormSupport {
             dbMessages.form.paymentMobile.reference.message
           );
         }
+      } else {
+        return await sendMessageInteractive(phoneNumber, {
+          type: "button",
+          body: {
+            text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+          },
+          action: {
+            buttons: [
+              {
+                type: "reply",
+                reply: {
+                  id: "form_1",
+                  title: "Si",
+                },
+              },
+              {
+                type: "reply",
+                reply: {
+                  id: "form_2",
+                  title: "No",
+                },
+              },
+            ],
+          },
+        });
       }
     }
   }
