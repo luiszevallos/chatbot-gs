@@ -84,6 +84,25 @@ const responseMessageInteractive = async (message: IMessage) => {
     case "7":
       return await closeConversation();
 
+    case "8":
+      return await sendMessageInteractive(phoneNumber, dbMessages.continue);
+
+    case "11":
+      await sendMessageText(
+        phoneNumber,
+        dbMessages.visualizePaymentZelle.message
+      );
+      return await sendMessageInteractive(phoneNumber, dbMessages.resolveDoubt);
+
+    case "12":
+      await sendMessageText(
+        phoneNumber,
+        dbMessages.visualizePaymentMobile.message
+      );
+      return await sendMessageInteractive(phoneNumber, dbMessages.resolveDoubt);
+
+    case "21":
+
     default:
       break;
   }
