@@ -88,7 +88,7 @@ export const dbMessages: IDB = {
   },
   attachImage: {
     type: "text",
-    message: "Por favor enviar una imagen de su caso",
+    message: "Por favor envié una imagen de su caso",
   },
   // welcome: {
   //

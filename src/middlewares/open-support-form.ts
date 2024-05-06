@@ -25,41 +25,41 @@ const openSupportForm = async (
       const { type, email, description, uri, locator, reference, amount } =
         formSupport.dataValues;
 
+      const formSupportOther = async () => {
+        if (!description && message.type !== "text") {
+          return await sendMessageText(phoneNumber, dbMessages.other.message);
+        } else if (!description) {
+          await formSupport.update({ description: text.body });
+          return await sendMessageText(
+            phoneNumber,
+            dbMessages.attachImage.message
+          );
+        } else if (!uri && message.type !== "image") {
+          return await sendMessageText(
+            phoneNumber,
+            dbMessages.attachImage.message
+          );
+        } else if (!uri) {
+          const response = await axios.get(`/${image.id}`);
+          // const resDownload = await axios.get(response.data.url)
+          // console.log(JSON.stringify(resDownload.data));
+          await formSupport.update({ uri: response.data.url, open: false });
+          const data = {
+            imagen: response.data.url,
+            description,
+            phoneNumber,
+            email,
+          };
+          console.log("🚀 ~ data:", data);
+          // TODO: aquí se envía en form a soporte
+          await sendMessageText(phoneNumber, dbMessages.support.message);
+          return await sendMessageInteractive(phoneNumber, dbMessages.continue);
+        }
+      };
+
       switch (type) {
         case "other":
-          if (!description && message.type !== "text") {
-            return await sendMessageText(phoneNumber, dbMessages.other.message);
-          } else if (!description) {
-            await formSupport.update({ description: text.body });
-            return await sendMessageText(
-              phoneNumber,
-              dbMessages.attachImage.message
-            );
-          } else if (!uri && message.type !== "image") {
-            return await sendMessageText(
-              phoneNumber,
-              dbMessages.support.message
-            );
-          } else if (!uri) {
-            const response = await axios.get(`/${image.id}`);
-            // const resDownload = await axios.get(response.data.url)
-            // console.log(JSON.stringify(resDownload.data));
-            await formSupport.update({ uri: response.data.url, open: false });
-            const data = {
-              imagen: response.data.url,
-              description,
-              phoneNumber,
-              email,
-            };
-            console.log("🚀 ~ data:", data);
-            // TODO: aquí se envía en form a soporte
-            await sendMessageText(phoneNumber, dbMessages.support.message);
-            return await sendMessageInteractive(
-              phoneNumber,
-              dbMessages.continue
-            );
-          }
-          break;
+          return await formSupportOther();
 
         default:
           break;
