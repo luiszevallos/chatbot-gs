@@ -36,7 +36,8 @@ const openSupportForm = async (
             return await sendMessageText(from, dbMessages.support.message);
           } else if (!uri) {
             const response = await axios.get(`/${image.id}`);
-            console.log(response);
+            // await formSupport.update({ uri: respontext.body });
+            console.log("🚀 ~ response:", response.data);
           }
           break;
 
