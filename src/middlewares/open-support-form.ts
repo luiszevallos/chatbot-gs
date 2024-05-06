@@ -19,25 +19,45 @@ const openSupportForm = async (
       },
     });
 
-    const { text, from, image } = message;
+    const { text, from: phoneNumber, image } = message;
 
     if (formSupport) {
-      const { type, description, uri, locator, reference, amount } =
+      const { type, email, description, uri, locator, reference, amount } =
         formSupport.dataValues;
 
       switch (type) {
         case "other":
           if (!description && message.type !== "text") {
-            return await sendMessageText(from, dbMessages.other.message);
+            return await sendMessageText(phoneNumber, dbMessages.other.message);
           } else if (!description) {
             await formSupport.update({ description: text.body });
-            return await sendMessageText(from, dbMessages.support.message);
+            return await sendMessageText(
+              phoneNumber,
+              dbMessages.support.message
+            );
           } else if (!uri && message.type !== "image") {
-            return await sendMessageText(from, dbMessages.support.message);
+            return await sendMessageText(
+              phoneNumber,
+              dbMessages.support.message
+            );
           } else if (!uri) {
             const response = await axios.get(`/${image.id}`);
-            // await formSupport.update({ uri: respontext.body });
-            console.log("🚀 ~ response.data:", JSON.stringify(response.data));
+            // const resDownload = await axios.get(response.data.url)
+            // console.log(JSON.stringify(resDownload.data));
+            await formSupport.update({ uri: response.data.url, open: false });
+            const data = {
+              imagen: response.data.url,
+              description,
+              phoneNumber,
+              email,
+            };
+            console.log("🚀 ~ data:", data);
+            // TODO: aquí se envía en form a soporte
+            await sendMessageText(phoneNumber, dbMessages.support.message);
+            return await sendMessageInteractive(
+              phoneNumber,
+              dbMessages.continue
+            );
           }
           break;
 
