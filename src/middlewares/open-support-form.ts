@@ -33,7 +33,7 @@ const openSupportForm = async (
             await formSupport.update({ description: text.body });
             return await sendMessageText(
               phoneNumber,
-              dbMessages.support.message
+              dbMessages.attachImage.message
             );
           } else if (!uri && message.type !== "image") {
             return await sendMessageText(
