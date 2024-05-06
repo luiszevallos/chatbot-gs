@@ -27,7 +27,6 @@ class Server {
   async connectDB() {
     try {
       await sequelize.authenticate();
-      console.log("Conectado auth");
       await sequelize.sync();
       console.log("Conectado Sync");
     } catch (error) {

@@ -49,7 +49,6 @@ const ValidChatStarted = async (
       }
     }
   } catch (error) {
-    console.log("🚀 ~ error:", error);
     res.sendStatus(500);
   }
 };

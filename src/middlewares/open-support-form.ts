@@ -50,7 +50,6 @@ const openSupportForm = async (
             phoneNumber,
             email,
           };
-          console.log("🚀 ~ data:", data);
           // TODO: aquí se envía en form a soporte
           await sendMessageText(phoneNumber, dbMessages.support.message);
           return await sendMessageInteractive(phoneNumber, dbMessages.continue);
