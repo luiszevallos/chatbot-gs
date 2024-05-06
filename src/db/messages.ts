@@ -154,7 +154,7 @@ export const dbMessages: IDB = {
   },
   validatePayment: {
     type: "text",
-    message: `*¿CÓMO VALIDO UN PAGO?* \nLos pagos suelen validarse automáticamente si el cliente ingresó solo el número de localizador de seis dígitos en el concepto. De lo contrario, el pago pasará a "Pagos por validar" y deberás seguir estos pasos:  \n\nBusca el pago usando los filtros de búsqueda.  \nUna vez localizado, haz clic en los tres puntos verticales y luego en "Validar".  \nIngresa el localizador de seis dígitos asociado al pago.  \nHaz clic en el botón "Validar".  \nTu pago pasará a la lista de pagos validados manualmente.`,
+    message: `*¿CÓMO VALIDO UN PAGO?* \nLos pagos suelen validarse automáticamente si el cliente ingresó solo el número de localizador de seis dígitos en el concepto. De lo contrario, el pago pasará a "Pagos por validar" y deberás seguir estos pasos:  \n\n- Busca el pago usando los filtros de búsqueda.  \n- Una vez localizado, haz clic en los tres puntos verticales y luego en "Validar".  \n- Ingresa el localizador de seis dígitos asociado al pago.  \n- Haz clic en el botón "Validar".  \n\nTu pago pasará a la lista de pagos validados manualmente.`,
   },
 
   resolveDoubtPaymentMobile: {

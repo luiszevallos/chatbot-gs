@@ -67,6 +67,7 @@ const responseMessageInteractive = async (message: IMessage) => {
 
   switch (replyId) {
     case "1":
+      // ? envía el formulario de no puedo ingresa a soporte
       return await sendFormSupport();
 
     case "2":
@@ -76,6 +77,7 @@ const responseMessageInteractive = async (message: IMessage) => {
       );
 
     case "3":
+      // ? crear formulario de otros problema
       return await createFormAnother();
 
     case "6":
