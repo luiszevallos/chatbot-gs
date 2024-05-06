@@ -114,11 +114,8 @@ class FormSupport {
           return await sendMessageText(phoneNumber, paymentMobile.uri.message);
         }
       } else if (!uri) {
-        if (type === "image") {
-          return await sendMessageText(
-            phoneNumber,
-            "Debe de enviar una imagen de la referencia"
-          );
+        if (message.type !== "image") {
+          return await sendMessageText(phoneNumber, paymentMobile.uri.message);
         } else {
           const response = await axios.get(`/${image.id}`);
           await formSupport.update({ uri: response.data.url });
