@@ -47,6 +47,7 @@ const responseMessageInteractive = async (message: IMessage) => {
   };
 
   const createFormAnother = async () => {
+    const { description } = dbMessages.form.other;
     const chat = await ChatModels.findOne({
       where: {
         phoneNumber,
@@ -62,7 +63,28 @@ const responseMessageInteractive = async (message: IMessage) => {
         uri: "",
       });
     }
-    return await sendMessageText(phoneNumber, dbMessages.other.message);
+    return await sendMessageText(phoneNumber, description.message);
+  };
+
+  const createFormPaymentMobile = async (bank: string) => {
+    const chat = await ChatModels.findOne({
+      where: {
+        phoneNumber,
+        open: true,
+      },
+    });
+    if (chat) {
+      await FormSupportModels.create({
+        email: chat.dataValues.email,
+        type: "paymentMobile",
+        phoneNumber,
+        bank,
+      });
+    }
+    return await sendMessageText(
+      phoneNumber,
+      dbMessages.form.paymentMobile.reference.message
+    );
   };
 
   switch (replyId) {
@@ -112,6 +134,12 @@ const responseMessageInteractive = async (message: IMessage) => {
 
     case "20":
       return await sendMessageInteractive(phoneNumber, dbMessages.typeBank);
+
+    case "21":
+      return await createFormPaymentMobile("Bancamiga");
+
+    case "22":
+      return await createFormPaymentMobile("BFC");
 
     case "23":
       await sendMessageText(phoneNumber, dbMessages.otherBank.message);

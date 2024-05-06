@@ -5,20 +5,6 @@ export const dbMessages: IDB = {
     type: "text",
     message: `*¡Hola!* \nBienvenido al Soporte del validador de pago \n\nPor favor ingrese su correo electrónico \n\(Ej: example@mail.com)`,
   },
-  form: {
-    locator: {
-      type: "text",
-      message: `Por favor ingresa el localizador \n\n(Ej: 123456)`,
-    },
-    reference: {
-      type: "text",
-      message: `Por favor ingresa el número de referencia \n\n(EJ: 123456)`,
-    },
-    amount: {
-      type: "text",
-      message: `Por favor ingresa el monto \n\n(EJ: 1000,00)`,
-    },
-  },
   support: {
     type: "text",
     message: "Estamos aperturando un ticket, pronto lo estaremos contactando",
@@ -81,14 +67,6 @@ export const dbMessages: IDB = {
   bye: {
     type: "text",
     message: "Gracias por contactarnos. Ha sido un placer atenderle.",
-  },
-  other: {
-    type: "text",
-    message: "Describa su problema",
-  },
-  attachImage: {
-    type: "text",
-    message: "Por favor envié una imagen de su caso",
   },
   resolveDoubt: {
     type: "button",
@@ -215,6 +193,46 @@ export const dbMessages: IDB = {
     type: "text",
     message:
       "Lo sentimos en este momento solo trabajamos con pago móvil de Bancamiga y BFC",
+  },
+
+  form: {
+    other: {
+      description: {
+        type: "text",
+        message: "Describa su problema",
+      },
+      uri: {
+        type: "text",
+        message: "Por favor envié una imagen de su caso",
+      },
+    },
+    paymentMobile: {
+      locator: {
+        type: "text",
+        message: `Por favor ingresa el localizador \n\n(Ej: 123456)`,
+      },
+      reference: {
+        type: "text",
+        message: `Por favor ingresa el número de referencia \n\n(EJ: 123456)`,
+      },
+      amount: {
+        type: "text",
+        message: `Por favor ingresa el monto \n\n(EJ: 1000,00)`,
+      },
+      issuerNumber: {
+        type: "text",
+        message:
+          "Por favor ingresa número de teléfono de donde se realizo el pago \n\n(Ej: 5800000000)",
+      },
+      bank: {
+        type: "text",
+        message: "Por favor ingresa banco de donde se realizo el pago",
+      },
+      uri: {
+        type: "text",
+        message: "Por favor enviar recibo de pago móvil",
+      },
+    },
   },
   //   res22: {
   //     type: "text",

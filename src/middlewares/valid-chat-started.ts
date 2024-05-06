@@ -21,11 +21,10 @@ const ValidChatStarted = async (
           open: true,
         },
       });
-      console.log("🚀 ~ chat:", chat);
 
       if (!chat) {
         // ? Valida si el texto enviado es un correo validado
-        console.log("--> 1");
+
         if (validEmail(message.text.body)) {
           // TODO: aquí va la petición para validar existencia de correo
 
@@ -41,10 +40,8 @@ const ValidChatStarted = async (
           return res.sendStatus(200);
         }
       } else if (validateCreationDate(chat.dataValues.createdAt)) {
-        console.log("--> 2");
         next();
       } else {
-        console.log("--> 3");
         await chat.update({
           open: false,
         });

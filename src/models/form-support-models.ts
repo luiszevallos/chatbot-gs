@@ -34,6 +34,15 @@ const FormSupport = sequelize.define(
     amount: {
       type: DataTypes.STRING,
     },
+    issuerNumber: {
+      type: DataTypes.STRING,
+    },
+    bank: {
+      type: DataTypes.STRING,
+    },
+    receiverNumber: {
+      type: DataTypes.STRING,
+    },
     description: {
       type: DataTypes.STRING,
     },

@@ -129,8 +129,6 @@ export type IDB = {
   main: IInteractiveButton;
   continue: IInteractiveButton;
   bye: IText;
-  attachImage: IText;
-  other: IText;
   didNotDisplayPayment: IInteractiveList;
   visualizePaymentZelle: IText;
   visualizePaymentMobile: IText;
@@ -140,9 +138,18 @@ export type IDB = {
   typeBank: IInteractiveList;
   validatePayment: IText;
   form: {
-    locator: IText;
-    reference: IText;
-    amount: IText;
+    paymentMobile: {
+      locator: IText;
+      reference: IText;
+      amount: IText;
+      issuerNumber: IText;
+      bank: IText;
+      uri: IText;
+    };
+    other: {
+      uri: IText;
+      description: IText;
+    };
   };
   // welcome: IInteractiveList;
   // response: {

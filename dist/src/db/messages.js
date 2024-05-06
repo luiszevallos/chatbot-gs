@@ -6,20 +6,6 @@ exports.dbMessages = {
         type: "text",
         message: `*¡Hola!* \nBienvenido al Soporte del validador de pago \n\nPor favor ingrese su correo electrónico \n\(Ej: example@mail.com)`,
     },
-    form: {
-        locator: {
-            type: "text",
-            message: `Por favor ingresa el localizador \n\n(Ej: 123456)`,
-        },
-        reference: {
-            type: "text",
-            message: `Por favor ingresa el número de referencia \n\n(EJ: 123456)`,
-        },
-        amount: {
-            type: "text",
-            message: `Por favor ingresa el monto \n\n(EJ: 1000,00)`,
-        },
-    },
     support: {
         type: "text",
         message: "Estamos aperturando un ticket, pronto lo estaremos contactando",
@@ -83,14 +69,6 @@ exports.dbMessages = {
         type: "text",
         message: "Gracias por contactarnos. Ha sido un placer atenderle.",
     },
-    other: {
-        type: "text",
-        message: "Describa su problema",
-    },
-    attachImage: {
-        type: "text",
-        message: "Por favor envié una imagen de su caso",
-    },
     resolveDoubt: {
         type: "button",
         body: {
@@ -147,11 +125,15 @@ exports.dbMessages = {
     },
     visualizePaymentZelle: {
         type: "text",
-        message: `*Si buscas un pago Zelle:* \n\nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "USD". \n - Método de pago: "Zelle". \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago`,
+        message: `*Si buscas un pago Zelle:* \nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "USD". \n - Método de pago: "Zelle". \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago`,
     },
     visualizePaymentMobile: {
         type: "text",
-        message: `*Si buscas un Pago Móvil:* \n\nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "Ves".  \n - Método de pago: "Pago móvil".  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago. `,
+        message: `*Si buscas un Pago Móvil:* \nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "Ves".  \n - Método de pago: "Pago móvil".  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago. `,
+    },
+    validatePayment: {
+        type: "text",
+        message: `*¿CÓMO VALIDO UN PAGO?* \nLos pagos suelen validarse automáticamente si el cliente ingresó solo el número de localizador de seis dígitos en el concepto. De lo contrario, el pago pasará a "Pagos por validar" y deberás seguir estos pasos:  \n\n- Busca el pago usando los filtros de búsqueda.  \n- Una vez localizado, haz clic en los tres puntos verticales y luego en "Validar".  \n- Ingresa el localizador de seis dígitos asociado al pago.  \n- Haz clic en el botón "Validar".  \n\nTu pago pasará a la lista de pagos validados manualmente.`,
     },
     resolveDoubtPaymentMobile: {
         type: "button",
@@ -180,7 +162,7 @@ exports.dbMessages = {
     typeBank: {
         type: "list",
         body: {
-            text: "*¿A qué banco se realizó el pago?*",
+            text: "¿A qué banco se realizó el pago?",
         },
         action: {
             button: "Lista de bancos",
@@ -209,7 +191,45 @@ exports.dbMessages = {
     },
     otherBank: {
         type: "text",
-        message: "Lo sentimos en este momento solo trabajamos con pago móvil de bancamiga y BFC",
+        message: "Lo sentimos en este momento solo trabajamos con pago móvil de Bancamiga y BFC",
+    },
+    form: {
+        other: {
+            description: {
+                type: "text",
+                message: "Describa su problema",
+            },
+            uri: {
+                type: "text",
+                message: "Por favor envié una imagen de su caso",
+            },
+        },
+        paymentMobile: {
+            locator: {
+                type: "text",
+                message: `Por favor ingresa el localizador \n\n(Ej: 123456)`,
+            },
+            reference: {
+                type: "text",
+                message: `Por favor ingresa el número de referencia \n\n(EJ: 123456)`,
+            },
+            amount: {
+                type: "text",
+                message: `Por favor ingresa el monto \n\n(EJ: 1000,00)`,
+            },
+            issuerNumber: {
+                type: "text",
+                message: "Por favor ingresa número de teléfono de donde se realizo el pago \n\n(Ej: 5800000000)",
+            },
+            bank: {
+                type: "text",
+                message: "Por favor ingresa banco de donde se realizo el pago",
+            },
+            uri: {
+                type: "text",
+                message: "Por favor enviar recibo de pago móvil",
+            },
+        },
     },
     //   res22: {
     //     type: "text",

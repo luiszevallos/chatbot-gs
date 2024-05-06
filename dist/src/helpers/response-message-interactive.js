@@ -57,6 +57,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.bye.message);
     });
     const createFormAnother = () => __awaiter(void 0, void 0, void 0, function* () {
+        const { description } = messages_1.dbMessages.form.other;
         const chat = yield models_1.ChatModels.findOne({
             where: {
                 phoneNumber,
@@ -72,14 +73,33 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
                 uri: "",
             });
         }
-        return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.other.message);
+        return yield (0, send_message_text_1.default)(phoneNumber, description.message);
+    });
+    const createFormPaymentMobile = (bank) => __awaiter(void 0, void 0, void 0, function* () {
+        const chat = yield models_1.ChatModels.findOne({
+            where: {
+                phoneNumber,
+                open: true,
+            },
+        });
+        if (chat) {
+            yield models_1.FormSupportModels.create({
+                email: chat.dataValues.email,
+                type: "paymentMobile",
+                phoneNumber,
+                bank,
+            });
+        }
+        return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.paymentMobile.reference.message);
     });
     switch (replyId) {
         case "1":
+            // ? envía el formulario de no puedo ingresa a soporte
             return yield sendFormSupport();
         case "2":
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.didNotDisplayPayment);
         case "3":
+            // ? crear formulario de otros problema
             return yield createFormAnother();
         case "6":
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.main);
@@ -92,9 +112,16 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.resolveDoubt);
         case "12":
             yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.visualizePaymentMobile.message);
-            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.resolveDoubt);
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.resolveDoubtPaymentMobile);
+        case "13":
+            yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.validatePayment.message);
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
         case "20":
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.typeBank);
+        case "21":
+            return yield createFormPaymentMobile("Bancamiga");
+        case "22":
+            return yield createFormPaymentMobile("BFC");
         case "23":
             yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.otherBank.message);
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);

@@ -36,6 +36,15 @@ const FormSupport = connection_1.default.define("form", {
     amount: {
         type: sequelize_1.DataTypes.STRING,
     },
+    issuerNumber: {
+        type: sequelize_1.DataTypes.STRING,
+    },
+    bank: {
+        type: sequelize_1.DataTypes.STRING,
+    },
+    receiverNumber: {
+        type: sequelize_1.DataTypes.STRING,
+    },
     description: {
         type: sequelize_1.DataTypes.STRING,
     },
