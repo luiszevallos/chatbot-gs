@@ -65,7 +65,7 @@ class FormSupport {
 
   async formPaymentMobile(message: IMessage) {
     const { paymentMobile } = dbMessages.form;
-    const { text, from: phoneNumber, image, interactive } = message;
+    const { text, from: phoneNumber, image, interactive, type } = message;
     const formSupport = await this.dbForm(phoneNumber);
 
     if (formSupport) {
@@ -73,7 +73,11 @@ class FormSupport {
         formSupport.dataValues;
 
       if (!reference) {
-        const notValid = validReference(text.body);
+        const notValid = await validReference(text.body);
+        console.log(
+          "🚀 ~ FormSupport ~ formPaymentMobile ~ reference:",
+          notValid
+        );
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
         } else {
@@ -85,6 +89,10 @@ class FormSupport {
         }
       } else if (!locator) {
         const notValid = validLocator(text.body);
+        console.log(
+          "🚀 ~ FormSupport ~ formPaymentMobile ~ locator:",
+          notValid
+        );
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
         } else {
@@ -96,6 +104,10 @@ class FormSupport {
         }
       } else if (!issuerNumber) {
         const notValid = validNumberPhone(text.body);
+        console.log(
+          "🚀 ~ FormSupport ~ formPaymentMobile ~ issuerNumber:",
+          notValid
+        );
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
         } else {
@@ -107,6 +119,7 @@ class FormSupport {
         }
       } else if (!amount) {
         const notValid = validAmount(text.body);
+        console.log("🚀 ~ FormSupport ~ formPaymentMobile ~ amount:", notValid);
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
         } else {
@@ -114,9 +127,11 @@ class FormSupport {
           return await sendMessageText(phoneNumber, paymentMobile.uri.message);
         }
       } else if (!uri) {
-        const notValid = validAmount(text.body);
-        if (notValid) {
-          return await sendMessageText(phoneNumber, notValid);
+        if (type === "image") {
+          return await sendMessageText(
+            phoneNumber,
+            "Debe de enviar una imagen de la referencia"
+          );
         } else {
           const response = await axios.get(`/${image.id}`);
           await formSupport.update({ uri: response.data.url });
