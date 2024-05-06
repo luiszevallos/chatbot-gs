@@ -217,7 +217,7 @@ export const dbMessages: IDB = {
       },
       amount: {
         type: "text",
-        message: `Por favor ingresa el monto \n\n(EJ: 1000,00)`,
+        message: `Por favor ingresa el monto \n\n(EJ: 1000.00)`,
       },
       issuerNumber: {
         type: "text",

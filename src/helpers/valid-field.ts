@@ -22,8 +22,7 @@ export const validNumberPhone = (text: string) => {
 };
 
 export const validAmount = (text: string) => {
-  const currentAmount = text.replaceAll(",", ".");
-  if (Number(currentAmount)) {
+  if (Number(text)) {
     return false;
   }
   return "Debe de ser un monto valido";
