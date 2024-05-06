@@ -8,17 +8,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const form_support_1 = __importDefault(require("../helpers/form-support"));
-const formSupport = new form_support_1.default();
+const models_1 = require("../models");
+const helpers_1 = require("../helpers");
 const openSupportForm = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { message } = req;
     if (message) {
-        const existFormSupport = yield formSupport.consultSupportForm(message);
-        if (existFormSupport) {
+        const formSupport = yield models_1.FormSupportModels.findOne({
+            where: {
+                phoneNumber: message.from,
+                open: true,
+            },
+        });
+        if (formSupport) {
+            const { type } = formSupport.dataValues;
+            switch (type) {
+                case "paymentMobile":
+                    (0, helpers_1.formPaymentMobile)(message);
+                    break;
+                case "other":
+                    (0, helpers_1.formOther)(message);
+                default:
+                    break;
+            }
             return res.sendStatus(200);
         }
     }

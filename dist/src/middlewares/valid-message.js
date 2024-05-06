@@ -18,7 +18,6 @@ const validMessage = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             if (change && ((_c = (_b = change === null || change === void 0 ? void 0 : change.value) === null || _b === void 0 ? void 0 : _b.messages) === null || _c === void 0 ? void 0 : _c.length) > 0) {
                 const message = change.value.messages[0];
                 if (message) {
-                    console.log("🚀 ~ messageId:", message.id);
                     req.message = message;
                     next();
                 }

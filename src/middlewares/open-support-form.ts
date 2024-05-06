@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import FormSupport from "../helpers/form-support";
-
-const formSupport = new FormSupport();
+import { FormSupportModels } from "../models";
+import { formOther, formPaymentMobile } from "../helpers";
 
 const openSupportForm = async (
   req: Request,
@@ -11,9 +10,27 @@ const openSupportForm = async (
   const { message } = req;
 
   if (message) {
-    const existFormSupport = await formSupport.consultSupportForm(message);
+    const formSupport = await FormSupportModels.findOne({
+      where: {
+        phoneNumber: message.from,
+        open: true,
+      },
+    });
 
-    if (existFormSupport) {
+    if (formSupport) {
+      const { type } = formSupport.dataValues;
+      switch (type) {
+        case "paymentMobile":
+          formPaymentMobile(message);
+          break;
+
+        case "other":
+          formOther(message);
+
+        default:
+          break;
+      }
+
       return res.sendStatus(200);
     }
   }
