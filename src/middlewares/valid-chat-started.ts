@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from "express";
 //\
 import { ChatModels } from "../models";
-import { sendMessageText } from "../helpers";
+import { sendMessageText, validateCreationDate } from "../helpers";
 import { dbMessages } from "../db/messages";
 import { validEmail } from "../helpers";
 
@@ -38,8 +38,14 @@ const ValidChatStarted = async (
           await sendMessageText(message.from, dbMessages.greeting.message);
           return res.sendStatus(200);
         }
-      } else {
+      } else if (validateCreationDate(chat.dataValues.createdAt)) {
         next();
+      } else {
+        await chat.update({
+          open: false,
+        });
+        await sendMessageText(message.from, dbMessages.greeting.message);
+        return res.sendStatus(200);
       }
     }
   } catch (error) {

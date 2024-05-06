@@ -22,7 +22,7 @@ export const dbMessages: IDB = {
   },
   support: {
     type: "text",
-    message: "Pronto lo estaremos contactando",
+    message: "Estamos aperturando un ticket, pronto lo estaremos contactando",
   },
   main: {
     type: "button",
