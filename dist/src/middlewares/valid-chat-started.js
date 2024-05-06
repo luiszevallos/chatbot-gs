@@ -25,6 +25,7 @@ const ValidChatStarted = (req, res, next) => __awaiter(void 0, void 0, void 0, f
                     open: true,
                 },
             });
+            console.log("🚀 ~ chat:", chat);
             if (!chat) {
                 // ? Valida si el texto enviado es un correo validado
                 if ((0, helpers_2.validEmail)(message.text.body)) {
@@ -42,7 +43,9 @@ const ValidChatStarted = (req, res, next) => __awaiter(void 0, void 0, void 0, f
                     return res.sendStatus(200);
                 }
             }
-            next();
+            else {
+                next();
+            }
         }
     }
     catch (error) {
