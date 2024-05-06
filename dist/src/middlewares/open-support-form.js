@@ -25,25 +25,39 @@ const openSupportForm = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
                 open: true,
             },
         });
-        const { text, from, image } = message;
+        const { text, from: phoneNumber, image } = message;
         if (formSupport) {
-            const { type, description, uri, locator, reference, amount } = formSupport.dataValues;
+            const { type, email, description, uri, locator, reference, amount } = formSupport.dataValues;
+            const formSupportOther = () => __awaiter(void 0, void 0, void 0, function* () {
+                if (!description && message.type !== "text") {
+                    return yield (0, helpers_1.sendMessageText)(phoneNumber, messages_1.dbMessages.other.message);
+                }
+                else if (!description) {
+                    yield formSupport.update({ description: text.body });
+                    return yield (0, helpers_1.sendMessageText)(phoneNumber, messages_1.dbMessages.attachImage.message);
+                }
+                else if (!uri && message.type !== "image") {
+                    return yield (0, helpers_1.sendMessageText)(phoneNumber, messages_1.dbMessages.attachImage.message);
+                }
+                else if (!uri) {
+                    const response = yield axios_1.default.get(`/${image.id}`);
+                    // const resDownload = await axios.get(response.data.url)
+                    // console.log(JSON.stringify(resDownload.data));
+                    yield formSupport.update({ uri: response.data.url, open: false });
+                    const data = {
+                        imagen: response.data.url,
+                        description,
+                        phoneNumber,
+                        email,
+                    };
+                    // TODO: aquí se envía en form a soporte
+                    yield (0, helpers_1.sendMessageText)(phoneNumber, messages_1.dbMessages.support.message);
+                    return yield (0, helpers_1.sendMessageInteractive)(phoneNumber, messages_1.dbMessages.continue);
+                }
+            });
             switch (type) {
                 case "other":
-                    if (!description && message.type !== "text") {
-                        return yield (0, helpers_1.sendMessageText)(from, messages_1.dbMessages.other.message);
-                    }
-                    else if (!description) {
-                        yield formSupport.update({ description: text.body });
-                        return yield (0, helpers_1.sendMessageText)(from, messages_1.dbMessages.support.message);
-                    }
-                    else if (!uri && message.type !== "image") {
-                        return yield (0, helpers_1.sendMessageText)(from, messages_1.dbMessages.support.message);
-                    }
-                    else if (!uri) {
-                        const response = yield axios_1.default.get(`/${image.id}`);
-                        console.log(response);
-                    }
+                    yield formSupportOther();
                     break;
                 default:
                     break;

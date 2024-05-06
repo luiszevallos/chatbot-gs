@@ -89,8 +89,140 @@ exports.dbMessages = {
     },
     attachImage: {
         type: "text",
-        message: "Por favor enviar una imagen de su caso",
+        message: "Por favor envié una imagen de su caso",
     },
+    resolveDoubt: {
+        type: "button",
+        body: {
+            text: `¿Resolví tu duda?`,
+        },
+        action: {
+            buttons: [
+                {
+                    type: "reply",
+                    reply: {
+                        id: "8",
+                        title: "Si",
+                    },
+                },
+                {
+                    type: "reply",
+                    reply: {
+                        id: "32",
+                        title: "No",
+                    },
+                },
+            ],
+        },
+    },
+    didNotDisplayPayment: {
+        type: "list",
+        body: {
+            text: `No visualizo el pago`,
+        },
+        action: {
+            button: "Menu",
+            sections: [
+                {
+                    title: "No visualizo el pago",
+                    rows: [
+                        {
+                            id: "11",
+                            title: "Zelle",
+                            description: "No visualizo un pago de Zelle",
+                        },
+                        {
+                            id: "12",
+                            title: "Pago móvil",
+                            description: "No visualizo pago móvil",
+                        },
+                        {
+                            id: "13",
+                            title: "¿Cómo valido un pago?",
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    visualizePaymentZelle: {
+        type: "text",
+        message: `*Si buscas un pago Zelle:* \n\nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "USD". \n - Método de pago: "Zelle". \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago`,
+    },
+    visualizePaymentMobile: {
+        type: "text",
+        message: `*Si buscas un Pago Móvil:* \n\nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "Ves".  \n - Método de pago: "Pago móvil".  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago. `,
+    },
+    resolveDoubtPaymentMobile: {
+        type: "button",
+        body: {
+            text: `¿Resolví tu duda?`,
+        },
+        action: {
+            buttons: [
+                {
+                    type: "reply",
+                    reply: {
+                        id: "8",
+                        title: "Si",
+                    },
+                },
+                {
+                    type: "reply",
+                    reply: {
+                        id: "20",
+                        title: "No",
+                    },
+                },
+            ],
+        },
+    },
+    typeBank: {
+        type: "list",
+        body: {
+            text: "*¿A qué banco se realizó el pago?*",
+        },
+        action: {
+            button: "Lista de bancos",
+            sections: [
+                {
+                    title: "Bancos",
+                    rows: [
+                        {
+                            id: "21",
+                            title: "Bancamiga",
+                            description: "BANCAMIGA BANCO UNIVERSAL, C.A.",
+                        },
+                        {
+                            id: "22",
+                            title: "BFC",
+                            description: "BANCO FONDO COMÚN, C.A. BANCO UNIVERSAL.",
+                        },
+                        {
+                            id: "23",
+                            title: "Otro",
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    otherBank: {
+        type: "text",
+        message: "Lo sentimos en este momento solo trabajamos con pago móvil de bancamiga y BFC",
+    },
+    //   res22: {
+    //     type: "text",
+    //     message: `*Si buscas un Pago Móvil:* \n\nDirígete a la pestaña "Todos". \nEn el área de búsqueda, ingresa: \n - Moneda: "Ves".  \n - Método de pago: "Pago móvil".  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago. `,
+    //   },
+    //   res23: {
+    //     type: "text",
+    //     message: `*CLIENTE NO COLOCO EL LOCALIZADOR:* \nSi el cliente no colocó el localizador en el concepto, lo ingresó de forma errónea o incluyó texto adicional, el pago no se validará automáticamente. En este caso, aparecerá en la pestaña "Por Validar" y deberá validarse manualmente. `,
+    //   },
+    //   res24: {
+    //     type: "text",
+    //     message: `*¿CÓMO VALIDO UN PAGO?* \nLos pagos suelen validarse automáticamente si el cliente ingresó solo el número de localizador de seis dígitos en el concepto. De lo contrario, el pago pasará a "Pagos por validar" y deberás seguir estos pasos:  \nBusca el pago usando los filtros de búsqueda.  \nUna vez localizado, haz clic en los tres puntos verticales y luego en "Validar".  \nIngresa el localizador de seis dígitos asociado al pago.  \nHaz clic en el botón "Validar".  \nTu pago pasará a la lista de pagos validados manualmente.`,
+    //   },
     // welcome: {
     //
     // },

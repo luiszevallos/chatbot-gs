@@ -152,6 +152,31 @@ export const dbMessages: IDB = {
     type: "text",
     message: `*Si buscas un Pago Móvil:* \n\nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "Ves".  \n - Método de pago: "Pago móvil".  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago. `,
   },
+
+  resolveDoubtPaymentMobile: {
+    type: "button",
+    body: {
+      text: `¿Resolví tu duda?`,
+    },
+    action: {
+      buttons: [
+        {
+          type: "reply",
+          reply: {
+            id: "8",
+            title: "Si",
+          },
+        },
+        {
+          type: "reply",
+          reply: {
+            id: "20",
+            title: "No",
+          },
+        },
+      ],
+    },
+  },
   typeBank: {
     type: "list",
     body: {
@@ -181,6 +206,11 @@ export const dbMessages: IDB = {
         },
       ],
     },
+  },
+  otherBank: {
+    type: "text",
+    message:
+      "Lo sentimos en este momento solo trabajamos con pago móvil de bancamiga y BFC",
   },
   //   res22: {
   //     type: "text",

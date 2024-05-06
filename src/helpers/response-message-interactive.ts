@@ -101,7 +101,12 @@ const responseMessageInteractive = async (message: IMessage) => {
       );
       return await sendMessageInteractive(phoneNumber, dbMessages.resolveDoubt);
 
-    case "21":
+    case "20":
+      return await sendMessageInteractive(phoneNumber, dbMessages.typeBank);
+
+    case "23":
+      await sendMessageText(phoneNumber, dbMessages.otherBank.message);
+      return await sendMessageInteractive(phoneNumber, dbMessages.continue);
 
     default:
       break;

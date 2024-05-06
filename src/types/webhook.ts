@@ -135,6 +135,8 @@ export type IDB = {
   visualizePaymentZelle: IText;
   visualizePaymentMobile: IText;
   resolveDoubt: IInteractiveButton;
+  resolveDoubtPaymentMobile: IInteractiveButton;
+  otherBank: IText;
   typeBank: IInteractiveList;
   form: {
     locator: IText;

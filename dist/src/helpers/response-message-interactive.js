@@ -37,7 +37,6 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
                 email,
                 description: `Usuario no puede ingresar a la plataforma con el correo: ${email}`,
             };
-            console.log("🚀 ~ sendFormSupport ~ data:", data);
             // TODO: Aquí se envía el formulario a soporte
             yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
@@ -78,12 +77,27 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
     switch (replyId) {
         case "1":
             return yield sendFormSupport();
+        case "2":
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.didNotDisplayPayment);
         case "3":
             return yield createFormAnother();
         case "6":
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.main);
         case "7":
             return yield closeConversation();
+        case "8":
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
+        case "11":
+            yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.visualizePaymentZelle.message);
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.resolveDoubt);
+        case "12":
+            yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.visualizePaymentMobile.message);
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.resolveDoubt);
+        case "20":
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.typeBank);
+        case "23":
+            yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.otherBank.message);
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
         default:
             break;
     }
