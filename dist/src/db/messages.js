@@ -215,11 +215,11 @@ exports.dbMessages = {
             },
             amount: {
                 type: "text",
-                message: `Por favor ingresa el monto \n\n(EJ: 1000,00)`,
+                message: `Por favor ingresa el monto \n\n(EJ: 1000.00)`,
             },
             issuerNumber: {
                 type: "text",
-                message: "Por favor ingresa número de teléfono de donde se realizo el pago \n\n(Ej: 5800000000)",
+                message: "Por favor ingresa número de teléfono de donde se realizo el pago \n\n(Ej: 04*********)",
             },
             bank: {
                 type: "text",

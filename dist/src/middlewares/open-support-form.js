@@ -18,7 +18,6 @@ const openSupportForm = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
     const { message } = req;
     if (message) {
         const existFormSupport = yield formSupport.consultSupportForm(message);
-        console.log("🚀 ~ existFormSupport:", JSON.stringify(existFormSupport));
         if (existFormSupport) {
             return res.sendStatus(200);
         }

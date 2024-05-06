@@ -78,49 +78,109 @@ class FormSupport {
         return __awaiter(this, void 0, void 0, function* () {
             var _a, _b;
             const { paymentMobile } = messages_1.dbMessages.form;
-            const { text, from: phoneNumber, image, interactive } = message;
+            const { text, from: phoneNumber, image, interactive, type } = message;
             const formSupport = yield this.dbForm(phoneNumber);
             if (formSupport) {
                 const { reference, locator, issuerNumber, amount, uri, email } = formSupport.dataValues;
                 if (!reference) {
-                    const notValid = (0, valid_field_1.validReference)(text.body);
+                    const notValid = yield (0, valid_field_1.validReference)(text.body);
                     if (notValid) {
                         return yield (0, send_message_text_1.default)(phoneNumber, notValid);
                     }
-                    yield formSupport.update({ reference: text.body });
-                    return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.reference.message);
+                    else {
+                        yield formSupport.update({ reference: text.body });
+                        return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.locator.message);
+                    }
                 }
                 else if (!locator) {
                     const notValid = (0, valid_field_1.validLocator)(text.body);
                     if (notValid) {
                         return yield (0, send_message_text_1.default)(phoneNumber, notValid);
                     }
-                    yield formSupport.update({ locator: text.body });
-                    return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.issuerNumber.message);
+                    else {
+                        yield formSupport.update({ locator: text.body });
+                        return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.issuerNumber.message);
+                    }
                 }
                 else if (!issuerNumber) {
                     const notValid = (0, valid_field_1.validNumberPhone)(text.body);
                     if (notValid) {
                         return yield (0, send_message_text_1.default)(phoneNumber, notValid);
                     }
-                    yield formSupport.update({ phoneNumber: text.body });
-                    return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.amount.message);
+                    else {
+                        yield formSupport.update({ issuerNumber: text.body });
+                        return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.amount.message);
+                    }
                 }
                 else if (!amount) {
                     const notValid = (0, valid_field_1.validAmount)(text.body);
                     if (notValid) {
                         return yield (0, send_message_text_1.default)(phoneNumber, notValid);
                     }
-                    yield formSupport.update({ amount: text.body });
-                    return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.uri.message);
+                    else {
+                        yield formSupport.update({ amount: text.body });
+                        return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.uri.message);
+                    }
                 }
                 else if (!uri) {
-                    const notValid = (0, valid_field_1.validAmount)(text.body);
-                    if (notValid) {
-                        return yield (0, send_message_text_1.default)(phoneNumber, notValid);
+                    if (message.type !== "image") {
+                        return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.uri.message);
                     }
-                    const response = yield axios_1.default.get(`/${image.id}`);
-                    yield formSupport.update({ uri: response.data.url });
+                    else {
+                        const response = yield axios_1.default.get(`/${image.id}`);
+                        yield formSupport.update({ uri: response.data.url });
+                        return yield (0, send_message_interactive_1.default)(phoneNumber, {
+                            type: "button",
+                            body: {
+                                text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+                            },
+                            action: {
+                                buttons: [
+                                    {
+                                        type: "reply",
+                                        reply: {
+                                            id: "form_1",
+                                            title: "Si",
+                                        },
+                                    },
+                                    {
+                                        type: "reply",
+                                        reply: {
+                                            id: "form_2",
+                                            title: "No",
+                                        },
+                                    },
+                                ],
+                            },
+                        });
+                    }
+                }
+                else if (message.type === "button") {
+                    const replyId = ((_a = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _a === void 0 ? void 0 : _a.id) || ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _b === void 0 ? void 0 : _b.id);
+                    if (replyId === "form_1") {
+                        yield this.sendFormSupport({
+                            phoneNumber,
+                            email,
+                            concept: "Pago no validado",
+                            uri,
+                            text: `Datos ingresado \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+                        });
+                        yield formSupport.update({ open: false });
+                        yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
+                        return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
+                    }
+                    else {
+                        yield formSupport.update({
+                            reference: "",
+                            locator: "",
+                            issuerNumber: "",
+                            amount: "",
+                            uri: "",
+                        });
+                        return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.paymentMobile.reference.message);
+                    }
+                }
+                else {
                     return yield (0, send_message_interactive_1.default)(phoneNumber, {
                         type: "button",
                         body: {
@@ -145,31 +205,6 @@ class FormSupport {
                             ],
                         },
                     });
-                }
-                else {
-                    const replyId = ((_a = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _a === void 0 ? void 0 : _a.id) || ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _b === void 0 ? void 0 : _b.id);
-                    if (replyId === "form_1") {
-                        yield this.sendFormSupport({
-                            phoneNumber,
-                            email,
-                            concept: "Pago no validado",
-                            uri,
-                            text: `Datos ingresado \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
-                        });
-                        yield formSupport.update({ open: false });
-                        yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
-                        return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
-                    }
-                    else {
-                        yield formSupport.update({
-                            reference: "",
-                            locator: "",
-                            issuerNumber: "",
-                            amount: "",
-                            uri: "",
-                        });
-                        return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.paymentMobile.reference.message);
-                    }
                 }
             }
         });
