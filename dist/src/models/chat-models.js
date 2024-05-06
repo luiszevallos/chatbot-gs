@@ -5,20 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../db/connection"));
-const FormSupport = connection_1.default.define("form", {
+const Chat = connection_1.default.define("chat", {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
     },
-    locator: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    reference: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    amount: {
-        type: sequelize_1.DataTypes.STRING,
+    chatbot: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: true,
     },
     open: {
         type: sequelize_1.DataTypes.BOOLEAN,
@@ -26,13 +21,14 @@ const FormSupport = connection_1.default.define("form", {
     },
     phoneNumber: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
     },
     email: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
 }, {
-    tableName: "form_support",
+    tableName: "chats",
 });
-exports.default = FormSupport;
-//# sourceMappingURL=form-support-models.js.map
+exports.default = Chat;
+//# sourceMappingURL=chat-models.js.map

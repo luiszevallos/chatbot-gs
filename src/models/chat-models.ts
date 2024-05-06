@@ -1,22 +1,17 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/connection";
 
-const FormSupport = sequelize.define(
-  "form",
+const Chat = sequelize.define(
+  "chat",
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    locator: {
-      type: DataTypes.STRING,
-    },
-    reference: {
-      type: DataTypes.STRING,
-    },
-    amount: {
-      type: DataTypes.STRING,
+    chatbot: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
     },
     open: {
       type: DataTypes.BOOLEAN,
@@ -24,6 +19,7 @@ const FormSupport = sequelize.define(
     },
     phoneNumber: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
@@ -31,8 +27,8 @@ const FormSupport = sequelize.define(
     },
   },
   {
-    tableName: "form_support",
+    tableName: "chats",
   }
 );
 
-export default FormSupport;
+export default Chat;

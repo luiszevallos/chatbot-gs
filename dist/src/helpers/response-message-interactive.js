@@ -8,111 +8,132 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const messages_1 = require("../db/messages");
-const models_1 = require("../models");
-const send_message_interactive_1 = __importDefault(require("./send-message-interactive"));
-const send_message_text_1 = __importDefault(require("./send-message-text"));
+// import sendMessageInteractive from "./send-message-interactive";
+// import sendMessageText from "./send-message-text";
 const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
-    const { from, interactive } = message;
-    const replyId = ((_a = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _a === void 0 ? void 0 : _a.id) || ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _b === void 0 ? void 0 : _b.id);
-    const createdFormSupport = () => __awaiter(void 0, void 0, void 0, function* () {
-        yield models_1.FormSupportModels.create({
-            locator: "",
-            amount: "",
-            reference: "",
-            phoneNumber: from,
-        });
-        return yield (0, send_message_text_1.default)(from, messages_1.dbMessages.form.locator.message);
-    });
-    const sendFormSupport = () => __awaiter(void 0, void 0, void 0, function* () {
-        const formSupport = yield models_1.FormSupportModels.findOne({
-            where: {
-                phoneNumber: message.from,
-                open: true,
-            },
-        });
-        if (formSupport) {
-            yield formSupport.update({ open: false });
-        }
-        yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.confirm.message);
-        return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
-    });
-    const resetFormSupport = () => __awaiter(void 0, void 0, void 0, function* () {
-        const formSupport = yield models_1.FormSupportModels.findOne({
-            where: {
-                phoneNumber: message.from,
-                open: true,
-            },
-        });
-        if (formSupport) {
-            yield formSupport.update({
-                open: true,
-                locator: "",
-                amount: "",
-                reference: "",
-            });
-        }
-        return yield (0, send_message_text_1.default)(from, messages_1.dbMessages.form.locator.message);
-    });
-    switch (replyId) {
-        // ? Response 1 --> 11 --> 111
-        case "1":
-            console.log("🚀 ~ responseMessageInteractive ~ message:", message);
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response.res1);
-        case "11":
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response.res11);
-        case "12":
-            yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res12.message);
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
-        case "111":
-            yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res111.message);
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
-        case "112":
-            yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res112.message);
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
-        // ? Response 2 --> 22 --> 222
-        case "2":
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.response.res2);
-        case "21":
-            yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res21.message);
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
-        case "22":
-            yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res22.message);
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
-        case "23":
-            yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res23.message);
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
-        case "24":
-            yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res24.message);
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
-        // ? Response 3 --> 33 --> 333
-        case "3":
-            yield (0, send_message_text_1.default)(from, messages_1.dbMessages.response.res3.message);
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.resolved3);
-        case "31":
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
-        case "32":
-            return yield createdFormSupport();
-        // ? Response 4 --> 44 --> 444
-        case "4":
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.continueConversation);
-        case "41":
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.welcome);
-        case "42":
-            return yield (0, send_message_text_1.default)(from, messages_1.dbMessages.goodBye.message);
-        // ? Response de form
-        case "form_1":
-            return yield sendFormSupport();
-        case "form_2":
-            return yield resetFormSupport();
-        default:
-            return yield (0, send_message_interactive_1.default)(from, messages_1.dbMessages.welcome);
-    }
+    // const { from, interactive } = message;
+    // const replyId = interactive?.list_reply?.id || interactive?.button_reply?.id;
+    // const createdFormSupport = async () => {
+    //   await FormSupportModels.create({
+    //     locator: "",
+    //     amount: "",
+    //     reference: "",
+    //     phoneNumber: from,
+    //   });
+    //   return await sendMessageText(from, dbMessages.form.locator.message);
+    // };
+    // const sendFormSupport = async () => {
+    //   const formSupport = await FormSupportModels.findOne({
+    //     where: {
+    //       phoneNumber: message.from,
+    //       open: true,
+    //     },
+    //   });
+    //   if (formSupport) {
+    //     await formSupport.update({ open: false });
+    //   }
+    //   await sendMessageText(from, dbMessages.response.confirm.message);
+    //   return await sendMessageInteractive(from, dbMessages.continueConversation);
+    // };
+    // const resetFormSupport = async () => {
+    //   const formSupport = await FormSupportModels.findOne({
+    //     where: {
+    //       phoneNumber: message.from,
+    //       open: true,
+    //     },
+    //   });
+    //   if (formSupport) {
+    //     await formSupport.update({
+    //       open: true,
+    //       locator: "",
+    //       amount: "",
+    //       reference: "",
+    //     });
+    //   }
+    //   return await sendMessageText(from, dbMessages.form.locator.message);
+    // };
+    // switch (replyId) {
+    //   // ? Response 1 --> 11 --> 111
+    //   case "1":
+    //     console.log("🚀 ~ responseMessageInteractive ~ message:", message);
+    //     return await sendMessageInteractive(from, dbMessages.response.res1);
+    //   case "11":
+    //     return await sendMessageInteractive(from, dbMessages.response.res11);
+    //   case "12":
+    //     await sendMessageText(from, dbMessages.response.res12.message);
+    //     return await sendMessageInteractive(
+    //       from,
+    //       dbMessages.continueConversation
+    //     );
+    //   case "111":
+    //     await sendMessageText(from, dbMessages.response.res111.message);
+    //     return await sendMessageInteractive(
+    //       from,
+    //       dbMessages.continueConversation
+    //     );
+    //   case "112":
+    //     await sendMessageText(from, dbMessages.response.res112.message);
+    //     return await sendMessageInteractive(
+    //       from,
+    //       dbMessages.continueConversation
+    //     );
+    //   // ? Response 2 --> 22 --> 222
+    //   case "2":
+    //     return await sendMessageInteractive(from, dbMessages.response.res2);
+    //   case "21":
+    //     await sendMessageText(from, dbMessages.response.res21.message);
+    //     return await sendMessageInteractive(
+    //       from,
+    //       dbMessages.continueConversation
+    //     );
+    //   case "22":
+    //     await sendMessageText(from, dbMessages.response.res22.message);
+    //     return await sendMessageInteractive(
+    //       from,
+    //       dbMessages.continueConversation
+    //     );
+    //   case "23":
+    //     await sendMessageText(from, dbMessages.response.res23.message);
+    //     return await sendMessageInteractive(
+    //       from,
+    //       dbMessages.continueConversation
+    //     );
+    //   case "24":
+    //     await sendMessageText(from, dbMessages.response.res24.message);
+    //     return await sendMessageInteractive(
+    //       from,
+    //       dbMessages.continueConversation
+    //     );
+    //   // ? Response 3 --> 33 --> 333
+    //   case "3":
+    //     await sendMessageText(from, dbMessages.response.res3.message);
+    //     return await sendMessageInteractive(from, dbMessages.resolved3);
+    //   case "31":
+    //     return await sendMessageInteractive(
+    //       from,
+    //       dbMessages.continueConversation
+    //     );
+    //   case "32":
+    //     return await createdFormSupport();
+    //   // ? Response 4 --> 44 --> 444
+    //   case "4":
+    //     return await sendMessageInteractive(
+    //       from,
+    //       dbMessages.continueConversation
+    //     );
+    //   case "41":
+    //     return await sendMessageInteractive(from, dbMessages.welcome);
+    //   case "42":
+    //     return await sendMessageText(from, dbMessages.goodBye.message);
+    //   // ? Response de form
+    //   case "form_1":
+    //     return await sendFormSupport();
+    //   case "form_2":
+    //     return await resetFormSupport();
+    //   default:
+    //     return await sendMessageInteractive(from, dbMessages.welcome);
+    // }
 });
 exports.default = responseMessageInteractive;
 //# sourceMappingURL=response-message-interactive.js.map

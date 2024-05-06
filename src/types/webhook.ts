@@ -118,31 +118,32 @@ export type IInteractiveList = {
 // TODO: db message
 
 export type IDB = {
-  welcome: IInteractiveList;
-  response: {
-    // ? Response 1 --> 11 --> 111
-    res1: IInteractiveButton;
-    res11: IInteractiveButton;
-    res12: IText;
-    res111: IText;
-    res112: IText;
-    //
-    // ? Response 2 --> 22 --> 222
-    res2: IInteractiveList;
-    res21: IText;
-    res22: IText;
-    res23: IText;
-    res24: IText;
+  greeting: IText;
+  // welcome: IInteractiveList;
+  // response: {
+  //   // ? Response 1 --> 11 --> 111
+  //   res1: IInteractiveButton;
+  //   res11: IInteractiveButton;
+  //   res12: IText;
+  //   res111: IText;
+  //   res112: IText;
+  //   //
+  //   // ? Response 2 --> 22 --> 222
+  //   res2: IInteractiveList;
+  //   res21: IText;
+  //   res22: IText;
+  //   res23: IText;
+  //   res24: IText;
 
-    // ? Response 3 --> 33 --> 333
-    res3: IText;
+  //   // ? Response 3 --> 33 --> 333
+  //   res3: IText;
 
-    // ? Form
-    confirm: IText;
-  };
-  resolved3: IInteractiveButton;
-  continueConversation: IInteractiveButton;
-  goodBye: IText;
+  //   // ? Form
+  //   confirm: IText;
+  // };
+  // resolved3: IInteractiveButton;
+  // continueConversation: IInteractiveButton;
+  // goodBye: IText;
   form: {
     locator: IText;
     reference: IText;
