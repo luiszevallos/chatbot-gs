@@ -144,7 +144,7 @@ class FormSupport {
             },
           });
         }
-      } else if (type === "button") {
+      } else if (message.type === "button") {
         const replyId =
           interactive?.list_reply?.id || interactive?.button_reply?.id;
 
