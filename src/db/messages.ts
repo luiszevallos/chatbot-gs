@@ -3,7 +3,7 @@ import { IDB } from "../types/webhook";
 export const dbMessages: IDB = {
   greeting: {
     type: "text",
-    message: `*¡Hola!* \nBienvenido al Soporte del validador de pago \n\nPor favor ingrese su correo electrónico \n\n(Ej: example@mail.com)`,
+    message: `*¡Hola!* \nBienvenido al Soporte del validador de pago \n\nPor favor ingrese su correo electrónico \n\(Ej: example@mail.com)`,
   },
 
   form: {
@@ -23,13 +23,13 @@ export const dbMessages: IDB = {
   main: {
     type: "list",
     body: {
-      text: `¿En qué puedo ayudarte hoy? \n\nPuedes preguntarme sobre:`,
+      text: `¿En qué puedo ayudarte? \n\nSelecciona una opción`,
     },
     action: {
-      button: "Selecciona una opción",
+      button: "Opción",
       sections: [
         {
-          title: "Menú",
+          title: "Opción",
           rows: [
             {
               id: "1",
