@@ -76,70 +76,79 @@ class FormSupport {
         const notValid = validReference(text.body);
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
+        } else {
+          await formSupport.update({ reference: text.body });
+          return await sendMessageText(
+            phoneNumber,
+            paymentMobile.reference.message
+          );
         }
-        await formSupport.update({ reference: text.body });
-        return await sendMessageText(
-          phoneNumber,
-          paymentMobile.reference.message
-        );
       } else if (!locator) {
         const notValid = validLocator(text.body);
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
+        } else {
+          await formSupport.update({ locator: text.body });
+          return await sendMessageText(
+            phoneNumber,
+            paymentMobile.issuerNumber.message
+          );
         }
-        await formSupport.update({ locator: text.body });
-        return await sendMessageText(
-          phoneNumber,
-          paymentMobile.issuerNumber.message
-        );
       } else if (!issuerNumber) {
         const notValid = validNumberPhone(text.body);
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
+        } else {
+          await formSupport.update({ phoneNumber: text.body });
+          return await sendMessageText(
+            phoneNumber,
+            paymentMobile.amount.message
+          );
         }
-        await formSupport.update({ phoneNumber: text.body });
-        return await sendMessageText(phoneNumber, paymentMobile.amount.message);
       } else if (!amount) {
         const notValid = validAmount(text.body);
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
+        } else {
+          await formSupport.update({ amount: text.body });
+          return await sendMessageText(phoneNumber, paymentMobile.uri.message);
         }
-        await formSupport.update({ amount: text.body });
-        return await sendMessageText(phoneNumber, paymentMobile.uri.message);
       } else if (!uri) {
         const notValid = validAmount(text.body);
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
+        } else {
+          const response = await axios.get(`/${image.id}`);
+          await formSupport.update({ uri: response.data.url });
+          return await sendMessageInteractive(phoneNumber, {
+            type: "button",
+            body: {
+              text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+            },
+            action: {
+              buttons: [
+                {
+                  type: "reply",
+                  reply: {
+                    id: "form_1",
+                    title: "Si",
+                  },
+                },
+                {
+                  type: "reply",
+                  reply: {
+                    id: "form_2",
+                    title: "No",
+                  },
+                },
+              ],
+            },
+          });
         }
-        const response = await axios.get(`/${image.id}`);
-        await formSupport.update({ uri: response.data.url });
-        return await sendMessageInteractive(phoneNumber, {
-          type: "button",
-          body: {
-            text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
-          },
-          action: {
-            buttons: [
-              {
-                type: "reply",
-                reply: {
-                  id: "form_1",
-                  title: "Si",
-                },
-              },
-              {
-                type: "reply",
-                reply: {
-                  id: "form_2",
-                  title: "No",
-                },
-              },
-            ],
-          },
-        });
       } else {
         const replyId =
           interactive?.list_reply?.id || interactive?.button_reply?.id;
+
         if (replyId === "form_1") {
           await this.sendFormSupport({
             phoneNumber,
