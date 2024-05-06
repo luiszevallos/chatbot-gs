@@ -222,7 +222,7 @@ export const dbMessages: IDB = {
       issuerNumber: {
         type: "text",
         message:
-          "Por favor ingresa número de teléfono de donde se realizo el pago \n\n(Ej: 5800000000)",
+          "Por favor ingresa número de teléfono de donde se realizo el pago \n\n(Ej: 04*********)",
       },
       bank: {
         type: "text",
