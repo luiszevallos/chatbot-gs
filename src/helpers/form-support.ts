@@ -74,10 +74,6 @@ class FormSupport {
 
       if (!reference) {
         const notValid = await validReference(text.body);
-        console.log(
-          "🚀 ~ FormSupport ~ formPaymentMobile ~ reference:",
-          notValid
-        );
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
         } else {
@@ -89,10 +85,6 @@ class FormSupport {
         }
       } else if (!locator) {
         const notValid = validLocator(text.body);
-        console.log(
-          "🚀 ~ FormSupport ~ formPaymentMobile ~ locator:",
-          notValid
-        );
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
         } else {
@@ -104,10 +96,6 @@ class FormSupport {
         }
       } else if (!issuerNumber) {
         const notValid = validNumberPhone(text.body);
-        console.log(
-          "🚀 ~ FormSupport ~ formPaymentMobile ~ issuerNumber:",
-          notValid
-        );
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
         } else {
@@ -119,7 +107,6 @@ class FormSupport {
         }
       } else if (!amount) {
         const notValid = validAmount(text.body);
-        console.log("🚀 ~ FormSupport ~ formPaymentMobile ~ amount:", notValid);
         if (notValid) {
           return await sendMessageText(phoneNumber, notValid);
         } else {
