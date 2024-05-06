@@ -28,11 +28,11 @@ export const postWebhook = async (req: Request, res: Response) => {
   try {
     const { from, type } = message;
 
-    // if (type === "interactive") {
-    //   await responseMessageInteractive(message);
-    // } else if (type === "text") {
-    await sendMessageInteractive(from, dbMessages.main);
-    // }
+    if (type === "interactive") {
+      await responseMessageInteractive(message);
+    } else {
+      await sendMessageInteractive(from, dbMessages.main);
+    }
   } catch (error: any) {
     const message = error?.response?.data || error.message || error;
     console.error("🚀 ~ postWebhook ~ error:", message);

@@ -27,7 +27,7 @@ export const dbMessages: IDB = {
   main: {
     type: "button",
     body: {
-      text: `¿En qué puedo ayudarte? \n\nSelecciona una opción`,
+      text: `¿En qué puedo ayudarte?`,
     },
     action: {
       buttons: [
