@@ -61,6 +61,12 @@ const openSupportForm = async (
           await formSupportOther();
           break;
 
+        case "paymentMobile":
+          break;
+
+        case "zelle":
+          break;
+
         default:
           break;
       }

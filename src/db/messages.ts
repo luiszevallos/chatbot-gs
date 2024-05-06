@@ -210,7 +210,7 @@ export const dbMessages: IDB = {
   otherBank: {
     type: "text",
     message:
-      "Lo sentimos en este momento solo trabajamos con pago móvil de bancamiga y BFC",
+      "Lo sentimos en este momento solo trabajamos con pago móvil de Bancamiga y BFC",
   },
   //   res22: {
   //     type: "text",
