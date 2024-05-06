@@ -11,13 +11,13 @@ const validMessage = async (
 
   try {
     if (object && entry?.length > 0 && entry[0].changes?.length > 0) {
-      console.log("🚀 ~ entryId:", entry[0].id);
       const change: IChange = entry[0].changes[0];
 
       if (change && change?.value?.messages?.length > 0) {
         const message = change.value.messages[0];
         if (message) {
-          console.log("🚀 ~ body:", JSON.stringify(req.body));
+          console.log("🚀 ~ entryId:", entry[0].id);
+
           req.message = message;
           next();
         } else {
