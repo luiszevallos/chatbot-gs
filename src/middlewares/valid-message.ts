@@ -16,7 +16,7 @@ const validMessage = async (
       if (change && change?.value?.messages?.length > 0) {
         const message = change.value.messages[0];
         if (message) {
-          console.log("🚀 ~ messageId:", message.id, message.text.body);
+          console.log("🚀 ~ messageId:", message.id);
 
           req.message = message;
           next();
