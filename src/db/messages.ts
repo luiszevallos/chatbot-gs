@@ -146,11 +146,15 @@ export const dbMessages: IDB = {
   },
   visualizePaymentZelle: {
     type: "text",
-    message: `*Si buscas un pago Zelle:* \n\nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "USD". \n - Método de pago: "Zelle". \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago`,
+    message: `*Si buscas un pago Zelle:* \nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "USD". \n - Método de pago: "Zelle". \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago`,
   },
   visualizePaymentMobile: {
     type: "text",
-    message: `*Si buscas un Pago Móvil:* \n\nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "Ves".  \n - Método de pago: "Pago móvil".  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago. `,
+    message: `*Si buscas un Pago Móvil:* \nDirígete a la pestaña "Todos". \n\nEn el área de búsqueda, ingresa: \n - Moneda: "Ves".  \n - Método de pago: "Pago móvil".  \n - En la lupa "Buscar referencia o concepto..", coloca la referencia o concepto del pago. `,
+  },
+  validatePayment: {
+    type: "text",
+    message: `*¿CÓMO VALIDO UN PAGO?* \nLos pagos suelen validarse automáticamente si el cliente ingresó solo el número de localizador de seis dígitos en el concepto. De lo contrario, el pago pasará a "Pagos por validar" y deberás seguir estos pasos:  \n\nBusca el pago usando los filtros de búsqueda.  \nUna vez localizado, haz clic en los tres puntos verticales y luego en "Validar".  \nIngresa el localizador de seis dígitos asociado al pago.  \nHaz clic en el botón "Validar".  \nTu pago pasará a la lista de pagos validados manualmente.`,
   },
 
   resolveDoubtPaymentMobile: {
@@ -180,7 +184,7 @@ export const dbMessages: IDB = {
   typeBank: {
     type: "list",
     body: {
-      text: "*¿A qué banco se realizó el pago?*",
+      text: "¿A qué banco se realizó el pago?",
     },
     action: {
       button: "Lista de bancos",

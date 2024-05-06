@@ -138,6 +138,7 @@ export type IDB = {
   resolveDoubtPaymentMobile: IInteractiveButton;
   otherBank: IText;
   typeBank: IInteractiveList;
+  validatePayment: IText;
   form: {
     locator: IText;
     reference: IText;

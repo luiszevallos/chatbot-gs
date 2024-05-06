@@ -104,6 +104,10 @@ const responseMessageInteractive = async (message: IMessage) => {
         dbMessages.resolveDoubtPaymentMobile
       );
 
+    case "13":
+      await sendMessageText(phoneNumber, dbMessages.validatePayment.message);
+      return await sendMessageInteractive(phoneNumber, dbMessages.continue);
+
     case "20":
       return await sendMessageInteractive(phoneNumber, dbMessages.typeBank);
 
