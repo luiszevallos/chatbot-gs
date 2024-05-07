@@ -80,12 +80,10 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
                     open: false,
                     send: true,
                 });
+                yield (0, send_message_text_1.default)(phoneNumber, `Ingresaste los siguiente datos: \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`);
                 return yield (0, send_message_interactive_1.default)(phoneNumber, {
                     type: "button",
                     body: {
-                        text: `Ingresaste los siguiente datos: \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
-                    },
-                    footer: {
                         text: "¿Esto es correcto?",
                     },
                     action: {

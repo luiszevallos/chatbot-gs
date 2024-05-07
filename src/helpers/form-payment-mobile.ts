@@ -74,12 +74,13 @@ const formPaymentMobile = async (message: IMessage) => {
           open: false,
           send: true,
         });
+        await sendMessageText(
+          phoneNumber,
+          `Ingresaste los siguiente datos: \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`
+        );
         return await sendMessageInteractive(phoneNumber, {
           type: "button",
           body: {
-            text: `Ingresaste los siguiente datos: \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
-          },
-          footer: {
             text: "¿Esto es correcto?",
           },
           action: {

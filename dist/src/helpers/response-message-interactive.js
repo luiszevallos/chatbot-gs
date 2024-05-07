@@ -135,7 +135,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         case "3":
             // ? crear formulario de otros problema
             return yield createFormAnother();
-        case "5":
+        case "4":
             // ? Envía formulario a soporte
             const body = yield (0, send_form_support_1.dataFormSupport)(phoneNumber);
             if (body) {

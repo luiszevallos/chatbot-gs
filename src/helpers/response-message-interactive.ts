@@ -141,7 +141,7 @@ const responseMessageInteractive = async (message: IMessage) => {
       // ? crear formulario de otros problema
       return await createFormAnother();
 
-    case "5":
+    case "4":
       // ? Envía formulario a soporte
       const body = await dataFormSupport(phoneNumber);
       if (body) {

@@ -70,12 +70,10 @@ const formZelle = (message) => __awaiter(void 0, void 0, void 0, function* () {
                     open: false,
                     send: true,
                 });
+                yield (0, send_message_text_1.default)(phoneNumber, `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Monto*: ${amount}`);
                 return yield (0, send_message_interactive_1.default)(phoneNumber, {
                     type: "button",
                     body: {
-                        text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Monto*: ${amount}`,
-                    },
-                    footer: {
                         text: "¿Esto es correcto?",
                     },
                     action: {

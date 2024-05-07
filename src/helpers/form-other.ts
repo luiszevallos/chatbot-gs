@@ -38,12 +38,13 @@ const formOther = async (message: IMessage) => {
         open: false,
         send: true,
       });
+      await sendMessageText(
+        phoneNumber,
+        `Ingresaste los siguiente datos: \n\n*Descripción*: ${description} \n 1 - Imagen adjuntada`
+      );
       return await sendMessageInteractive(phoneNumber, {
         type: "button",
         body: {
-          text: `Ingresaste los siguiente datos: \n\n*Descripción*: ${description} \n 1 - Imagen adjuntada`,
-        },
-        footer: {
           text: "¿Esto es correcto?",
         },
         action: {
@@ -51,14 +52,14 @@ const formOther = async (message: IMessage) => {
             {
               type: "reply",
               reply: {
-                id: "5",
+                id: "4",
                 title: "Si",
               },
             },
             {
               type: "reply",
               reply: {
-                id: "6",
+                id: "5",
                 title: "No",
               },
             },

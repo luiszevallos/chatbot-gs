@@ -49,12 +49,10 @@ const formOther = (message) => __awaiter(void 0, void 0, void 0, function* () {
                 open: false,
                 send: true,
             });
+            yield (0, send_message_text_1.default)(phoneNumber, `Ingresaste los siguiente datos: \n\n*Descripción*: ${description} \n 1 - Imagen adjuntada`);
             return yield (0, send_message_interactive_1.default)(phoneNumber, {
                 type: "button",
                 body: {
-                    text: `Ingresaste los siguiente datos: \n\n*Descripción*: ${description} \n 1 - Imagen adjuntada`,
-                },
-                footer: {
                     text: "¿Esto es correcto?",
                 },
                 action: {
@@ -62,14 +60,14 @@ const formOther = (message) => __awaiter(void 0, void 0, void 0, function* () {
                         {
                             type: "reply",
                             reply: {
-                                id: "5",
+                                id: "4",
                                 title: "Si",
                             },
                         },
                         {
                             type: "reply",
                             reply: {
-                                id: "6",
+                                id: "5",
                                 title: "No",
                             },
                         },
