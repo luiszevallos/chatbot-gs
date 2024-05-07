@@ -44,18 +44,38 @@ const formOther = (message) => __awaiter(void 0, void 0, void 0, function* () {
         else if (!uri) {
             // ? Guardar la imagen
             const response = yield axios_1.default.get(`/${image.id}`);
-            // const resDownload = await axios.get(response.data.url)
-            // console.log(JSON.stringify(resDownload.data));
-            yield formSupport.update({ uri: response.data.url, open: false });
-            const data = {
-                imagen: response.data.url,
-                description,
-                phoneNumber,
-                email,
-            };
-            // TODO: aquí se envía en form a soporte
-            yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
-            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
+            yield formSupport.update({
+                uri: response.data.url,
+                open: false,
+                send: true,
+            });
+            return yield (0, send_message_interactive_1.default)(phoneNumber, {
+                type: "button",
+                body: {
+                    text: `Ingresaste los siguiente datos: \n\n*Descripción*: ${description} \n 1 - Imagen adjuntada`,
+                },
+                footer: {
+                    text: "¿Esto es correcto?",
+                },
+                action: {
+                    buttons: [
+                        {
+                            type: "reply",
+                            reply: {
+                                id: "5",
+                                title: "Si",
+                            },
+                        },
+                        {
+                            type: "reply",
+                            reply: {
+                                id: "6",
+                                title: "No",
+                            },
+                        },
+                    ],
+                },
+            });
         }
     }
     return;

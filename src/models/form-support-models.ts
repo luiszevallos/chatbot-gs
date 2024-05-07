@@ -17,6 +17,14 @@ const FormSupport = sequelize.define(
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
+    send: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    cancelled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     phoneNumber: {
       type: DataTypes.STRING,
       allowNull: false,

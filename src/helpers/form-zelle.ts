@@ -49,7 +49,11 @@ const formZelle = async (message: IMessage) => {
         return await sendMessageText(phoneNumber, zelle.uri.message);
       } else {
         const response = await axios.get(`/${image.id}`);
-        await formSupport.update({ uri: response.data.url });
+        await formSupport.update({
+          uri: response.data.url,
+          open: false,
+          send: true,
+        });
         return await sendMessageInteractive(phoneNumber, {
           type: "button",
           body: {
@@ -63,14 +67,14 @@ const formZelle = async (message: IMessage) => {
               {
                 type: "reply",
                 reply: {
-                  id: "form_1",
+                  id: "4",
                   title: "Si",
                 },
               },
               {
                 type: "reply",
                 reply: {
-                  id: "form_2",
+                  id: "5",
                   title: "No",
                 },
               },
@@ -78,66 +82,6 @@ const formZelle = async (message: IMessage) => {
           },
         });
       }
-    } else if (
-      message.type === "interactive" &&
-      message.interactive?.type === "button_reply"
-    ) {
-      const replyId =
-        interactive?.list_reply?.id || interactive?.button_reply?.id;
-
-      if (replyId === "form_1") {
-        const data = {
-          phoneNumber,
-          email,
-          concept: "Pago no validado",
-          uri,
-          text: `Datos ingresado \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Monto*: ${amount}`,
-        };
-        console.log("🚀 ~ formZelle ~ data:", data);
-        await formSupport.update({ open: false });
-        await sendMessageText(phoneNumber, dbMessages.support.message);
-        return await sendMessageInteractive(phoneNumber, dbMessages.continue);
-      } else {
-        await formSupport.update({
-          reference: "",
-          locator: "",
-          issuerNumber: "",
-          amount: "",
-          uri: "",
-        });
-        return await sendMessageText(
-          phoneNumber,
-          dbMessages.form.zelle.reference.message
-        );
-      }
-    } else {
-      return await sendMessageInteractive(phoneNumber, {
-        type: "button",
-        body: {
-          text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Monto*: ${amount}`,
-        },
-        footer: {
-          text: "¿Esto es correcto?",
-        },
-        action: {
-          buttons: [
-            {
-              type: "reply",
-              reply: {
-                id: "form_1",
-                title: "Si",
-              },
-            },
-            {
-              type: "reply",
-              reply: {
-                id: "form_2",
-                title: "No",
-              },
-            },
-          ],
-        },
-      });
     }
   }
   return;

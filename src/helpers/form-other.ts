@@ -33,18 +33,38 @@ const formOther = async (message: IMessage) => {
     } else if (!uri) {
       // ? Guardar la imagen
       const response = await axios.get(`/${image.id}`);
-      // const resDownload = await axios.get(response.data.url)
-      // console.log(JSON.stringify(resDownload.data));
-      await formSupport.update({ uri: response.data.url, open: false });
-      const data = {
-        imagen: response.data.url,
-        description,
-        phoneNumber,
-        email,
-      };
-      // TODO: aquí se envía en form a soporte
-      await sendMessageText(phoneNumber, dbMessages.support.message);
-      return await sendMessageInteractive(phoneNumber, dbMessages.continue);
+      await formSupport.update({
+        uri: response.data.url,
+        open: false,
+        send: true,
+      });
+      return await sendMessageInteractive(phoneNumber, {
+        type: "button",
+        body: {
+          text: `Ingresaste los siguiente datos: \n\n*Descripción*: ${description} \n 1 - Imagen adjuntada`,
+        },
+        footer: {
+          text: "¿Esto es correcto?",
+        },
+        action: {
+          buttons: [
+            {
+              type: "reply",
+              reply: {
+                id: "5",
+                title: "Si",
+              },
+            },
+            {
+              type: "reply",
+              reply: {
+                id: "6",
+                title: "No",
+              },
+            },
+          ],
+        },
+      });
     }
   }
   return;

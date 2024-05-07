@@ -43,9 +43,11 @@ const ValidChatStarted = (req, res, next) => __awaiter(void 0, void 0, void 0, f
                 }
             }
             else if ((0, helpers_1.validateCreationDate)(chat.dataValues.createdAt)) {
+                console.log("🚀 ~ chat.dataValues.createdAt:", chat.dataValues.createdAt);
                 next();
             }
             else {
+                console.log("🚀 ~ ya paso 2 hora desde que se");
                 yield chat.update({
                     open: false,
                 });

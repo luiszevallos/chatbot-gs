@@ -2,16 +2,15 @@
 import { dbMessages } from "../db/messages";
 import { ChatModels, FormSupportModels } from "../models";
 import { IMessage } from "../types/webhook";
+import { dataFormSupport, sendFormSupport } from "./send-form-support";
 import sendMessageInteractive from "./send-message-interactive";
 import sendMessageText from "./send-message-text";
-// import sendMessageInteractive from "./send-message-interactive";
-// import sendMessageText from "./send-message-text";
 
 const responseMessageInteractive = async (message: IMessage) => {
   const { from: phoneNumber, interactive } = message;
   const replyId = interactive?.list_reply?.id || interactive?.button_reply?.id;
 
-  const sendFormSupport = async () => {
+  const sendFormSupportAccessDenied = async () => {
     const chat = await ChatModels.findOne({
       where: {
         phoneNumber,
@@ -23,8 +22,10 @@ const responseMessageInteractive = async (message: IMessage) => {
       const data = {
         phoneNumber,
         email,
+        concept: "No puedo ingresar",
         description: `Usuario no puede ingresar a la plataforma con el correo: ${email}`,
       };
+      await sendFormSupport(data);
       // TODO: Aquí se envía el formulario a soporte
       await sendMessageText(phoneNumber, dbMessages.support.message);
       return await sendMessageInteractive(phoneNumber, dbMessages.continue);
@@ -107,10 +108,28 @@ const responseMessageInteractive = async (message: IMessage) => {
     );
   };
 
+  const cancelForm = async () => {
+    const form = await FormSupportModels.findOne({
+      where: {
+        phoneNumber,
+        open: false,
+        send: true,
+      },
+    });
+    if (form) {
+      form.update({
+        cancelled: true,
+        send: false,
+        open: false,
+      });
+    }
+    return;
+  };
+
   switch (replyId) {
     case "1":
       // ? envía el formulario de no puedo ingresa a soporte
-      return await sendFormSupport();
+      return await sendFormSupportAccessDenied();
 
     case "2":
       return await sendMessageInteractive(
@@ -121,6 +140,19 @@ const responseMessageInteractive = async (message: IMessage) => {
     case "3":
       // ? crear formulario de otros problema
       return await createFormAnother();
+
+    case "5":
+      // ? Envía formulario a soporte
+      const body = await dataFormSupport(phoneNumber);
+      if (body) {
+        await sendFormSupport(body);
+      }
+      await sendMessageText(phoneNumber, dbMessages.support.message);
+      return await sendMessageInteractive(phoneNumber, dbMessages.continue);
+
+    case "5":
+      await cancelForm();
+      return await sendMessageInteractive(phoneNumber, dbMessages.continue);
 
     case "6":
       return await sendMessageInteractive(phoneNumber, dbMessages.main);

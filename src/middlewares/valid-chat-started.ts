@@ -40,8 +40,13 @@ const ValidChatStarted = async (
           return res.sendStatus(200);
         }
       } else if (validateCreationDate(chat.dataValues.createdAt)) {
+        console.log(
+          "🚀 ~ chat.dataValues.createdAt:",
+          chat.dataValues.createdAt
+        );
         next();
       } else {
+        console.log("🚀 ~ ya paso 2 hora desde que se");
         await chat.update({
           open: false,
         });

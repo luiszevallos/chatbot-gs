@@ -19,7 +19,6 @@ const send_message_interactive_1 = __importDefault(require("./send-message-inter
 const send_message_text_1 = __importDefault(require("./send-message-text"));
 const valid_field_1 = require("./valid-field");
 const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c;
     const { paymentMobile } = messages_1.dbMessages.form;
     const { text, from: phoneNumber, image, interactive, type } = message;
     const formSupport = yield models_1.FormSupportModels.findOne({
@@ -76,25 +75,32 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
             }
             else {
                 const response = yield axios_1.default.get(`/${image.id}`);
-                yield formSupport.update({ uri: response.data.url });
+                yield formSupport.update({
+                    uri: response.data.url,
+                    open: false,
+                    send: true,
+                });
                 return yield (0, send_message_interactive_1.default)(phoneNumber, {
                     type: "button",
                     body: {
                         text: `Ingresaste los siguiente datos: \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+                    },
+                    footer: {
+                        text: "¿Esto es correcto?",
                     },
                     action: {
                         buttons: [
                             {
                                 type: "reply",
                                 reply: {
-                                    id: "form_1",
+                                    id: "4",
                                     title: "Si",
                                 },
                             },
                             {
                                 type: "reply",
                                 reply: {
-                                    id: "form_2",
+                                    id: "5",
                                     title: "No",
                                 },
                             },
@@ -102,59 +108,6 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
                     },
                 });
             }
-        }
-        else if (message.type === "interactive" &&
-            ((_a = message.interactive) === null || _a === void 0 ? void 0 : _a.type) === "button_reply") {
-            const replyId = ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _b === void 0 ? void 0 : _b.id) || ((_c = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _c === void 0 ? void 0 : _c.id);
-            if (replyId === "form_1") {
-                const data = {
-                    phoneNumber,
-                    email,
-                    concept: "Pago no validado",
-                    uri,
-                    text: `Datos ingresado \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
-                };
-                console.log("🚀 ~ formPaymentMobile ~ data:", data);
-                yield formSupport.update({ open: false });
-                yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
-                return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
-            }
-            else {
-                yield formSupport.update({
-                    reference: "",
-                    locator: "",
-                    issuerNumber: "",
-                    amount: "",
-                    uri: "",
-                });
-                return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.paymentMobile.reference.message);
-            }
-        }
-        else {
-            return yield (0, send_message_interactive_1.default)(phoneNumber, {
-                type: "button",
-                body: {
-                    text: `Ingresaste los siguiente datos: \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
-                },
-                action: {
-                    buttons: [
-                        {
-                            type: "reply",
-                            reply: {
-                                id: "form_1",
-                                title: "Si",
-                            },
-                        },
-                        {
-                            type: "reply",
-                            reply: {
-                                id: "form_2",
-                                title: "No",
-                            },
-                        },
-                    ],
-                },
-            });
         }
     }
     return;

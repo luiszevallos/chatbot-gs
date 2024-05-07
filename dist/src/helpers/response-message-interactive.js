@@ -15,15 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // import { dbMessages } from "../db/messages";
 const messages_1 = require("../db/messages");
 const models_1 = require("../models");
+const send_form_support_1 = require("./send-form-support");
 const send_message_interactive_1 = __importDefault(require("./send-message-interactive"));
 const send_message_text_1 = __importDefault(require("./send-message-text"));
-// import sendMessageInteractive from "./send-message-interactive";
-// import sendMessageText from "./send-message-text";
 const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const { from: phoneNumber, interactive } = message;
     const replyId = ((_a = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _a === void 0 ? void 0 : _a.id) || ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _b === void 0 ? void 0 : _b.id);
-    const sendFormSupport = () => __awaiter(void 0, void 0, void 0, function* () {
+    const sendFormSupportAccessDenied = () => __awaiter(void 0, void 0, void 0, function* () {
         const chat = yield models_1.ChatModels.findOne({
             where: {
                 phoneNumber,
@@ -35,8 +34,10 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
             const data = {
                 phoneNumber,
                 email,
+                concept: "No puedo ingresar",
                 description: `Usuario no puede ingresar a la plataforma con el correo: ${email}`,
             };
+            yield (0, send_form_support_1.sendFormSupport)(data);
             // TODO: Aquí se envía el formulario a soporte
             yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
@@ -108,15 +109,43 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         }
         return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.zelle.reference.message);
     });
+    const cancelForm = () => __awaiter(void 0, void 0, void 0, function* () {
+        const form = yield models_1.FormSupportModels.findOne({
+            where: {
+                phoneNumber,
+                open: false,
+                send: true,
+            },
+        });
+        if (form) {
+            form.update({
+                cancelled: true,
+                send: false,
+                open: false,
+            });
+        }
+        return;
+    });
     switch (replyId) {
         case "1":
             // ? envía el formulario de no puedo ingresa a soporte
-            return yield sendFormSupport();
+            return yield sendFormSupportAccessDenied();
         case "2":
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.didNotDisplayPayment);
         case "3":
             // ? crear formulario de otros problema
             return yield createFormAnother();
+        case "5":
+            // ? Envía formulario a soporte
+            const body = yield (0, send_form_support_1.dataFormSupport)(phoneNumber);
+            if (body) {
+                yield (0, send_form_support_1.sendFormSupport)(body);
+            }
+            yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
+        case "5":
+            yield cancelForm();
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
         case "6":
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.main);
         case "7":
