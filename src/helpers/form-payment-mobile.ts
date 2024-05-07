@@ -96,7 +96,10 @@ const formPaymentMobile = async (message: IMessage) => {
           },
         });
       }
-    } else if (message.type === "button") {
+    } else if (
+      message.type === "interactive" &&
+      message.interactive?.type === "button_reply"
+    ) {
       const replyId =
         interactive?.list_reply?.id || interactive?.button_reply?.id;
 
@@ -126,7 +129,6 @@ const formPaymentMobile = async (message: IMessage) => {
         );
       }
     } else {
-      console.log("else");
       return await sendMessageInteractive(phoneNumber, {
         type: "button",
         body: {
