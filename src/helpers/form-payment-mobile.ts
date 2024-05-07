@@ -73,7 +73,7 @@ const formPaymentMobile = async (message: IMessage) => {
         return await sendMessageInteractive(phoneNumber, {
           type: "button",
           body: {
-            text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+            text: `Ingresaste los siguiente datos: \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
           },
           action: {
             buttons: [
@@ -108,7 +108,7 @@ const formPaymentMobile = async (message: IMessage) => {
           email,
           concept: "Pago no validado",
           uri,
-          text: `Datos ingresado \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+          text: `Datos ingresado \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
         };
         console.log("🚀 ~ formPaymentMobile ~ data:", data);
         await formSupport.update({ open: false });
