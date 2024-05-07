@@ -87,6 +87,26 @@ const responseMessageInteractive = async (message: IMessage) => {
     );
   };
 
+  const createFormZelle = async () => {
+    const chat = await ChatModels.findOne({
+      where: {
+        phoneNumber,
+        open: true,
+      },
+    });
+    if (chat) {
+      await FormSupportModels.create({
+        email: chat.dataValues.email,
+        type: "zelle",
+        phoneNumber,
+      });
+    }
+    return await sendMessageText(
+      phoneNumber,
+      dbMessages.form.zelle.reference.message
+    );
+  };
+
   switch (replyId) {
     case "1":
       // ? envía el formulario de no puedo ingresa a soporte
@@ -116,7 +136,10 @@ const responseMessageInteractive = async (message: IMessage) => {
         phoneNumber,
         dbMessages.visualizePaymentZelle.message
       );
-      return await sendMessageInteractive(phoneNumber, dbMessages.resolveDoubt);
+      return await sendMessageInteractive(
+        phoneNumber,
+        dbMessages.resolveDoubtZelle
+      );
 
     case "12":
       await sendMessageText(
@@ -144,6 +167,9 @@ const responseMessageInteractive = async (message: IMessage) => {
     case "23":
       await sendMessageText(phoneNumber, dbMessages.otherBank.message);
       return await sendMessageInteractive(phoneNumber, dbMessages.continue);
+
+    case "25":
+      return await createFormZelle();
 
     default:
       break;

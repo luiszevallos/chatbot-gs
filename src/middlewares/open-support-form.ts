@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { FormSupportModels } from "../models";
-import { formOther, formPaymentMobile } from "../helpers";
+import { formOther, formPaymentMobile, formZelle } from "../helpers";
 
 const openSupportForm = async (
   req: Request,
@@ -21,11 +21,15 @@ const openSupportForm = async (
       const { type } = formSupport.dataValues;
       switch (type) {
         case "paymentMobile":
-          formPaymentMobile(message);
+          await formPaymentMobile(message);
+          break;
+
+        case "zelle":
+          await formZelle(message);
           break;
 
         case "other":
-          formOther(message);
+          await formOther(message);
           break;
 
         default:

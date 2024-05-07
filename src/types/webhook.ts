@@ -134,6 +134,7 @@ export type IDB = {
   visualizePaymentMobile: IText;
   resolveDoubt: IInteractiveButton;
   resolveDoubtPaymentMobile: IInteractiveButton;
+  resolveDoubtZelle: IInteractiveButton;
   otherBank: IText;
   typeBank: IInteractiveList;
   validatePayment: IText;
@@ -144,6 +145,12 @@ export type IDB = {
       amount: IText;
       issuerNumber: IText;
       bank: IText;
+      uri: IText;
+    };
+    zelle: {
+      locator: IText;
+      reference: IText;
+      amount: IText;
       uri: IText;
     };
     other: {

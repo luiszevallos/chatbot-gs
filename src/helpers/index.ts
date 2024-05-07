@@ -5,3 +5,4 @@ export { default as formPaymentMobile } from "./form-payment-mobile";
 export { default as sendMessageText } from "./send-message-text";
 export { default as validEmail } from "./valid-email";
 export { default as formOther } from "./form-other";
+export { default as formZelle } from "./form-zelle";

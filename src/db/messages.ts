@@ -159,6 +159,30 @@ export const dbMessages: IDB = {
       ],
     },
   },
+  resolveDoubtZelle: {
+    type: "button",
+    body: {
+      text: `¿Resolví tu duda?`,
+    },
+    action: {
+      buttons: [
+        {
+          type: "reply",
+          reply: {
+            id: "8",
+            title: "Si",
+          },
+        },
+        {
+          type: "reply",
+          reply: {
+            id: "25",
+            title: "No",
+          },
+        },
+      ],
+    },
+  },
   typeBank: {
     type: "list",
     body: {
@@ -204,6 +228,24 @@ export const dbMessages: IDB = {
       uri: {
         type: "text",
         message: "Por favor envié una imagen de su caso",
+      },
+    },
+    zelle: {
+      locator: {
+        type: "text",
+        message: `Por favor ingresa el localizador \n\n(Ej: 123456)`,
+      },
+      reference: {
+        type: "text",
+        message: `Por favor ingresa el número de referencia \n\n(EJ: 123456)`,
+      },
+      amount: {
+        type: "text",
+        message: `Por favor ingresa el monto \n\n(EJ: 1000.00)`,
+      },
+      uri: {
+        type: "text",
+        message: "Por favor enviar recibo de pago móvil",
       },
     },
     paymentMobile: {
