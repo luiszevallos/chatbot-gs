@@ -237,7 +237,7 @@ export const dbMessages: IDB = {
       },
       reference: {
         type: "text",
-        message: `Por favor ingresa el número de referencia \n\n(EJ: 123456)`,
+        message: `Por favor ingresa la referencia \n\n(EJ: 123456)`,
       },
       amount: {
         type: "text",
@@ -245,7 +245,7 @@ export const dbMessages: IDB = {
       },
       uri: {
         type: "text",
-        message: "Por favor enviar recibo de pago móvil",
+        message: "Por favor enviar recibo de zelle",
       },
     },
     paymentMobile: {

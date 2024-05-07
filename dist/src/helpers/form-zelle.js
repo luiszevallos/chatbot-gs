@@ -18,10 +18,10 @@ const axios_1 = __importDefault(require("../utils/axios"));
 const send_message_interactive_1 = __importDefault(require("./send-message-interactive"));
 const send_message_text_1 = __importDefault(require("./send-message-text"));
 const valid_field_1 = require("./valid-field");
-const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, function* () {
+const formZelle = (message) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
-    const { paymentMobile } = messages_1.dbMessages.form;
-    const { text, from: phoneNumber, image, interactive, type } = message;
+    const { zelle } = messages_1.dbMessages.form;
+    const { text, from: phoneNumber, image, interactive } = message;
     const formSupport = yield models_1.FormSupportModels.findOne({
         where: {
             phoneNumber,
@@ -29,7 +29,7 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
         },
     });
     if (formSupport) {
-        const { reference, locator, issuerNumber, amount, uri, email, bank } = formSupport.dataValues;
+        const { reference, locator, amount, uri, email } = formSupport.dataValues;
         if (!reference) {
             const notValid = yield (0, valid_field_1.validReference)(text.body);
             if (notValid) {
@@ -37,7 +37,7 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
             }
             else {
                 yield formSupport.update({ reference: text.body });
-                return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.locator.message);
+                return yield (0, send_message_text_1.default)(phoneNumber, zelle.locator.message);
             }
         }
         else if (!locator) {
@@ -47,17 +47,7 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
             }
             else {
                 yield formSupport.update({ locator: text.body });
-                return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.issuerNumber.message);
-            }
-        }
-        else if (!issuerNumber) {
-            const notValid = (0, valid_field_1.validNumberPhone)(text.body);
-            if (notValid) {
-                return yield (0, send_message_text_1.default)(phoneNumber, notValid);
-            }
-            else {
-                yield formSupport.update({ issuerNumber: text.body });
-                return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.amount.message);
+                return yield (0, send_message_text_1.default)(phoneNumber, zelle.amount.message);
             }
         }
         else if (!amount) {
@@ -67,12 +57,12 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
             }
             else {
                 yield formSupport.update({ amount: text.body });
-                return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.uri.message);
+                return yield (0, send_message_text_1.default)(phoneNumber, zelle.uri.message);
             }
         }
         else if (!uri) {
             if (message.type !== "image") {
-                return yield (0, send_message_text_1.default)(phoneNumber, paymentMobile.uri.message);
+                return yield (0, send_message_text_1.default)(phoneNumber, zelle.uri.message);
             }
             else {
                 const response = yield axios_1.default.get(`/${image.id}`);
@@ -80,7 +70,7 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
                 return yield (0, send_message_interactive_1.default)(phoneNumber, {
                     type: "button",
                     body: {
-                        text: `Ingresaste los siguiente datos: \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+                        text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Monto*: ${amount}`,
                     },
                     action: {
                         buttons: [
@@ -112,9 +102,9 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
                     email,
                     concept: "Pago no validado",
                     uri,
-                    text: `Datos ingresado \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+                    text: `Datos ingresado \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Monto*: ${amount}`,
                 };
-                console.log("🚀 ~ formPaymentMobile ~ data:", data);
+                console.log("🚀 ~ formZelle ~ data:", data);
                 yield formSupport.update({ open: false });
                 yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
                 return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
@@ -127,14 +117,14 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
                     amount: "",
                     uri: "",
                 });
-                return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.paymentMobile.reference.message);
+                return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.zelle.reference.message);
             }
         }
         else {
             return yield (0, send_message_interactive_1.default)(phoneNumber, {
                 type: "button",
                 body: {
-                    text: `Ingresaste los siguiente datos: \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+                    text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Monto*: ${amount}`,
                 },
                 action: {
                     buttons: [
@@ -159,5 +149,5 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
     }
     return;
 });
-exports.default = formPaymentMobile;
-//# sourceMappingURL=form-payment-mobile.js.map
+exports.default = formZelle;
+//# sourceMappingURL=form-zelle.js.map

@@ -24,10 +24,13 @@ const openSupportForm = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
             const { type } = formSupport.dataValues;
             switch (type) {
                 case "paymentMobile":
-                    (0, helpers_1.formPaymentMobile)(message);
+                    yield (0, helpers_1.formPaymentMobile)(message);
+                    break;
+                case "zelle":
+                    yield (0, helpers_1.formZelle)(message);
                     break;
                 case "other":
-                    (0, helpers_1.formOther)(message);
+                    yield (0, helpers_1.formOther)(message);
                     break;
                 default:
                     break;
