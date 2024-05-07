@@ -14,7 +14,6 @@ import {
 const formPaymentMobile = async (message: IMessage) => {
   const { paymentMobile } = dbMessages.form;
   const { text, from: phoneNumber, image, interactive, type } = message;
-  console.log("🚀 ~ formPaymentMobile ~ message:", message);
 
   const formSupport = await FormSupportModels.findOne({
     where: {
@@ -24,7 +23,7 @@ const formPaymentMobile = async (message: IMessage) => {
   });
 
   if (formSupport) {
-    const { reference, locator, issuerNumber, amount, uri, email } =
+    const { reference, locator, issuerNumber, amount, uri, email, bank } =
       formSupport.dataValues;
 
     if (!reference) {
@@ -132,7 +131,7 @@ const formPaymentMobile = async (message: IMessage) => {
       return await sendMessageInteractive(phoneNumber, {
         type: "button",
         body: {
-          text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
+          text: `Ingresaste los siguiente datos: \n\n*Banco*: ${bank} \n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Número emisor*: ${issuerNumber} \n*Monto*: ${amount}`,
         },
         action: {
           buttons: [
