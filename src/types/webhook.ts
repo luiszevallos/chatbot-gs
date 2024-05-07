@@ -49,8 +49,6 @@ export type IEntry = {
   changes: IChange[];
 };
 
-// TODO: type message
-
 type IFunctionConfirmItem = {
   vars: string[];
   smps: string[];
@@ -119,8 +117,6 @@ export type IInteractiveList = {
     button: string;
   };
 };
-
-// TODO: db message
 
 export type IDB = {
   greeting: IText;

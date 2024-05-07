@@ -38,7 +38,6 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
                 description: `Usuario no puede ingresar a la plataforma con el correo: ${email}`,
             };
             yield (0, send_form_support_1.sendFormSupport)(data);
-            // TODO: Aquí se envía el formulario a soporte
             yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
         }

@@ -20,6 +20,7 @@ const dataFormSupport = (phoneNumber) => __awaiter(void 0, void 0, void 0, funct
         },
     });
     if (form) {
+        yield form.update({ send: false });
         const { type, description, phoneNumber, email, uri, bank, reference, locator, issuerNumber, amount, } = form.dataValues;
         switch (type) {
             case "other":

@@ -19,6 +19,7 @@ export const dataFormSupport = async (phoneNumber: string) => {
     },
   });
   if (form) {
+    await form.update({ send: false });
     const {
       type,
       description,

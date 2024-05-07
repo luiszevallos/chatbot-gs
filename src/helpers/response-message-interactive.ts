@@ -26,7 +26,6 @@ const responseMessageInteractive = async (message: IMessage) => {
         description: `Usuario no puede ingresar a la plataforma con el correo: ${email}`,
       };
       await sendFormSupport(data);
-      // TODO: Aquí se envía el formulario a soporte
       await sendMessageText(phoneNumber, dbMessages.support.message);
       return await sendMessageInteractive(phoneNumber, dbMessages.continue);
     }
