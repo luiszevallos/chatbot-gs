@@ -55,6 +55,9 @@ const formZelle = async (message: IMessage) => {
           body: {
             text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Monto*: ${amount}`,
           },
+          footer: {
+            text: "¿Esto es correcto?",
+          },
           action: {
             buttons: [
               {
@@ -112,6 +115,9 @@ const formZelle = async (message: IMessage) => {
         type: "button",
         body: {
           text: `Ingresaste los siguiente datos: \n\n*Referencia*: ${reference} \n*Localizador*: ${locator} \n*Monto*: ${amount}`,
+        },
+        footer: {
+          text: "¿Esto es correcto?",
         },
         action: {
           buttons: [
