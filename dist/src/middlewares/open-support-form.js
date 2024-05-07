@@ -28,6 +28,7 @@ const openSupportForm = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
                     break;
                 case "other":
                     (0, helpers_1.formOther)(message);
+                    break;
                 default:
                     break;
             }

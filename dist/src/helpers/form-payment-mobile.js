@@ -21,7 +21,8 @@ const valid_field_1 = require("./valid-field");
 const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const { paymentMobile } = messages_1.dbMessages.form;
-    const { text, from: phoneNumber, image, interactive } = message;
+    const { text, from: phoneNumber, image, interactive, type } = message;
+    console.log("🚀 ~ formPaymentMobile ~ message:", message);
     const formSupport = yield models_1.FormSupportModels.findOne({
         where: {
             phoneNumber,
@@ -130,6 +131,7 @@ const formPaymentMobile = (message) => __awaiter(void 0, void 0, void 0, functio
             }
         }
         else {
+            console.log("else");
             return yield (0, send_message_interactive_1.default)(phoneNumber, {
                 type: "button",
                 body: {

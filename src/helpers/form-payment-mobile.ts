@@ -13,7 +13,8 @@ import {
 
 const formPaymentMobile = async (message: IMessage) => {
   const { paymentMobile } = dbMessages.form;
-  const { text, from: phoneNumber, image, interactive } = message;
+  const { text, from: phoneNumber, image, interactive, type } = message;
+  console.log("🚀 ~ formPaymentMobile ~ message:", message);
 
   const formSupport = await FormSupportModels.findOne({
     where: {
@@ -125,6 +126,7 @@ const formPaymentMobile = async (message: IMessage) => {
         );
       }
     } else {
+      console.log("else");
       return await sendMessageInteractive(phoneNumber, {
         type: "button",
         body: {
