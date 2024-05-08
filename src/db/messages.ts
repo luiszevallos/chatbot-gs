@@ -95,7 +95,7 @@ export const dbMessages: IDB = {
   didNotDisplayPayment: {
     type: "list",
     body: {
-      text: `No visualizo el pago \n\nseleccioné una opción`,
+      text: `Seleccioné una opción`,
     },
     action: {
       button: "Menu",
@@ -186,7 +186,7 @@ export const dbMessages: IDB = {
   typeBank: {
     type: "list",
     body: {
-      text: "¿A qué banco se realizó el pago? \n\nseleccioné una opción",
+      text: "¿A qué banco se realizó el pago?",
     },
     action: {
       button: "Lista de bancos",
