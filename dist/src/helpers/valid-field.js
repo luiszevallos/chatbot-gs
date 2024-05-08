@@ -9,8 +9,8 @@ const validReference = (text) => {
 };
 exports.validReference = validReference;
 const validLocator = (text) => {
-    if (text.length < 6) {
-        return "El localizador debe de ser mayor o igual de 6 letras";
+    if (text.length !== 6) {
+        return "El localizador debe de ser igual a 6 letras";
     }
     if (/[0-9]/.test(text)) {
         return "El localizador no debe de contener número";
