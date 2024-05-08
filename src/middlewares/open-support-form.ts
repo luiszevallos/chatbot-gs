@@ -18,6 +18,9 @@ const openSupportForm = async (
     });
 
     if (formSupport) {
+      console.log(
+        `El numero ${message.from} tiene un form de soporte abierto, tipo ${formSupport.dataValues.type}`
+      );
       const { type } = formSupport.dataValues;
       switch (type) {
         case "paymentMobile":

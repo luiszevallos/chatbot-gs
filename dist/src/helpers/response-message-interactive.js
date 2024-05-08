@@ -186,7 +186,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         case "25":
             return yield createFormZelle();
         default:
-            break;
+            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.main);
     }
 });
 exports.default = responseMessageInteractive;

@@ -233,7 +233,7 @@ export const dbMessages: IDB = {
     zelle: {
       locator: {
         type: "text",
-        message: `Por favor ingresa el localizador \n\n(Ej: 123456)`,
+        message: `Por favor ingresa el localizador \n\n(Ej: ABCDEF)`,
       },
       reference: {
         type: "text",
@@ -251,7 +251,7 @@ export const dbMessages: IDB = {
     paymentMobile: {
       locator: {
         type: "text",
-        message: `Por favor ingresa el localizador \n\n(Ej: 123456)`,
+        message: `Por favor ingresa el localizador \n\n(Ej: ABCDEF)`,
       },
       reference: {
         type: "text",

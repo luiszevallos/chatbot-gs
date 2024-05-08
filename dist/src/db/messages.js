@@ -231,7 +231,7 @@ exports.dbMessages = {
         zelle: {
             locator: {
                 type: "text",
-                message: `Por favor ingresa el localizador \n\n(Ej: 123456)`,
+                message: `Por favor ingresa el localizador \n\n(Ej: ABCDEF)`,
             },
             reference: {
                 type: "text",
@@ -249,7 +249,7 @@ exports.dbMessages = {
         paymentMobile: {
             locator: {
                 type: "text",
-                message: `Por favor ingresa el localizador \n\n(Ej: 123456)`,
+                message: `Por favor ingresa el localizador \n\n(Ej: ABCDEF)`,
             },
             reference: {
                 type: "text",

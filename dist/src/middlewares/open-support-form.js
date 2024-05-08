@@ -21,6 +21,7 @@ const openSupportForm = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
             },
         });
         if (formSupport) {
+            console.log(`El numero ${message.from} tiene un form de soporte abierto, tipo ${formSupport.dataValues.type}`);
             const { type } = formSupport.dataValues;
             switch (type) {
                 case "paymentMobile":
