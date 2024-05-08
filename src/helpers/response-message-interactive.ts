@@ -107,7 +107,7 @@ const responseMessageInteractive = async (message: IMessage) => {
     );
   };
 
-  const cancelForm = async () => {
+  const resetForm = async () => {
     const form = await FormSupportModels.findOne({
       where: {
         phoneNumber,
@@ -117,10 +117,37 @@ const responseMessageInteractive = async (message: IMessage) => {
     });
     if (form) {
       form.update({
-        cancelled: true,
         send: false,
-        open: false,
+        open: true,
+        reference: "",
+        locator: "",
+        amount: "",
+        uri: "",
+        issuerNumber: "",
+        description: "",
       });
+      switch (form.dataValues.type) {
+        case "zelle":
+          return await sendMessageText(
+            phoneNumber,
+            dbMessages.form.zelle.reference.message
+          );
+
+        case "paymentMobile":
+          return await sendMessageText(
+            phoneNumber,
+            dbMessages.form.paymentMobile.reference.message
+          );
+
+        case "other":
+          return await sendMessageText(
+            phoneNumber,
+            dbMessages.form.other.description.message
+          );
+
+        default:
+          return;
+      }
     }
     return;
   };
@@ -150,8 +177,7 @@ const responseMessageInteractive = async (message: IMessage) => {
       return await sendMessageInteractive(phoneNumber, dbMessages.continue);
 
     case "5":
-      await cancelForm();
-      return await sendMessageInteractive(phoneNumber, dbMessages.continue);
+      return await resetForm();
 
     case "6":
       return await sendMessageInteractive(phoneNumber, dbMessages.main);

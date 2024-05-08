@@ -12,6 +12,10 @@ const validMessage = async (
   try {
     if (object && entry?.length > 0 && entry[0].changes?.length > 0) {
       const change: IChange = entry[0].changes[0];
+      console.log(
+        "🚀 ~ change:",
+        JSON.stringify(change.value.contacts[0].profile)
+      );
 
       if (change && change?.value?.messages?.length > 0) {
         const message = change.value.messages[0];

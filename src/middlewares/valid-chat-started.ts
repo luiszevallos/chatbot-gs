@@ -14,6 +14,7 @@ const ValidChatStarted = async (
 
   try {
     if (message) {
+      console.log("🚀 ~ message:", JSON.stringify(message));
       const phoneNumber = message.from;
       const chat = await ChatModels.findOne({
         where: {
@@ -40,13 +41,8 @@ const ValidChatStarted = async (
           return res.sendStatus(200);
         }
       } else if (validateCreationDate(chat.dataValues.createdAt)) {
-        console.log(
-          "🚀 ~ chat.dataValues.createdAt:",
-          chat.dataValues.createdAt
-        );
         next();
       } else {
-        console.log("🚀 ~ ya paso 2 hora desde que se");
         await chat.update({
           open: false,
         });

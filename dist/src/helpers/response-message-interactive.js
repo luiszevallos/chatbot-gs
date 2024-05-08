@@ -108,7 +108,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         }
         return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.zelle.reference.message);
     });
-    const cancelForm = () => __awaiter(void 0, void 0, void 0, function* () {
+    const resetForm = () => __awaiter(void 0, void 0, void 0, function* () {
         const form = yield models_1.FormSupportModels.findOne({
             where: {
                 phoneNumber,
@@ -118,10 +118,25 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         });
         if (form) {
             form.update({
-                cancelled: true,
                 send: false,
-                open: false,
+                open: true,
+                reference: "",
+                locator: "",
+                amount: "",
+                uri: "",
+                issuerNumber: "",
+                description: "",
             });
+            switch (form.dataValues.type) {
+                case "zelle":
+                    return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.zelle.reference.message);
+                case "paymentMobile":
+                    return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.paymentMobile.reference.message);
+                case "other":
+                    return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.other.description.message);
+                default:
+                    return;
+            }
         }
         return;
     });
@@ -143,8 +158,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
             yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.support.message);
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
         case "5":
-            yield cancelForm();
-            return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
+            return yield resetForm();
         case "6":
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.main);
         case "7":
