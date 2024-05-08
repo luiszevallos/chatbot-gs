@@ -23,7 +23,8 @@ const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
     else {
         res.status(403).json({
-            message: "Error en conectar bot",
+            message: "Error en token de verificación",
+            ok: false,
         });
     }
 });

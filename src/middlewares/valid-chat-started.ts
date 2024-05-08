@@ -5,6 +5,8 @@ import { sendMessageText, validateCreationDate } from "../helpers";
 import { dbMessages } from "../db/messages";
 import { validEmail } from "../helpers";
 
+// ? Valida si el numero de teléfono tiene un conversación iniciada
+// ? Si no envía mensaje solicitado el correo
 const ValidChatStarted = async (
   req: Request,
   res: Response,
@@ -14,7 +16,6 @@ const ValidChatStarted = async (
 
   try {
     if (message) {
-      console.log("🚀 ~ message:", JSON.stringify(message));
       const phoneNumber = message.from;
       const chat = await ChatModels.findOne({
         where: {
@@ -24,8 +25,8 @@ const ValidChatStarted = async (
       });
 
       if (!chat) {
-        // ? Valida si el texto enviado es un correo validado
-
+        // ? Valida si el mensaje tiene es un correo
+        // ? para iniciar conversación
         if (validEmail(message.text.body)) {
           // TODO: aquí va la petición para validar existencia de correo
 
@@ -41,8 +42,10 @@ const ValidChatStarted = async (
           return res.sendStatus(200);
         }
       } else if (validateCreationDate(chat.dataValues.createdAt)) {
+        // ? Valida la inicializan de la conversación si no sobrepasa en tiempo respuesta 2H
         next();
       } else {
+        // ? Se cierra conversación anterior y se envía mensaje de bienvenida
         await chat.update({
           open: false,
         });

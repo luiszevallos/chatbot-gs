@@ -17,29 +17,32 @@ const openSupportForm = async (
       },
     });
 
+    // ? Valida si existe un form de soporte abierto
     if (formSupport) {
-      console.log(
-        `El numero ${message.from} tiene un form de soporte abierto, tipo ${formSupport.dataValues.type}`
-      );
       const { type } = formSupport.dataValues;
+
       switch (type) {
         case "paymentMobile":
           await formPaymentMobile(message);
-          break;
+          return res.sendStatus(200);
 
         case "zelle":
           await formZelle(message);
-          break;
+          return res.sendStatus(200);
 
         case "other":
           await formOther(message);
-          break;
+          return res.sendStatus(200);
 
         default:
+          // ? se cierra form de soporte
+          formSupport.update({
+            open: false,
+            send: false,
+            canceled: true,
+          });
           break;
       }
-
-      return res.sendStatus(200);
     }
   }
 

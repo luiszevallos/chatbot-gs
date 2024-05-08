@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// ? Valida si viene un mensaje
 const validMessage = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     const { object, entry } = req.body;
     try {
         if (object && (entry === null || entry === void 0 ? void 0 : entry.length) > 0 && ((_a = entry[0].changes) === null || _a === void 0 ? void 0 : _a.length) > 0) {
             const change = entry[0].changes[0];
-            console.log("🚀 ~ change:", JSON.stringify(change.value.contacts[0].profile));
             if (change && ((_c = (_b = change === null || change === void 0 ? void 0 : change.value) === null || _b === void 0 ? void 0 : _b.messages) === null || _c === void 0 ? void 0 : _c.length) > 0) {
                 const message = change.value.messages[0];
                 if (message) {

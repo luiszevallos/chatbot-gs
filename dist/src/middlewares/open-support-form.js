@@ -20,23 +20,28 @@ const openSupportForm = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
                 open: true,
             },
         });
+        // ? Valida si existe un form de soporte abierto
         if (formSupport) {
-            console.log(`El numero ${message.from} tiene un form de soporte abierto, tipo ${formSupport.dataValues.type}`);
             const { type } = formSupport.dataValues;
             switch (type) {
                 case "paymentMobile":
                     yield (0, helpers_1.formPaymentMobile)(message);
-                    break;
+                    return res.sendStatus(200);
                 case "zelle":
                     yield (0, helpers_1.formZelle)(message);
-                    break;
+                    return res.sendStatus(200);
                 case "other":
                     yield (0, helpers_1.formOther)(message);
-                    break;
+                    return res.sendStatus(200);
                 default:
+                    // ? se cierra form de soporte
+                    formSupport.update({
+                        open: false,
+                        send: false,
+                        canceled: true,
+                    });
                     break;
             }
-            return res.sendStatus(200);
         }
     }
     next();

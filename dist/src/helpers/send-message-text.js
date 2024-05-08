@@ -34,6 +34,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importStar(require("../utils/axios"));
 const sendMessageText = (to, message) => __awaiter(void 0, void 0, void 0, function* () {
+    // ? response mensaje solo texto
     return yield axios_1.default.post(axios_1.endpoints.messages, {
         to,
         type: "text",

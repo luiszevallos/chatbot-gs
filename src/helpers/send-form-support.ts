@@ -1,5 +1,5 @@
-import axios from "axios";
-import { HOST_API_SUPPORT } from "../../config-global";
+// ! import axios from "axios";
+// ! import { HOST_API_SUPPORT } from "../../config-global";
 import { FormSupportModels } from "../models";
 
 type IData = {
@@ -10,6 +10,7 @@ type IData = {
   uri?: string;
 };
 
+// ? Crear la data de formulario de soporte
 export const dataFormSupport = async (phoneNumber: string) => {
   const form = await FormSupportModels.findOne({
     where: {
@@ -67,12 +68,13 @@ export const dataFormSupport = async (phoneNumber: string) => {
   return null;
 };
 
+// ? enviar lel formulario a soporte
 export const sendFormSupport = async (data: IData) => {
   try {
     // TODO: conexión con soporte
     console.log("🚀 ~ sendFormSupport ~ data:", data);
-    // const response = await axios.post(`${HOST_API_SUPPORT}`, data);
-    // return response.data;
+    // ! const response = await axios.post(`${HOST_API_SUPPORT}`, data);
+    // ! return response.data;
     return;
   } catch (error: any) {
     throw new Error(`${error?.message || error}`);

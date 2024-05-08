@@ -28,7 +28,7 @@ const formZelle = (message) => __awaiter(void 0, void 0, void 0, function* () {
         },
     });
     if (formSupport) {
-        const { reference, locator, amount, uri, email } = formSupport.dataValues;
+        const { reference, locator, amount, uri } = formSupport.dataValues;
         if (!reference) {
             const notValid = yield (0, valid_field_1.validReference)(text.body);
             if (notValid) {

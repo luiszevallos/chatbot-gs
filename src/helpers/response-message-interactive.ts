@@ -1,7 +1,7 @@
-// import { dbMessages } from "../db/messages";
-import { dbMessages } from "../db/messages";
 import { ChatModels, FormSupportModels } from "../models";
+import { dbMessages } from "../db/messages";
 import { IMessage } from "../types/webhook";
+//
 import { dataFormSupport, sendFormSupport } from "./send-form-support";
 import sendMessageInteractive from "./send-message-interactive";
 import sendMessageText from "./send-message-text";
@@ -10,6 +10,7 @@ const responseMessageInteractive = async (message: IMessage) => {
   const { from: phoneNumber, interactive } = message;
   const replyId = interactive?.list_reply?.id || interactive?.button_reply?.id;
 
+  // ? Enviar form a soporte de no puedo ingresar a la plataforma
   const sendFormSupportAccessDenied = async () => {
     const chat = await ChatModels.findOne({
       where: {
@@ -31,6 +32,7 @@ const responseMessageInteractive = async (message: IMessage) => {
     }
   };
 
+  // ? cierra la conversación y envía mensaje de dependida
   const closeConversation = async () => {
     const chat = await ChatModels.findOne({
       where: {
@@ -46,6 +48,7 @@ const responseMessageInteractive = async (message: IMessage) => {
     return await sendMessageText(phoneNumber, dbMessages.bye.message);
   };
 
+  // ? Inicializa un form de soporte type (otro)
   const createFormAnother = async () => {
     const { description } = dbMessages.form.other;
     const chat = await ChatModels.findOne({
@@ -66,6 +69,7 @@ const responseMessageInteractive = async (message: IMessage) => {
     return await sendMessageText(phoneNumber, description.message);
   };
 
+  // ? Inicializa un form de soporte type (Pago móvil)
   const createFormPaymentMobile = async (bank: string) => {
     const chat = await ChatModels.findOne({
       where: {
@@ -87,6 +91,7 @@ const responseMessageInteractive = async (message: IMessage) => {
     );
   };
 
+  // ? Inicializa un form de soporte type (Zelle)
   const createFormZelle = async () => {
     const chat = await ChatModels.findOne({
       where: {
@@ -107,6 +112,7 @@ const responseMessageInteractive = async (message: IMessage) => {
     );
   };
 
+  // ? reiniciar form de soporte
   const resetForm = async () => {
     const form = await FormSupportModels.findOne({
       where: {

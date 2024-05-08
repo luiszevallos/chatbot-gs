@@ -36,6 +36,7 @@ const axios_1 = __importStar(require("../utils/axios"));
 const sendMessageInteractive = (to, // ? usuario que recibe mensaje
 interactive // ? mensaje interactivo que se envía a usuario
 ) => __awaiter(void 0, void 0, void 0, function* () {
+    // ? response mensaje interactivo como lista y botones
     return yield axios_1.default.post(axios_1.endpoints.messages, {
         messaging_product: "whatsapp",
         type: "interactive",

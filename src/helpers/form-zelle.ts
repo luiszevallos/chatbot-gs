@@ -18,7 +18,7 @@ const formZelle = async (message: IMessage) => {
   });
 
   if (formSupport) {
-    const { reference, locator, amount, uri, email } = formSupport.dataValues;
+    const { reference, locator, amount, uri } = formSupport.dataValues;
 
     if (!reference) {
       const notValid = await validReference(text.body);

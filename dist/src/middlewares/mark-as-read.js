@@ -34,6 +34,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 //
 const axios_1 = __importStar(require("../utils/axios"));
+// ? marca el mensaje como leído
 const markAsRead = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const messageId = (_a = req.message) === null || _a === void 0 ? void 0 : _a.id;

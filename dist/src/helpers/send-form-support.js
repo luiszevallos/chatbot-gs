@@ -10,7 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendFormSupport = exports.dataFormSupport = void 0;
+// ! import axios from "axios";
+// ! import { HOST_API_SUPPORT } from "../../config-global";
 const models_1 = require("../models");
+// ? Crear la data de formulario de soporte
 const dataFormSupport = (phoneNumber) => __awaiter(void 0, void 0, void 0, function* () {
     const form = yield models_1.FormSupportModels.findOne({
         where: {
@@ -54,12 +57,13 @@ const dataFormSupport = (phoneNumber) => __awaiter(void 0, void 0, void 0, funct
     return null;
 });
 exports.dataFormSupport = dataFormSupport;
+// ? enviar lel formulario a soporte
 const sendFormSupport = (data) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // TODO: conexión con soporte
         console.log("🚀 ~ sendFormSupport ~ data:", data);
-        // const response = await axios.post(`${HOST_API_SUPPORT}`, data);
-        // return response.data;
+        // ! const response = await axios.post(`${HOST_API_SUPPORT}`, data);
+        // ! return response.data;
         return;
     }
     catch (error) {

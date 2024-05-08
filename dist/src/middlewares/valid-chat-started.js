@@ -14,11 +14,12 @@ const models_1 = require("../models");
 const helpers_1 = require("../helpers");
 const messages_1 = require("../db/messages");
 const helpers_2 = require("../helpers");
+// ? Valida si el numero de teléfono tiene un conversación iniciada
+// ? Si no envía mensaje solicitado el correo
 const ValidChatStarted = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { message } = req;
     try {
         if (message) {
-            console.log("🚀 ~ message:", JSON.stringify(message));
             const phoneNumber = message.from;
             const chat = yield models_1.ChatModels.findOne({
                 where: {
@@ -27,7 +28,8 @@ const ValidChatStarted = (req, res, next) => __awaiter(void 0, void 0, void 0, f
                 },
             });
             if (!chat) {
-                // ? Valida si el texto enviado es un correo validado
+                // ? Valida si el mensaje tiene es un correo
+                // ? para iniciar conversación
                 if ((0, helpers_2.validEmail)(message.text.body)) {
                     // TODO: aquí va la petición para validar existencia de correo
                     const email = message.text.body;
@@ -44,9 +46,11 @@ const ValidChatStarted = (req, res, next) => __awaiter(void 0, void 0, void 0, f
                 }
             }
             else if ((0, helpers_1.validateCreationDate)(chat.dataValues.createdAt)) {
+                // ? Valida la inicializan de la conversación si no sobrepasa en tiempo respuesta 2H
                 next();
             }
             else {
+                // ? Se cierra conversación anterior y se envía mensaje de bienvenida
                 yield chat.update({
                     open: false,
                 });

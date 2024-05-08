@@ -13,7 +13,8 @@ export const getWebhook = async (req: Request, res: Response) => {
     res.status(200).send(challenge);
   } else {
     res.status(403).json({
-      message: "Error en conectar bot",
+      message: "Error en token de verificación",
+      ok: false,
     });
   }
 };

@@ -12,9 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// import { dbMessages } from "../db/messages";
-const messages_1 = require("../db/messages");
 const models_1 = require("../models");
+const messages_1 = require("../db/messages");
+//
 const send_form_support_1 = require("./send-form-support");
 const send_message_interactive_1 = __importDefault(require("./send-message-interactive"));
 const send_message_text_1 = __importDefault(require("./send-message-text"));
@@ -22,6 +22,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
     var _a, _b;
     const { from: phoneNumber, interactive } = message;
     const replyId = ((_a = interactive === null || interactive === void 0 ? void 0 : interactive.list_reply) === null || _a === void 0 ? void 0 : _a.id) || ((_b = interactive === null || interactive === void 0 ? void 0 : interactive.button_reply) === null || _b === void 0 ? void 0 : _b.id);
+    // ? Enviar form a soporte de no puedo ingresar a la plataforma
     const sendFormSupportAccessDenied = () => __awaiter(void 0, void 0, void 0, function* () {
         const chat = yield models_1.ChatModels.findOne({
             where: {
@@ -42,6 +43,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
             return yield (0, send_message_interactive_1.default)(phoneNumber, messages_1.dbMessages.continue);
         }
     });
+    // ? cierra la conversación y envía mensaje de dependida
     const closeConversation = () => __awaiter(void 0, void 0, void 0, function* () {
         const chat = yield models_1.ChatModels.findOne({
             where: {
@@ -56,6 +58,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         }
         return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.bye.message);
     });
+    // ? Inicializa un form de soporte type (otro)
     const createFormAnother = () => __awaiter(void 0, void 0, void 0, function* () {
         const { description } = messages_1.dbMessages.form.other;
         const chat = yield models_1.ChatModels.findOne({
@@ -75,6 +78,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         }
         return yield (0, send_message_text_1.default)(phoneNumber, description.message);
     });
+    // ? Inicializa un form de soporte type (Pago móvil)
     const createFormPaymentMobile = (bank) => __awaiter(void 0, void 0, void 0, function* () {
         const chat = yield models_1.ChatModels.findOne({
             where: {
@@ -92,6 +96,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         }
         return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.paymentMobile.reference.message);
     });
+    // ? Inicializa un form de soporte type (Zelle)
     const createFormZelle = () => __awaiter(void 0, void 0, void 0, function* () {
         const chat = yield models_1.ChatModels.findOne({
             where: {
@@ -108,6 +113,7 @@ const responseMessageInteractive = (message) => __awaiter(void 0, void 0, void 0
         }
         return yield (0, send_message_text_1.default)(phoneNumber, messages_1.dbMessages.form.zelle.reference.message);
     });
+    // ? reiniciar form de soporte
     const resetForm = () => __awaiter(void 0, void 0, void 0, function* () {
         const form = yield models_1.FormSupportModels.findOne({
             where: {

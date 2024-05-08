@@ -2,6 +2,7 @@ import { NextFunction, Response, Request } from "express";
 //
 import axios, { endpoints } from "../utils/axios";
 
+// ? marca el mensaje como leído
 const markAsRead = async (req: Request, res: Response, next: NextFunction) => {
   const messageId = req.message?.id;
 
