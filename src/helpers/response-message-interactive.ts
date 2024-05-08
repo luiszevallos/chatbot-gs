@@ -229,7 +229,7 @@ const responseMessageInteractive = async (message: IMessage) => {
       return await createFormZelle();
 
     default:
-      break;
+      return await sendMessageInteractive(phoneNumber, dbMessages.main);
   }
 };
 
